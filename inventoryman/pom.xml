@@ -11,8 +11,8 @@
 	<groupId>com.skillstorm</groupId>
 	<artifactId>inventoryman</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>InventoryMan</name>
-	<description>Demo Project 1 for SkillStorm SDET Apprenticeship 2024</description>
+	<name>inventoryman</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
