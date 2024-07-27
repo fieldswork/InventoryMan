@@ -1,5 +1,6 @@
 package com.skillstorm.inventoryman.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
+    @JsonBackReference
     private Warehouse warehouse;
 
     // Getters and setters

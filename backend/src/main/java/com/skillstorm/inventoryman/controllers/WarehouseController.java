@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/warehouses")
+@RequestMapping("/api/warehouses")
 public class WarehouseController {
-    
+
     @Autowired
     private WarehouseService warehouseService;
 
@@ -40,5 +40,10 @@ public class WarehouseController {
     @DeleteMapping("/{id}")
     public void deleteWarehouse(@PathVariable Long id) {
         warehouseService.deleteWarehouse(id);
+    }
+
+    @GetMapping("/{id}/space-used")
+    public double getCurrentSpaceUsed(@PathVariable Long id) {
+        return warehouseService.getCurrentSpaceUsed(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.skillstorm.inventoryman.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,8 @@ public class Warehouse {
     private int capacity;
 
     @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items = new ArrayList<>(); // Initialize the list
+    @JsonManagedReference
+    private List<Item> items = new ArrayList<>();
 
     // Getters and setters
     public Long getId() {
