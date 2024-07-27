@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -32,16 +33,43 @@ public class ItemService {
             throw new IllegalArgumentException("Warehouse not found");
         }
 
-        double totalSize = warehouse.getItems().stream().mapToDouble(Item::getSizeInCubicFt).sum();
-        totalSize += item.getSizeInCubicFt(); // Add the size of the new item
+        double currentSpaceUsed = warehouse.getItems().stream()
+                                            .mapToDouble(existingItem -> existingItem.getQuantity() * existingItem.getSizeInCubicFt())
+                                            .sum();
+        double newItemSpace = item.getQuantity() * item.getSizeInCubicFt();
 
-        if (totalSize > warehouse.getCapacity()) {
+        if (currentSpaceUsed + newItemSpace > warehouse.getCapacity()) {
             throw new IllegalArgumentException("Warehouse capacity exceeded");
         }
 
         item.setWarehouse(warehouse);
-        warehouse.getItems().add(item); // Ensure the item is added to the warehouse's items list
+        warehouse.getItems().add(item);
         return itemRepository.save(item);
+    }
+
+    public Item updateItem(Long id, Item itemDetails) {
+        Item existingItem = itemRepository.findById(id).orElse(null);
+        if (existingItem == null) {
+            throw new IllegalArgumentException("Item not found");
+        }
+
+        Warehouse warehouse = existingItem.getWarehouse();
+
+        double currentSpaceUsed = warehouse.getItems().stream()
+                                            .filter(item -> !item.getId().equals(id))
+                                            .mapToDouble(item -> item.getQuantity() * item.getSizeInCubicFt())
+                                            .sum();
+        double updatedItemSpace = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
+
+        if (currentSpaceUsed + updatedItemSpace > warehouse.getCapacity()) {
+            throw new IllegalArgumentException("Warehouse capacity exceeded");
+        }
+
+        existingItem.setName(itemDetails.getName());
+        existingItem.setDescription(itemDetails.getDescription());
+        existingItem.setQuantity(itemDetails.getQuantity());
+        existingItem.setSizeInCubicFt(itemDetails.getSizeInCubicFt());
+        return itemRepository.save(existingItem);
     }
 
     public void deleteItem(Long id) {

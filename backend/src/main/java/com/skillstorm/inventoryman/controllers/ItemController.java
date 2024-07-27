@@ -31,11 +31,7 @@ public class ItemController {
 
     @PutMapping("/{id}")
     public Item updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
-        Item item = itemService.getItemById(id);
-        item.setName(itemDetails.getName());
-        item.setDescription(itemDetails.getDescription());
-        item.setQuantity(itemDetails.getQuantity());
-        return itemService.saveItem(item);
+        return itemService.updateItem(id, itemDetails);
     }
 
     @DeleteMapping("/{id}")

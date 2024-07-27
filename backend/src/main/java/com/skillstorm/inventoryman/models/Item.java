@@ -21,7 +21,6 @@ public class Item {
     @JsonBackReference
     private Warehouse warehouse;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
