@@ -1,6 +1,7 @@
 package com.skillstorm.inventoryman.models;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Warehouse {
     private int capacity;
 
     @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>(); // Initialize the list
 
     // Getters and setters
     public Long getId() {
