@@ -1,10 +1,6 @@
 package com.skillstorm.inventoryman.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "items")
@@ -15,10 +11,13 @@ public class Item {
     private Long id;
 
     private String name;
-
     private String description;
-
     private int quantity;
+    private double sizeInCubicFt;
+
+    @ManyToOne
+    @JoinColumn(name = "warehouse_id", nullable = false)
+    private Warehouse warehouse;
 
     // Getters and setters
     public Long getId() {
@@ -51,5 +50,21 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getSizeInCubicFt() {
+        return sizeInCubicFt;
+    }
+
+    public void setSizeInCubicFt(double sizeInCubicFt) {
+        this.sizeInCubicFt = sizeInCubicFt;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 }
