@@ -3,6 +3,7 @@ package com.skillstorm.inventoryman.controllers;
 import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,17 +26,26 @@ public class ItemController {
     }
 
     @PostMapping
-    public Item createItem(@RequestBody Item item) {
-        return itemService.saveItem(item);
+    public ResponseEntity<Item> createItem(@RequestBody Item item) {
+        try {
+            return ResponseEntity.ok(itemService.saveItem(item));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @PutMapping("/{id}")
-    public Item updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
-        return itemService.updateItem(id, itemDetails);
+    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
+        try {
+            return ResponseEntity.ok(itemService.updateItem(id, itemDetails));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
         itemService.deleteItem(id);
+        return ResponseEntity.noContent().build();
     }
 }

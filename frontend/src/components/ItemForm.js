@@ -9,6 +9,8 @@ const ItemForm = ({ item, onSave }) => {
   const [sizeInCubicFt, setSizeInCubicFt] = useState(item ? item.sizeInCubicFt : '');
   const [warehouseId, setWarehouseId] = useState(item ? item.warehouse.id : '');
   const [warehouses, setWarehouses] = useState([]);
+  const [availableCapacity, setAvailableCapacity] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     WarehouseService.getAll().then(response => {
@@ -16,8 +18,23 @@ const ItemForm = ({ item, onSave }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (warehouseId) {
+      WarehouseService.get(warehouseId).then(response => {
+        const warehouse = response.data;
+        setAvailableCapacity(warehouse.capacity - warehouse.usedCapacity);
+      });
+    }
+  }, [warehouseId]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const totalSize = parseFloat(sizeInCubicFt) * parseInt(quantity);
+    if (totalSize > availableCapacity) {
+      setError('Total item size exceeds the available capacity of the warehouse.');
+      return;
+    }
+
     const itemData = {
       name,
       description,
@@ -25,6 +42,7 @@ const ItemForm = ({ item, onSave }) => {
       sizeInCubicFt: parseFloat(sizeInCubicFt),
       warehouse: { id: parseInt(warehouseId) }
     };
+
     if (item) {
       ItemService.update(item.id, itemData).then(() => onSave());
     } else {
@@ -91,6 +109,7 @@ const ItemForm = ({ item, onSave }) => {
           ))}
         </select>
       </div>
+      {error && <div className="alert alert-danger">{error}</div>}
       <button type="submit" className="btn btn-primary mt-3">
         {item ? 'Update' : 'Create'}
       </button>
