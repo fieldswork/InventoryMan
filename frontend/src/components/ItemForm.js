@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/itemService';
 import WarehouseService from '../services/warehouseService';
+import { useParams } from 'react-router-dom';
 
-const ItemForm = ({ item, onSave }) => {
-  const [name, setName] = useState(item ? item.name : '');
-  const [description, setDescription] = useState(item ? item.description : '');
-  const [quantity, setQuantity] = useState(item ? item.quantity : '');
-  const [sizeInCubicFt, setSizeInCubicFt] = useState(item ? item.sizeInCubicFt : '');
-  const [warehouseId, setWarehouseId] = useState(item ? item.warehouse.id : '');
+const ItemForm = ({ onSave }) => {
+  const { id } = useParams();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [sizeInCubicFt, setSizeInCubicFt] = useState('');
+  const [warehouseId, setWarehouseId] = useState('');
   const [warehouses, setWarehouses] = useState([]);
   const [availableCapacity, setAvailableCapacity] = useState(null);
   const [error, setError] = useState('');
@@ -16,7 +18,19 @@ const ItemForm = ({ item, onSave }) => {
     WarehouseService.getAll().then(response => {
       setWarehouses(response.data);
     });
-  }, []);
+
+    if (id) {
+      ItemService.get(id).then(response => {
+        const item = response.data;
+        setName(item.name);
+        setDescription(item.description);
+        setQuantity(item.quantity);
+        setSizeInCubicFt(item.sizeInCubicFt);
+        setWarehouseId(item.warehouse.id);
+        setAvailableCapacity(item.warehouse.capacity - item.warehouse.usedCapacity);
+      });
+    }
+  }, [id]);
 
   useEffect(() => {
     if (warehouseId) {
@@ -51,8 +65,8 @@ const ItemForm = ({ item, onSave }) => {
       warehouse: { id: parseInt(warehouseId) }
     };
 
-    if (item) {
-      ItemService.update(item.id, itemData).then(() => onSave());
+    if (id) {
+      ItemService.update(id, itemData).then(() => onSave());
     } else {
       ItemService.create(itemData).then(() => onSave());
     }
@@ -119,7 +133,7 @@ const ItemForm = ({ item, onSave }) => {
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
       <button type="submit" className="btn btn-primary mt-3">
-        {item ? 'Update' : 'Create'}
+        {id ? 'Update' : 'Create'}
       </button>
     </form>
   );

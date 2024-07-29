@@ -4,9 +4,13 @@ import WarehouseList from './components/WarehouseList';
 import ItemList from './components/ItemList';
 import WarehouseForm from './components/WarehouseForm';
 import ItemForm from './components/ItemForm';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure this line is present
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const handleSave = () => {
+    window.location.href = '/items';
+  };
+
   return (
     <Router>
       <div>
@@ -31,10 +35,10 @@ function App() {
           <Routes>
             <Route path="/warehouses" element={<WarehouseList />} />
             <Route path="/items" element={<ItemList />} />
-            <Route path="/add-warehouse" element={<WarehouseForm onSave={() => window.location.href = '/warehouses'} />} />
-            <Route path="/add-item" element={<ItemForm onSave={() => window.location.href = '/items'} />} />
-            <Route path="/edit-warehouse/:id" element={<WarehouseForm onSave={() => window.location.href = '/warehouses'} />} />
-            <Route path="/edit-item/:id" element={<ItemForm onSave={() => window.location.href = '/items'} />} />
+            <Route path="/add-warehouse" element={<WarehouseForm onSave={handleSave} />} />
+            <Route path="/add-item" element={<ItemForm onSave={handleSave} />} />
+            <Route path="/edit-warehouse/:id" element={<WarehouseForm onSave={handleSave} />} />
+            <Route path="/edit-item/:id" element={<ItemForm onSave={handleSave} />} />
           </Routes>
         </div>
       </div>
