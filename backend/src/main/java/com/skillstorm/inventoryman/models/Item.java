@@ -1,10 +1,12 @@
 package com.skillstorm.inventoryman.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "items")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Item {
 
     @Id
@@ -18,7 +20,6 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
-    @JsonManagedReference
     private Warehouse warehouse;
 
     // Getters and setters
