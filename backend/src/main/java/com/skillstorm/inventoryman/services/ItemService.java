@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -33,46 +32,58 @@ public class ItemService {
             throw new IllegalArgumentException("Warehouse not found");
         }
 
-        double currentSpaceUsed = warehouse.getItems().stream()
-                                            .mapToDouble(existingItem -> existingItem.getQuantity() * existingItem.getSizeInCubicFt())
-                                            .sum();
-        double newItemSpace = item.getQuantity() * item.getSizeInCubicFt();
+        double additionalCapacity = item.getQuantity() * item.getSizeInCubicFt();
+        double newUsedCapacity = warehouse.getUsedCapacity() + additionalCapacity;
 
-        if (currentSpaceUsed + newItemSpace > warehouse.getCapacity()) {
+        if (newUsedCapacity > warehouse.getCapacity()) {
             throw new IllegalArgumentException("Warehouse capacity exceeded");
         }
 
+        warehouse.setUsedCapacity(newUsedCapacity);
+        warehouseRepository.save(warehouse);
+        
         item.setWarehouse(warehouse);
-        warehouse.getItems().add(item);
         return itemRepository.save(item);
     }
 
-    public Item updateItem(Long id, Item itemDetails) {
-        Item existingItem = itemRepository.findById(id).orElse(null);
-        if (existingItem == null) {
-            throw new IllegalArgumentException("Item not found");
+    public void deleteItem(Long id) {
+        Item item = itemRepository.findById(id).orElse(null);
+
+        if (item != null) {
+            Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
+            if (warehouse != null) {
+                double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt());
+                warehouse.setUsedCapacity(newUsedCapacity);
+                warehouseRepository.save(warehouse);
+            }
+            itemRepository.deleteById(id);
         }
-
-        Warehouse warehouse = existingItem.getWarehouse();
-
-        double currentSpaceUsed = warehouse.getItems().stream()
-                                            .filter(item -> !item.getId().equals(id))
-                                            .mapToDouble(item -> item.getQuantity() * item.getSizeInCubicFt())
-                                            .sum();
-        double updatedItemSpace = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
-
-        if (currentSpaceUsed + updatedItemSpace > warehouse.getCapacity()) {
-            throw new IllegalArgumentException("Warehouse capacity exceeded");
-        }
-
-        existingItem.setName(itemDetails.getName());
-        existingItem.setDescription(itemDetails.getDescription());
-        existingItem.setQuantity(itemDetails.getQuantity());
-        existingItem.setSizeInCubicFt(itemDetails.getSizeInCubicFt());
-        return itemRepository.save(existingItem);
     }
 
-    public void deleteItem(Long id) {
-        itemRepository.deleteById(id);
+    public Item updateItem(Long id, Item itemDetails) {
+        Item item = itemRepository.findById(id).orElse(null);
+        if (item != null) {
+            Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
+            if (warehouse == null) {
+                throw new IllegalArgumentException("Warehouse not found");
+            }
+            double oldUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt());
+            double newUsedCapacity = oldUsedCapacity + (itemDetails.getQuantity() * itemDetails.getSizeInCubicFt());
+
+            if (newUsedCapacity > warehouse.getCapacity()) {
+                throw new IllegalArgumentException("Warehouse capacity exceeded");
+            }
+            
+            warehouse.setUsedCapacity(newUsedCapacity);
+            warehouseRepository.save(warehouse);
+
+            item.setName(itemDetails.getName());
+            item.setDescription(itemDetails.getDescription());
+            item.setQuantity(itemDetails.getQuantity());
+            item.setSizeInCubicFt(itemDetails.getSizeInCubicFt());
+            item.setWarehouse(warehouse);
+            return itemRepository.save(item);
+        }
+        return null;
     }
 }

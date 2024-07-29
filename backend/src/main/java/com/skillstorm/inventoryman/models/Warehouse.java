@@ -1,8 +1,6 @@
 package com.skillstorm.inventoryman.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,10 +13,10 @@ public class Warehouse {
 
     private String name;
     private int capacity;
+    private double usedCapacity;
 
     @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items;
 
     // Getters and setters
     public Long getId() {
@@ -43,6 +41,14 @@ public class Warehouse {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public double getUsedCapacity() {
+        return usedCapacity;
+    }
+
+    public void setUsedCapacity(double usedCapacity) {
+        this.usedCapacity = usedCapacity;
     }
 
     public List<Item> getItems() {

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WarehouseService {
@@ -17,7 +16,7 @@ public class WarehouseService {
     public List<Warehouse> getAllWarehouses() {
         return warehouseRepository.findAll();
     }
-    
+
     public Warehouse getWarehouseById(Long id) {
         return warehouseRepository.findById(id).orElse(null);
     }
@@ -30,15 +29,11 @@ public class WarehouseService {
         warehouseRepository.deleteById(id);
     }
 
-    public double getCurrentSpaceUsed(Long warehouseId) {
-        Optional<Warehouse> warehouseOpt = warehouseRepository.findById(warehouseId);
-        if (warehouseOpt.isPresent()) {
-            Warehouse warehouse = warehouseOpt.get();
-            return warehouse.getItems().stream()
-                            .mapToDouble(item -> item.getQuantity() * item.getSizeInCubicFt())
-                            .sum();
-        } else {
-            throw new IllegalArgumentException("Warehouse not found");
+    public double getCurrentSpaceUsed(Long id) {
+        Warehouse warehouse = warehouseRepository.findById(id).orElse(null);
+        if (warehouse != null) {
+            return warehouse.getUsedCapacity();
         }
+        return 0;
     }
 }
