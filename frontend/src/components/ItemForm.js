@@ -29,7 +29,15 @@ const ItemForm = ({ item, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const totalSize = parseFloat(sizeInCubicFt) * parseInt(quantity);
+    const parsedQuantity = parseInt(quantity);
+    const parsedSizeInCubicFt = parseFloat(sizeInCubicFt);
+    
+    if (parsedQuantity <= 0 || parsedSizeInCubicFt <= 0) {
+      setError('Quantity and size must be positive values.');
+      return;
+    }
+
+    const totalSize = parsedSizeInCubicFt * parsedQuantity;
     if (totalSize > availableCapacity) {
       setError('Total item size exceeds the available capacity of the warehouse.');
       return;
@@ -38,8 +46,8 @@ const ItemForm = ({ item, onSave }) => {
     const itemData = {
       name,
       description,
-      quantity: parseInt(quantity),
-      sizeInCubicFt: parseFloat(sizeInCubicFt),
+      quantity: parsedQuantity,
+      sizeInCubicFt: parsedSizeInCubicFt,
       warehouse: { id: parseInt(warehouseId) }
     };
 
