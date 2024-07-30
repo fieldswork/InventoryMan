@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const handleSave = () => {
-    window.location.href = '/items';
+    window.location.href = '/warehouses';
   };
 
   return (
