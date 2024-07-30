@@ -6,7 +6,7 @@ const UtilizationBar = ({ usedCapacity, capacity }) => {
   return (
     <div className="progress" style={{ height: '25px' }}>
       <div
-        className="progress-bar"
+        className="progress-bar progress-bar-striped"
         role="progressbar"
         style={{ width: `${percentage}%` }}
         aria-valuenow={percentage}

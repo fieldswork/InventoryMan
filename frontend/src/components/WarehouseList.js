@@ -17,6 +17,14 @@ const WarehouseList = () => {
     navigate(`/edit-warehouse/${warehouseId}`);
   };
 
+  const handleDelete = (warehouseId) => {
+    if (window.confirm('This will delete the warehouse and all items contained within it.\n\nAre you sure you want to delete this warehouse?')) {
+      WarehouseService.delete(warehouseId).then(() => {
+        setWarehouses(warehouses.filter(warehouse => warehouse.id !== warehouseId));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Warehouses</h2>
@@ -27,7 +35,10 @@ const WarehouseList = () => {
               <h5>{warehouse.name}</h5>
               <p>{warehouse.usedCapacity} / {warehouse.capacity} cubic feet utilized</p>
               <UtilizationBar usedCapacity={warehouse.usedCapacity} capacity={warehouse.capacity} />
-              <button onClick={() => handleEdit(warehouse.id)} className="btn btn-primary mt-3">Edit</button>
+              <div className="d-flex justify-content-between mt-3">
+                <button onClick={() => handleEdit(warehouse.id)} className="btn btn-primary">Edit</button>
+                <button onClick={() => handleDelete(warehouse.id)} className="btn btn-danger">Delete</button>
+              </div>
             </div>
           </div>
         ))}

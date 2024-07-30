@@ -16,6 +16,14 @@ const ItemList = () => {
     navigate(`/edit-item/${itemId}`);
   };
 
+  const handleDelete = (itemId) => {
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      ItemService.delete(itemId).then(() => {
+        setItems(items.filter(item => item.id !== itemId));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Items</h2>
@@ -27,7 +35,10 @@ const ItemList = () => {
               <p>{item.description}</p>
               <p>Quantity: {item.quantity}</p>
               <p>Size: {item.sizeInCubicFt} cubic feet</p>
-              <button onClick={() => handleEdit(item.id)} className="btn btn-primary mt-3">Edit</button>
+              <div className="d-flex justify-content-between mt-3">
+                <button onClick={() => handleEdit(item.id)} className="btn btn-primary">Edit</button>
+                <button onClick={() => handleDelete(item.id)} className="btn btn-danger">Delete</button>
+              </div>
             </div>
           </div>
         ))}
