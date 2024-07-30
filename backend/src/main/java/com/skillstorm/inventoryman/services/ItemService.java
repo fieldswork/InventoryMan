@@ -67,13 +67,19 @@ public class ItemService {
             if (warehouse == null) {
                 throw new IllegalArgumentException("Warehouse not found");
             }
-            double oldUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt());
-            double newUsedCapacity = oldUsedCapacity + (itemDetails.getQuantity() * itemDetails.getSizeInCubicFt());
+
+            double currentItemSize = item.getQuantity() * item.getSizeInCubicFt();
+            double newItemSize = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
+            double newUsedCapacity = warehouse.getUsedCapacity() - currentItemSize + newItemSize;
+
+            System.out.println("Current item size: " + currentItemSize);
+            System.out.println("New item size: " + newItemSize);
+            System.out.println("New used capacity: " + newUsedCapacity);
 
             if (newUsedCapacity > warehouse.getCapacity()) {
                 throw new IllegalArgumentException("Warehouse capacity exceeded");
             }
-            
+
             warehouse.setUsedCapacity(newUsedCapacity);
             warehouseRepository.save(warehouse);
 
@@ -87,3 +93,4 @@ public class ItemService {
         return null;
     }
 }
+

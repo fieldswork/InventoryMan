@@ -12,6 +12,7 @@ const ItemForm = ({ onSave }) => {
   const [warehouseId, setWarehouseId] = useState('');
   const [warehouses, setWarehouses] = useState([]);
   const [availableCapacity, setAvailableCapacity] = useState(null);
+  const [initialItem, setInitialItem] = useState(null); // <--- 
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const ItemForm = ({ onSave }) => {
         setQuantity(item.quantity);
         setSizeInCubicFt(item.sizeInCubicFt);
         setWarehouseId(item.warehouse.id);
-        setAvailableCapacity(item.warehouse.capacity - item.warehouse.usedCapacity);
+        setInitialItem(item); // Details stored here
       });
     }
   }, [id]);
@@ -51,7 +52,12 @@ const ItemForm = ({ onSave }) => {
       return;
     }
 
-    const totalSize = parsedSizeInCubicFt * parsedQuantity;
+    let totalSize = parsedSizeInCubicFt * parsedQuantity;
+    if (initialItem && initialItem.warehouse.id === parseInt(warehouseId)) {
+      const initialSize = initialItem.sizeInCubicFt * initialItem.quantity;
+      totalSize -= initialSize; // Adjust for the existing item's size?
+    }
+
     if (totalSize > availableCapacity) {
       setError('Total item size exceeds the available capacity of the warehouse.');
       return;
