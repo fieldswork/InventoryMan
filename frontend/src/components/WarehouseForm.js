@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WarehouseService from '../services/warehouseService';
 import { useParams } from 'react-router-dom';
+import UtilizationBar from './UtilizationBar';
 
 const WarehouseForm = ({ onSave }) => {
   const { id } = useParams();
@@ -70,21 +71,12 @@ const WarehouseForm = ({ onSave }) => {
           required
         />
       </div>
-      <div className="form-group">
-        <label>Used Capacity</label>
-        <div className="progress" style={{ height: '25px' }}>
-          <div
-            className="progress-bar"
-            role="progressbar"
-            style={{ width: `${(usedCapacity / capacity) * 100}%` }}
-            aria-valuenow={(usedCapacity / capacity) * 100}
-            aria-valuemin="0"
-            aria-valuemax="100"
-          >
-            {usedCapacity} / {capacity} (cubic feet)
-          </div>
+      {id && (
+        <div className="form-group">
+          <label>Used Capacity</label>
+          <UtilizationBar usedCapacity={usedCapacity} capacity={capacity} />
         </div>
-      </div>
+      )}
       {error && <div className="alert alert-danger">{error}</div>}
       <button type="submit" className="btn btn-primary mt-3">
         {id ? 'Update' : 'Create'}
