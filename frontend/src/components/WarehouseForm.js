@@ -72,14 +72,18 @@ const WarehouseForm = ({ onSave }) => {
       </div>
       <div className="form-group">
         <label>Used Capacity</label>
-        <input
-          type="number"
-          step="0.01"
-          className="form-control"
-          value={usedCapacity}
-          onChange={(e) => setUsedCapacity(e.target.value)}
-          readOnly
-        />
+        <div className="progress" style={{ height: '25px' }}>
+          <div
+            className="progress-bar"
+            role="progressbar"
+            style={{ width: `${(usedCapacity / capacity) * 100}%` }}
+            aria-valuenow={(usedCapacity / capacity) * 100}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {usedCapacity} / {capacity} (cubic feet)
+          </div>
+        </div>
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
       <button type="submit" className="btn btn-primary mt-3">
