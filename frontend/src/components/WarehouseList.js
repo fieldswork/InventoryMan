@@ -20,17 +20,18 @@ const WarehouseList = () => {
   return (
     <div>
       <h2>Warehouses</h2>
-      <ul>
+      <div className="row">
         {warehouses.map(warehouse => (
-          <li key={warehouse.id} className="d-flex align-items-center justify-content-between">
-            <div>
-              {warehouse.name}
+          <div key={warehouse.id} className="col-md-6">
+            <div className="card">
+              <h5>{warehouse.name}</h5>
+              <p>{warehouse.usedCapacity} / {warehouse.capacity} cubic feet utilized</p>
               <UtilizationBar usedCapacity={warehouse.usedCapacity} capacity={warehouse.capacity} />
+              <button onClick={() => handleEdit(warehouse.id)} className="btn btn-primary mt-3">Edit</button>
             </div>
-            <button onClick={() => handleEdit(warehouse.id)} className="btn btn-primary ml-3">Edit</button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

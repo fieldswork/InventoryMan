@@ -2,17 +2,18 @@
 import React from 'react';
 
 const UtilizationBar = ({ usedCapacity, capacity }) => {
+  const percentage = (usedCapacity / capacity) * 100;
   return (
     <div className="progress" style={{ height: '25px' }}>
       <div
         className="progress-bar"
         role="progressbar"
-        style={{ width: `${(usedCapacity / capacity) * 100}%` }}
-        aria-valuenow={(usedCapacity / capacity) * 100}
+        style={{ width: `${percentage}%` }}
+        aria-valuenow={percentage}
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        {usedCapacity} / {capacity} (cubic feet)
+        {`${Math.round(percentage)}%`}
       </div>
     </div>
   );

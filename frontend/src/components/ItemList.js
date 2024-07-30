@@ -19,14 +19,19 @@ const ItemList = () => {
   return (
     <div>
       <h2>Items</h2>
-      <ul>
+      <div className="row">
         {items.map(item => (
-          <li key={item.id}>
-            {item.name}
-            <button onClick={() => handleEdit(item.id)} className="btn btn-primary ml-3">Edit</button>
-          </li>
+          <div key={item.id} className="col-md-6">
+            <div className="card">
+              <h5>{item.name}</h5>
+              <p>{item.description}</p>
+              <p>Quantity: {item.quantity}</p>
+              <p>Size: {item.sizeInCubicFt} cubic feet</p>
+              <button onClick={() => handleEdit(item.id)} className="btn btn-primary mt-3">Edit</button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

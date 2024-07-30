@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import WarehouseList from './components/WarehouseList';
 import ItemList from './components/ItemList';
 import WarehouseForm from './components/WarehouseForm';
 import ItemForm from './components/ItemForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
   const handleSave = () => {
@@ -15,19 +16,19 @@ function App() {
     <Router>
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/warehouses" className="navbar-brand">Inventory Man</a>
+          <NavLink to="/warehouses" className="navbar-brand">Inventory Man</NavLink>
           <div className="navbar-nav">
             <li className="nav-item">
-              <a href="/warehouses" className="nav-link">Warehouses</a>
+              <NavLink to="/warehouses" className="nav-link" activeClassName="active">Warehouses</NavLink>
             </li>
             <li className="nav-item">
-              <a href="/items" className="nav-link">Items</a>
+              <NavLink to="/items" className="nav-link" activeClassName="active">Items</NavLink>
             </li>
             <li className="nav-item">
-              <a href="/add-warehouse" className="nav-link">Add Warehouse</a>
+              <NavLink to="/add-warehouse" className="nav-link" activeClassName="active">Add Warehouse</NavLink>
             </li>
             <li className="nav-item">
-              <a href="/add-item" className="nav-link">Add Item</a>
+              <NavLink to="/add-item" className="nav-link" activeClassName="active">Add Item</NavLink>
             </li>
           </div>
         </nav>
