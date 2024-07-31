@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ItemService from '../services/itemService';
+import WarehouseService from '../services/warehouseService';
 import { useNavigate } from 'react-router-dom';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
+  const [warehouses, setWarehouses] = useState([]);
   const [sortCriteria, setSortCriteria] = useState('name'); // default sort by name
+  const [filterWarehouse, setFilterWarehouse] = useState('all'); // default filter by all warehouses
   const navigate = useNavigate();
 
   useEffect(() => {
     ItemService.getAll().then(response => {
       console.log('Fetched items:', response.data); // LOGGING <----------
       setItems(response.data);
+    });
+    WarehouseService.getAll().then(response => {
+      setWarehouses(response.data);
     });
   }, []);
 
@@ -30,8 +36,12 @@ const ItemList = () => {
     setSortCriteria(e.target.value);
   };
 
+  const handleFilterChange = (e) => {
+    setFilterWarehouse(e.target.value);
+  };
+
   const sortedItems = [...items].sort((a, b) => {
-    if (sortCriteria === 'name') { // assigning an empty string for name if null
+    if (sortCriteria === 'name') {
       const nameA = a.name || '';
       const nameB = b.name || '';
       return nameA.localeCompare(nameB);
@@ -40,6 +50,10 @@ const ItemList = () => {
     }
     return 0;
   });
+
+  const filteredItems = filterWarehouse === 'all'
+    ? sortedItems
+    : sortedItems.filter(item => item.warehouse.id === parseInt(filterWarehouse));
 
   return (
     <div>
@@ -51,14 +65,24 @@ const ItemList = () => {
           <option value="quantity">Quantity</option>
         </select>
       </div>
+      <div className="mb-3">
+        <label htmlFor="filterWarehouse" className="form-label">Filter by Warehouse:</label>
+        <select id="filterWarehouse" className="form-select" onChange={handleFilterChange} value={filterWarehouse}>
+          <option value="all">All Warehouses</option>
+          {warehouses.map(warehouse => (
+            <option key={warehouse.id} value={warehouse.id}>{warehouse.name}</option>
+          ))}
+        </select>
+      </div>
       <div className="row">
-        {sortedItems.map(item => (
+        {filteredItems.map(item => (
           <div key={item.id} className="col-md-6">
             <div className="card">
               <h5>{item.name || 'Unnamed Item'}</h5>
               <p>{item.description}</p>
               <p>Quantity: {item.quantity}</p>
               <p>Size: {item.sizeInCubicFt} cubic feet</p>
+              <p>Warehouse: {item.warehouse.name}</p>
               <div className="d-flex justify-content-between mt-3">
                 <button onClick={() => handleEdit(item.id)} className="btn btn-primary">Edit</button>
                 <button onClick={() => handleDelete(item.id)} className="btn btn-danger">Delete</button>
