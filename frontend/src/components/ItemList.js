@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
+  const [sortCriteria, setSortCriteria] = useState('name'); // default sort by name
   const navigate = useNavigate();
 
   useEffect(() => {
     ItemService.getAll().then(response => {
+      console.log('Fetched items:', response.data); // LOGGING <----------
       setItems(response.data);
     });
   }, []);
@@ -24,14 +26,36 @@ const ItemList = () => {
     }
   };
 
+  const handleSortChange = (e) => {
+    setSortCriteria(e.target.value);
+  };
+
+  const sortedItems = [...items].sort((a, b) => {
+    if (sortCriteria === 'name') { // assigning an empty string for name if null
+      const nameA = a.name || '';
+      const nameB = b.name || '';
+      return nameA.localeCompare(nameB);
+    } else if (sortCriteria === 'quantity') {
+      return b.quantity - a.quantity;
+    }
+    return 0;
+  });
+
   return (
     <div>
       <h2>Items</h2>
+      <div className="mb-3">
+        <label htmlFor="sortCriteria" className="form-label">Sort By:</label>
+        <select id="sortCriteria" className="form-select" onChange={handleSortChange} value={sortCriteria}>
+          <option value="name">Name (Alphabetical)</option>
+          <option value="quantity">Quantity</option>
+        </select>
+      </div>
       <div className="row">
-        {items.map(item => (
+        {sortedItems.map(item => (
           <div key={item.id} className="col-md-6">
             <div className="card">
-              <h5>{item.name}</h5>
+              <h5>{item.name || 'Unnamed Item'}</h5>
               <p>{item.description}</p>
               <p>Quantity: {item.quantity}</p>
               <p>Size: {item.sizeInCubicFt} cubic feet</p>

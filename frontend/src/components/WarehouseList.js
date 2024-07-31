@@ -5,6 +5,7 @@ import UtilizationBar from './UtilizationBar';
 
 const WarehouseList = () => {
   const [warehouses, setWarehouses] = useState([]);
+  const [sortCriteria, setSortCriteria] = useState('name'); // default sort by name
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,11 +26,33 @@ const WarehouseList = () => {
     }
   };
 
+  const handleSortChange = (e) => {
+    setSortCriteria(e.target.value);
+  };
+
+  const sortedWarehouses = [...warehouses].sort((a, b) => {
+    if (sortCriteria === 'name') {
+      return a.name.localeCompare(b.name);
+    } else if (sortCriteria === 'utilization') {
+      const utilizationA = (a.usedCapacity / a.capacity) * 100;
+      const utilizationB = (b.usedCapacity / b.capacity) * 100;
+      return utilizationB - utilizationA;
+    }
+    return 0;
+  });
+
   return (
     <div>
       <h2>Warehouses</h2>
+      <div className="mb-3">
+        <label htmlFor="sortCriteria" className="form-label">Sort By:</label>
+        <select id="sortCriteria" className="form-select" onChange={handleSortChange} value={sortCriteria}>
+          <option value="name">Name (Alphabetical)</option>
+          <option value="utilization">Utilization (%)</option>
+        </select>
+      </div>
       <div className="row">
-        {warehouses.map(warehouse => (
+        {sortedWarehouses.map(warehouse => (
           <div key={warehouse.id} className="col-md-6">
             <div className="card">
               <h5>{warehouse.name}</h5>
