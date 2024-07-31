@@ -12,11 +12,19 @@ class WarehouseService {
   }
 
   create(data) {
-    return axios.post(API_URL, data);
+    return axios.post(API_URL, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   update(id, data) {
-    return axios.put(`${API_URL}/${id}`, data);
+    return axios.put(`${API_URL}/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   delete(id) {
