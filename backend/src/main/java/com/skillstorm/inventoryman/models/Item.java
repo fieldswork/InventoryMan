@@ -1,6 +1,7 @@
 package com.skillstorm.inventoryman.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -18,8 +19,9 @@ public class Item {
     private int quantity;
     private double sizeInCubicFt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id", nullable = false)
+    @JsonManagedReference
     private Warehouse warehouse;
 
     // Getters and setters
