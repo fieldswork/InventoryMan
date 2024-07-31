@@ -44,11 +44,11 @@ const ItemForm = ({ onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const parsedQuantity = parseInt(quantity);
+    const parsedQuantity = Math.ceil(parseFloat(quantity)); // round up to nearest whole number
     const parsedSizeInCubicFt = parseFloat(sizeInCubicFt);
     
-    if (parsedQuantity <= 0 || parsedSizeInCubicFt <= 0) {
-      setError('Quantity and size must be positive values.');
+    if (parsedQuantity < 1 || parsedSizeInCubicFt <= 0) {
+      setError('Quantity must be at least 1 and size must be a positive value.');
       return;
     }
 
