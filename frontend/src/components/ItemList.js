@@ -47,6 +47,12 @@ const ItemList = () => {
       return nameA.localeCompare(nameB);
     } else if (sortCriteria === 'quantity') {
       return b.quantity - a.quantity;
+    } else if (sortCriteria === 'size') {
+      return b.sizeInCubicFt - a.sizeInCubicFt;
+    } else if (sortCriteria === 'totalSize') {
+      const totalSizeA = a.sizeInCubicFt * a.quantity;
+      const totalSizeB = b.sizeInCubicFt * b.quantity;
+      return totalSizeB - totalSizeA;
     }
     return 0;
   });
@@ -63,6 +69,8 @@ const ItemList = () => {
         <select id="sortCriteria" className="form-select" onChange={handleSortChange} value={sortCriteria}>
           <option value="name">Name (Alphabetical)</option>
           <option value="quantity">Quantity</option>
+          <option value="size">Item Size</option>
+          <option value="totalSize">Total Size</option>
         </select>
       </div>
       <div className="mb-3">
