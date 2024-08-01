@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/items';
+const API_URL = 'http://3.94.101.114:8080/api/items';
 
 class ItemService {
   getAll() {
