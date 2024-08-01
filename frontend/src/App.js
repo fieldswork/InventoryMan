@@ -4,6 +4,7 @@ import WarehouseList from './components/WarehouseList';
 import ItemList from './components/ItemList';
 import WarehouseForm from './components/WarehouseForm';
 import ItemForm from './components/ItemForm';
+import HomePage from './components/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -16,7 +17,7 @@ function App() {
     <Router>
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <NavLink to="/warehouses" className="navbar-brand">Inventory Man</NavLink>
+          <NavLink to="/" className="navbar-brand" style={{ paddingLeft: '20px' }}>InventoryMan</NavLink>
           <div className="navbar-nav">
             <li className="nav-item">
               <NavLink to="/warehouses" className="nav-link" activeClassName="active">Warehouses</NavLink>
@@ -34,6 +35,7 @@ function App() {
         </nav>
         <div className="container mt-3">
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/warehouses" element={<WarehouseList />} />
             <Route path="/items" element={<ItemList />} />
             <Route path="/add-warehouse" element={<WarehouseForm onSave={handleSave} />} />
