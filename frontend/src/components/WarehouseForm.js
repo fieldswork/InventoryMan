@@ -27,12 +27,17 @@ const WarehouseForm = ({ onSave }) => {
     const parsedUsedCapacity = parseFloat(usedCapacity);
 
     if (parsedCapacity <= 0 || parsedUsedCapacity < 0) {
-      setError('Capacity must be positive and used capacity cannot be negative.');
+      setError('Capacity must be positive.');
       return;
     }
 
     if (parsedCapacity < parsedUsedCapacity) {
-      setError('New capacity cannot be less than the used capacity.');
+      setError('Used capacity exceeds new capacity.');
+      return;
+    }
+
+    if (parsedCapacity > Number.MAX_SAFE_INTEGER || parsedUsedCapacity > Number.MAX_SAFE_INTEGER) {
+      setError('Capacity is too large.');
       return;
     }
 

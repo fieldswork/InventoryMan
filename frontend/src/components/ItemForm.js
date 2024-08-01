@@ -47,8 +47,13 @@ const ItemForm = ({ onSave }) => {
     const parsedQuantity = Math.ceil(parseFloat(quantity)); // round up to nearest whole number
     const parsedSizeInCubicFt = parseFloat(sizeInCubicFt);
     
-    if (parsedQuantity < 1 || parsedSizeInCubicFt <= 0) {
-      setError('Quantity must be at least 1 and size must be a positive value.');
+    if (parsedQuantity < 1 || parsedSizeInCubicFt < 1) {
+      setError('Quantity and size must be at least 1.');
+      return;
+    }
+
+    if (parsedQuantity > Number.MAX_SAFE_INTEGER || parsedSizeInCubicFt > Number.MAX_SAFE_INTEGER) {
+      setError('Quantity, size, or both values are too large.');
       return;
     }
 
@@ -130,7 +135,7 @@ const ItemForm = ({ onSave }) => {
           required
         >
           <option value="">Select a Warehouse</option>
-          {warehouses.map((warehouse) => (
+          {warehouses.map(warehouse => (
             <option key={warehouse.id} value={warehouse.id}>
               {warehouse.name}
             </option>
