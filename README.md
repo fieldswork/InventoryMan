@@ -1,6 +1,6 @@
 # InventoryMan
 
-### A basic inventory management application created as part of the SkillStorm SDET Apprenticeship.
+### A basic inventory management application created as part of the SkillStorm SDET Apprenticeship
 
 ### This project is hosted on the AWS free tier! 
 Find it [here!](http://inventory-man.s3-website-us-east-1.amazonaws.com) (http://inventory-man.s3-website-us-east-1.amazonaws.com)
