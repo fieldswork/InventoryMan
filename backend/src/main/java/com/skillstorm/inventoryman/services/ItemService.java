@@ -18,15 +18,15 @@ public class ItemService {
     @Autowired
     private WarehouseRepository warehouseRepository;
 
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems() { // Method that returns all items
         return itemRepository.findAll();
     }
 
-    public Item getItemById(Long id) {
+    public Item getItemById(Long id) { // Method that returns an item by id
         return itemRepository.findById(id).orElse(null);
     }
 
-    public Item saveItem(Item item) {
+    public Item saveItem(Item item) { // Method that creates a new item
         Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
         if (warehouse == null) {
             throw new IllegalArgumentException("Warehouse not found");
@@ -35,7 +35,7 @@ public class ItemService {
         double additionalCapacity = item.getQuantity() * item.getSizeInCubicFt();
         double newUsedCapacity = warehouse.getUsedCapacity() + additionalCapacity;
 
-        if (newUsedCapacity > warehouse.getCapacity()) {
+        if (newUsedCapacity > warehouse.getCapacity()) { // If the new used capacity is greater than the warehouse capacity, frontend will display an error message
             throw new IllegalArgumentException("Warehouse capacity exceeded");
         }
 
@@ -43,16 +43,16 @@ public class ItemService {
         warehouseRepository.save(warehouse);
         
         item.setWarehouse(warehouse);
-        return itemRepository.save(item);
+        return itemRepository.save(item); // Saves the item if it fits in the warehouse
     }
 
-    public void deleteItem(Long id) {
+    public void deleteItem(Long id) { // Method that deletes an item by id
         Item item = itemRepository.findById(id).orElse(null);
 
-        if (item != null) {
-            Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
+        if (item != null) { 
+            Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null); // Gets the warehouse of the item, if it exists
             if (warehouse != null) {
-                double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt());
+                double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt()); // Calculates the new used capacity of the warehouse
                 warehouse.setUsedCapacity(newUsedCapacity);
                 warehouseRepository.save(warehouse);
             }
@@ -60,7 +60,7 @@ public class ItemService {
         }
     }
 
-    public Item updateItem(Long id, Item itemDetails) {
+    public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
@@ -79,7 +79,7 @@ public class ItemService {
             double newItemSize = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
             double newUsedCapacity = newWarehouse.getUsedCapacity() + newItemSize;
     
-            if (newUsedCapacity > newWarehouse.getCapacity()) {
+            if (newUsedCapacity > newWarehouse.getCapacity()) { // If the new used capacity is greater than the warehouse capacity, frontend will display an error message
                 throw new IllegalArgumentException("New Warehouse capacity exceeded");
             }
     

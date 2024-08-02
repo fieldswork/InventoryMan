@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const UtilizationBar = ({ usedCapacity, capacity }) => {
   const percentage = (usedCapacity / capacity) * 100;
 
-  let progressBarClass = 'bg-primary'; // blue under 75%
+  let progressBarClass = 'bg-primary'; // Blue under 75% capacity
   if (percentage >= 100) {
-    progressBarClass = 'bg-danger'; // red at 100%
+    progressBarClass = 'bg-danger'; // Red at 100%
   } else if (percentage >= 75) {
-    progressBarClass = 'bg-warning'; // yellow between 75-100%
+    progressBarClass = 'bg-warning'; // Yellow if between 75-100%
   }
 
   return (

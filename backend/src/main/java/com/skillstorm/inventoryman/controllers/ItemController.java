@@ -15,17 +15,17 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping
+    @GetMapping // Gets all items
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Gets an item by id
     public Item getItemById(@PathVariable Long id) {
         return itemService.getItemById(id);
     }
 
-    @PostMapping
+    @PostMapping // Creates a new item
     public ResponseEntity<Item> createItem(@RequestBody Item item) {
         try {
             return ResponseEntity.ok(itemService.saveItem(item));
@@ -34,7 +34,7 @@ public class ItemController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // Updates an item by id
     public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
         try {
             return ResponseEntity.ok(itemService.updateItem(id, itemDetails));
@@ -43,7 +43,7 @@ public class ItemController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // Deletes an item by id
     public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
         itemService.deleteItem(id);
         return ResponseEntity.noContent().build();

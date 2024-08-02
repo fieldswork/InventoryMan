@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/warehouses';
+const API_URL = 'http://localhost:8080/api/warehouses'; // This also needs to be updated if moved to AWS
 
-class WarehouseService {
+class WarehouseService { // Routes api calls to the backend for warehouse data
   getAll() {
     return axios.get(API_URL);
   }

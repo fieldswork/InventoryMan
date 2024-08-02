@@ -14,22 +14,22 @@ public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
-    @GetMapping
+    @GetMapping // Gets all warehouses
     public List<Warehouse> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Gets a warehouse by id
     public Warehouse getWarehouseById(@PathVariable Long id) {
         return warehouseService.getWarehouseById(id);
     }
 
-    @PostMapping
+    @PostMapping // Creates a new warehouse
     public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.saveWarehouse(warehouse);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // Updates a warehouse by id
     public Warehouse updateWarehouse(@PathVariable Long id, @RequestBody Warehouse warehouseDetails) {
         Warehouse warehouse = warehouseService.getWarehouseById(id);
         warehouse.setName(warehouseDetails.getName());
@@ -37,12 +37,12 @@ public class WarehouseController {
         return warehouseService.saveWarehouse(warehouse);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // Deletes a warehouse by id
     public void deleteWarehouse(@PathVariable Long id) {
         warehouseService.deleteWarehouse(id);
     }
 
-    @GetMapping("/{id}/space-used")
+    @GetMapping("/{id}/space-used") // Gets the current space used in a warehouse by id
     public double getCurrentSpaceUsed(@PathVariable Long id) {
         return warehouseService.getCurrentSpaceUsed(id);
     }

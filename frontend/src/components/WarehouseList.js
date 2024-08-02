@@ -5,32 +5,32 @@ import UtilizationBar from './UtilizationBar';
 
 const WarehouseList = () => {
   const [warehouses, setWarehouses] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState('name'); // default sort by name
+  const [sortCriteria, setSortCriteria] = useState('name'); // Default is to sort by name
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { // Fetch all warehouses on component mount
     WarehouseService.getAll().then(response => {
       setWarehouses(response.data);
     });
   }, []);
 
-  const handleEdit = (warehouseId) => {
+  const handleEdit = (warehouseId) => { // Navigate to edit warehouse page with warehouse ID given
     navigate(`/edit-warehouse/${warehouseId}`);
   };
 
-  const handleDelete = (warehouseId) => {
-    if (window.confirm('This will delete the warehouse and all items contained within it.\n\nAre you sure you want to delete this warehouse?')) {
-      WarehouseService.delete(warehouseId).then(() => {
+  const handleDelete = (warehouseId) => { // Deletes warehouse and updates state
+    if (window.confirm('This will delete the warehouse and all items contained within it.\n\nAre you sure you want to delete this warehouse?')) { // Confirm deletion popup done here
+      WarehouseService.delete(warehouseId).then(() => { // Delete warehouse and update state, note that items are deleted via cascade in the backend
         setWarehouses(warehouses.filter(warehouse => warehouse.id !== warehouseId));
       });
     }
   };
 
-  const handleSortChange = (e) => {
+  const handleSortChange = (e) => { // Update sort criteria state based on user selection
     setSortCriteria(e.target.value);
   };
 
-  const sortedWarehouses = [...warehouses].sort((a, b) => {
+  const sortedWarehouses = [...warehouses].sort((a, b) => { // Sort warehouses based on sort criteria, in this case, by name or utilization
     if (sortCriteria === 'name') {
       return a.name.localeCompare(b.name);
     } else if (sortCriteria === 'utilization') {

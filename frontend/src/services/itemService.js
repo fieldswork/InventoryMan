@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/items';
+const API_URL = 'http://localhost:8080/api/items'; // This also needs to be updated if moved to AWS
 
-class ItemService {
+class ItemService { // Routes api calls to the backend for item data
   getAll() {
     return axios.get(API_URL);
   }

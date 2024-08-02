@@ -14,6 +14,7 @@ Find it [here!](http://inventory-man.s3-website-us-east-1.amazonaws.com) (http:/
  - Sorting and filtering for easy navigation
  - Logic to prevent reaching over-capacity in warehouses
  - Input validation for forms
+ - Pre-computed utilization percentage for each warehouse
  - Responsive design for mobile and desktop
 
 ## AWS Deployment

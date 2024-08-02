@@ -3,16 +3,16 @@ import WarehouseService from '../services/warehouseService';
 import { useParams } from 'react-router-dom';
 import UtilizationBar from './UtilizationBar';
 
-const WarehouseForm = ({ onSave }) => {
+const WarehouseForm = ({ onSave }) => { // Warehouse form component, used for both creating and editing warehouses
   const { id } = useParams();
   const [name, setName] = useState('');
   const [capacity, setCapacity] = useState('');
   const [usedCapacity, setUsedCapacity] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  useEffect(() => { // Fetch warehouse data if editing
     if (id) {
-      WarehouseService.get(id).then(response => {
+      WarehouseService.get(id).then(response => { // Fetch warehouse data
         const warehouse = response.data;
         setName(warehouse.name);
         setCapacity(warehouse.capacity);
@@ -21,12 +21,12 @@ const WarehouseForm = ({ onSave }) => {
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { // Validate and submit form data to create or update warehouse
     e.preventDefault();
     const parsedCapacity = parseInt(capacity);
     const parsedUsedCapacity = parseFloat(usedCapacity);
 
-    if (parsedCapacity <= 0 || parsedUsedCapacity < 0) {
+    if (parsedCapacity <= 0 || parsedUsedCapacity < 0) { // More form validation
       setError('Capacity must be positive.');
       return;
     }
@@ -47,7 +47,7 @@ const WarehouseForm = ({ onSave }) => {
       usedCapacity: parsedUsedCapacity
     };
 
-    if (id) {
+    if (id) { // Update warehouse if editing, otherwise create new warehouse
       WarehouseService.update(id, warehouseData).then(() => onSave());
     } else {
       WarehouseService.create(warehouseData).then(() => onSave());

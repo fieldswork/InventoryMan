@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  const handleSave = () => {
+  const handleSave = () => { // Redirect to warehouses page after creating/editing warehouse or item
     window.location.href = '/warehouses';
   };
 

@@ -15,7 +15,7 @@ const ItemForm = ({ onSave }) => {
   const [initialItem, setInitialItem] = useState(null);
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  useEffect(() => { // Fetch all warehouses and item data if editing
     WarehouseService.getAll().then(response => {
       setWarehouses(response.data);
     });
@@ -33,7 +33,7 @@ const ItemForm = ({ onSave }) => {
     }
   }, [id]);
 
-  useEffect(() => {
+  useEffect(() => { // Fetch warehouse data to calculate available capacity
     if (warehouseId) {
       WarehouseService.get(warehouseId).then(response => {
         const warehouse = response.data;
@@ -42,9 +42,9 @@ const ItemForm = ({ onSave }) => {
     }
   }, [warehouseId]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { // Validate and submit form data
     e.preventDefault();
-    const parsedQuantity = Math.ceil(parseFloat(quantity)); // round up to nearest whole number
+    const parsedQuantity = Math.ceil(parseFloat(quantity)); // Rounds up to nearest whole number
     const parsedSizeInCubicFt = parseFloat(sizeInCubicFt);
     
     if (parsedQuantity < 1 || parsedSizeInCubicFt < 1) {
@@ -58,12 +58,12 @@ const ItemForm = ({ onSave }) => {
     }
 
     let totalSize = parsedSizeInCubicFt * parsedQuantity;
-    if (initialItem && initialItem.warehouse.id === parseInt(warehouseId)) {
+    if (initialItem && initialItem.warehouse.id === parseInt(warehouseId)) { // Subtract initial item size if editing
       const initialSize = initialItem.sizeInCubicFt * initialItem.quantity;
       totalSize -= initialSize;
     }
 
-    if (totalSize > availableCapacity) {
+    if (totalSize > availableCapacity) { // Validation for warehouse is set to display error here!
       setError('Total item size exceeds the available capacity of the warehouse.');
       return;
     }
@@ -76,9 +76,9 @@ const ItemForm = ({ onSave }) => {
       warehouse: { id: parseInt(warehouseId) }
     };
 
-    if (id) {
+    if (id) { // Update or create item if form data is valid
       ItemService.update(id, itemData).then(() => onSave());
-    } else {
+    } else { // If id is not present, create a new item
       ItemService.create(itemData).then(() => onSave());
     }
   };

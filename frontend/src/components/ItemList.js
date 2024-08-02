@@ -6,25 +6,25 @@ import { useNavigate } from 'react-router-dom';
 const ItemList = () => {
   const [items, setItems] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState('name'); // default sort by name
-  const [filterWarehouse, setFilterWarehouse] = useState('all'); // default filter by all warehouses
+  const [sortCriteria, setSortCriteria] = useState('name'); // Default is to sort by name
+  const [filterWarehouse, setFilterWarehouse] = useState('all'); // Default is to show all items as well
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { // Fetch all items and warehouses on component mount
     ItemService.getAll().then(response => {
-      console.log('Fetched items:', response.data); // LOGGING <----------
+      console.log('Fetched items:', response.data); // Logging fetched items
       setItems(response.data);
     });
-    WarehouseService.getAll().then(response => {
+    WarehouseService.getAll().then(response => { 
       setWarehouses(response.data);
     });
   }, []);
 
-  const handleEdit = (itemId) => {
+  const handleEdit = (itemId) => { // Navigate to edit item page
     navigate(`/edit-item/${itemId}`);
   };
 
-  const handleDelete = (itemId) => {
+  const handleDelete = (itemId) => { // Delete item and update state
     if (window.confirm('Are you sure you want to delete this item?')) {
       ItemService.delete(itemId).then(() => {
         setItems(items.filter(item => item.id !== itemId));
@@ -32,15 +32,15 @@ const ItemList = () => {
     }
   };
 
-  const handleSortChange = (e) => {
+  const handleSortChange = (e) => { // Update sort criteria state based on user selection
     setSortCriteria(e.target.value);
   };
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (e) => { // Update filter warehouse state based on user selection
     setFilterWarehouse(e.target.value);
   };
 
-  const sortedItems = [...items].sort((a, b) => {
+  const sortedItems = [...items].sort((a, b) => { // Sort items based on sort criteria, using localeCompare for string comparison
     if (sortCriteria === 'name') {
       const nameA = a.name || '';
       const nameB = b.name || '';
@@ -57,9 +57,9 @@ const ItemList = () => {
     return 0;
   });
 
-  const filteredItems = filterWarehouse === 'all'
-    ? sortedItems
-    : sortedItems.filter(item => item.warehouse.id === parseInt(filterWarehouse));
+  const filteredItems = filterWarehouse === 'all' // Filter items based on warehouse selection
+    ? sortedItems // Show all items if no warehouse is selected
+    : sortedItems.filter(item => item.warehouse.id === parseInt(filterWarehouse)); // Show items from selected warehouse
 
   return (
     <div>
