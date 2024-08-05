@@ -7,7 +7,7 @@
 
 ~~*If the link is down, the project may have been taken offline to avoid charges.*~~
 
-Update 8/5/24: Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!
+**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!
 
 ## Facts and Features
  - Full-stack application made with SpringBoot, PostgreSQL, and React
