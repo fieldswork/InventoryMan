@@ -2,10 +2,12 @@
 
 ### A basic inventory management application created as part of the SkillStorm SDET Apprenticeship
 
-### This project is hosted on the AWS free tier! 
-Find it [here!](http://inventory-man.s3-website-us-east-1.amazonaws.com) (http://inventory-man.s3-website-us-east-1.amazonaws.com)
+### This project ~~is~~ was hosted on the AWS free tier! 
+~~Find it [here!](http://inventory-man.s3-website-us-east-1.amazonaws.com) (http://inventory-man.s3-website-us-east-1.amazonaws.com)~~
 
-*If the link is down, the project may have been taken offline to avoid charges.*
+~~*If the link is down, the project may have been taken offline to avoid charges.*~~
+
+Update 8/5/24: Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!
 
 ## Facts and Features
  - Full-stack application made with SpringBoot, PostgreSQL, and React
