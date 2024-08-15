@@ -67,8 +67,8 @@ public class TestScript {
 
         WebElement textbox = driver.findElement(By.name("my-text"));
         WebElement checkBox = driver.findElement(By.id("my-check-2"));
-        WebElement submitBtn = driver.findElement(By.cssSelector("button"));
-        WebElement submitBtn2 = driver.findElement(By.tagName("a"));
+        //WebElement submitBtn = driver.findElement(By.cssSelector("button"));
+        //WebElement submitBtn2 = driver.findElement(By.tagName("a"));
         WebElement checkRadio = driver.findElement(By.xpath("//input[@name='my-radio']"));
 
         textbox.sendKeys("This is my input!");
