@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-ee957551-a34a-4cf4-90d2-99797e16756b"
+           tests="2"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.610">
+    <properties></properties>
+
+
+
+            <testcase
+                name="verifyGreeting"
+                time="0.044"
+                classname="com.skillstorm.inventoryman.MyTestNG">
+            </testcase>
+            <testcase
+                name="login"
+                time="0.566"
+                classname="com.skillstorm.inventoryman.MyTestNG">
+            </testcase>
+</testsuite>

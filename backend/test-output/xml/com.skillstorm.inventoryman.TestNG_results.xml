@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-ffece49b-4f23-4244-bb68-2b89636828b6"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.052">
+    <properties></properties>
+
+
+
+            <testcase
+                name="test2"
+                time="0.000"
+                classname="com.skillstorm.inventoryman.TestNG">
+            </testcase>
+            <testcase
+                name="test1"
+                time="0.052"
+                classname="com.skillstorm.inventoryman.TestNG">
+            </testcase>
+            <testcase
+                name="test3"
+                time="0.000"
+                classname="com.skillstorm.inventoryman.TestNG">
+            </testcase>
+</testsuite>
