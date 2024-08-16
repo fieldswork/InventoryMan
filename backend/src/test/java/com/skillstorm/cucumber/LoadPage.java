@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import com.skillstorm.selenium.InventoryManPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoadPage {
 

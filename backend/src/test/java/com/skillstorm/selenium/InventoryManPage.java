@@ -15,6 +15,15 @@ public class InventoryManPage {
         PageFactory.initElements(driver, this);
     }
 
+    public String getTabTitle() {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        return driver.getTitle();
+    }
+
     public void get() {
         this.driver.get(url);
     }
