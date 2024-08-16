@@ -9,7 +9,7 @@ import com.skillstorm.selenium.InventoryManPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoadPage {
+public class CreateWarehouse {
 
     private WebDriver driver;
     private InventoryManPage imPage;
@@ -21,23 +21,7 @@ public class LoadPage {
         this.imPage = new InventoryManPage(driver);
     }
 
-    @Given("I attempt to load the website")
-    public void loadWebsite() {
-        System.out.println("Step: I attempt to load the website");
-        this.imPage.get();
-    }
 
-    @When("the website loads")
-    public void websiteLoads() {
-        System.out.println("Step: the website loads");
-        // Wait for the page to load
-    }
-
-    @Then("I should see the title {string}")
-    public void checkTitle(String expectedTitle) {
-        System.out.println("Step: I should see the title " + expectedTitle);
-        assertEquals(expectedTitle, this.imPage.getTabTitle(), "The page title should match the expected title");
-    }
 
     @After("@loading")
     public void tearDown() {
