@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import com.skillstorm.selenium.InventoryManPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoadPage {
 
@@ -36,7 +37,9 @@ public class LoadPage {
     @Then("I should see the title {string}")
     public void checkTitle(String expectedTitle) {
         System.out.println("Step: I should see the title " + expectedTitle);
-        assertEquals(expectedTitle, driver.getTitle());
+
+        //assertEquals(expectedTitle, imPage.getTabTitle());
+        assertTrue(expectedTitle.equals(imPage.getTabTitle()));
     }
 
     @After
