@@ -16,6 +16,11 @@ public class AddWarehousePage {
     }
 
     public void get() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.driver.get(url);
     }
 

@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InventoryManPage {
 
@@ -14,13 +16,22 @@ public class InventoryManPage {
     private static final String url = "http://localhost:3000";
 
     // Add Warehouse button
-    @FindBy(xpath = "/html/body/div/div/nav/div/li[3]/a")
+    @FindBy(id="add-warehouse")
     private WebElement addWarehouseButton;
 
     public InventoryManPage(WebDriver driver) {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         PageFactory.initElements(driver, this);
+    }
+
+    public void clickAddWarehouseButton() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        addWarehouseButton.click();
     }
 
     public String getTabTitle() {
@@ -33,6 +44,11 @@ public class InventoryManPage {
     }
 
     public void get() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.driver.get(url);
     }
 }
