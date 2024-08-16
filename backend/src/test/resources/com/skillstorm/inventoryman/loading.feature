@@ -1,4 +1,5 @@
 Feature: Has the website loaded?
     Scenario: The website has loaded
-        Given I am on the website
+        Given I attempt to load the website
+        When the website loads
         Then I should see the title "InventoryMan"
