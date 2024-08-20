@@ -10,12 +10,18 @@ public class WebConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() { // Configures CORS
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // Allow requests from the React app, this gets updated for the AWS deployment
-                        .allowedMethods("GET", "POST", "PUT", "DELETE") // All these methods are allowed
+                        .allowedOrigins(
+                            "http://localhost:3000", // Local development
+                            "http://44.214.65.155",  // AWS Elastic IP for backend
+                            "inventoryman-env.us-east-1.elasticbeanstalk.com", // EB URL
+                            "http://18.209.149.218", // EC2 IP 
+                            "http://inventoryman.s3-website-us-east-1.amazonaws.com" // Frontend S3 bucket
+                        )
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
         };

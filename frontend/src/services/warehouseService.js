@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/warehouses'; // This also needs to be updated if moved to AWS
+const API_URL = 'http://18.209.149.218:8080/api/warehouses'; // EC2 public IP (may change)
+// const API_URL = 'http://44.214.65.155:8080/api/warehouses'; // EC2 elastic IP (backup)
 
 class WarehouseService { // Routes api calls to the backend for warehouse data
   getAll() {
