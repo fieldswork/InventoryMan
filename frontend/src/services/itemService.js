@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://18.209.149.218:8080/api/items'; // EC2 public IP (may change)
-// const API_URL = 'http://44.214.65.155:8080/api/items'; // EC2 elastic IP (backup)
+const API_URL = "http://inventoryman-env.us-east-1.elasticbeanstalk.com:8080/api/items"; // AWS EB URL
+//const API_URL = 'http://18.209.149.218:8080/api/items'; // EC2 public IP (may change)
+// const API_URL = 'http://44.214.65.155:8080/api/items'; // EC2 elastic IP
 
 class ItemService { // Routes api calls to the backend for item data
   getAll() {
