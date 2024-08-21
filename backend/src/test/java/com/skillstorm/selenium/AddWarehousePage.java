@@ -62,7 +62,7 @@ public class AddWarehousePage {
     }
 
     // Clicks the submit button
-    public void clickSubmitButton() {
+    public void clickSubmitWarehouseButton() {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {

@@ -28,7 +28,7 @@ public class AddWarehouseSteps {
 
     @Given("I am on the Add Warehouse page")
     public void loadWebsite() {
-        System.out.println("Step: I am on the Warehouses page");
+        System.out.println("Step: I am on the Add Warehouses page");
         this.awhPage.get(); // Loads add warehouse page
     }
 
@@ -44,13 +44,13 @@ public class AddWarehouseSteps {
         this.awhPage.enterWarehouseCapacity(warehouseCapacity);
     }
 
-    @And("I click the Create button")
-    public void clickSubmitButton() {
-        System.out.println("Step: I click the Create button");
-        this.awhPage.clickSubmitButton();
+    @And("I click the Create button to submit the warehouse")
+    public void clickSubmitWarehouseButton() {
+        System.out.println("Step: I click the Create button to submit the warehouse");
+        this.awhPage.clickSubmitWarehouseButton();
     }
 
-    @Then("I should be redirected to the Warehouses page")
+    @Then("I should be redirected to the Warehouses page if the warehouse is valid")
     public void isOnWarehousesPage() {
         System.out.println("Step: I should be redirected to the Warehouses page");
         assertTrue(awhPage.amIOnWarehousesPage());
