@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 public class AddWarehousePage {
     
     private WebDriver driver;
-    private static final String url = "http://localhost:3000/add-warehouse";
+    private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/add-warehouse";
 
     public AddWarehousePage(WebDriver driver) {
         this.driver = driver;

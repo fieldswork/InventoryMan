@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class InventoryManPage {
 
     private WebDriver driver;
-    private static final String url = "http://localhost:3000";
+    private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/";
 
     // Add Warehouse button
     @FindBy(id="add-warehouse")
