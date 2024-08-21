@@ -15,8 +15,8 @@ Feature: Sort warehouses
     #     When I select "<sortCriteria>" in the Sort By dropdown 
     #     Then Warehouses should NOT be displayed in the page by "<order>" order
 
-    Examples:
-    |sortCriteria           |   order           |
-    |Name (Alphabetical)    |   alphabetical    |
-    |Utilization (%)        |   utilization     |
+    # Examples:
+    # |sortCriteria           |   order           |
+    # |Name (Alphabetical)    |   alphabetical    |
+    # |Utilization (%)        |   utilization     |
 

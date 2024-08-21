@@ -63,15 +63,10 @@ public class WarehousesPage {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> warehouses = new ArrayList<>();
 
         if (sortingOrder.equals("alphabetical")) {
-            warehouses = driver.findElements(By.tagName("h5"));
-            List<String> values = new ArrayList<>();
-            
-            for (WebElement w: warehouses) {
-                values.add(w.getText());
-            }
+        
+            List<String> values = allWarehouses();
 
             List<String> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues);
@@ -82,10 +77,11 @@ public class WarehousesPage {
             return orderedValues.equals(values);
 
         } else {
-            warehouses = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
+            List<WebElement> whElements = new ArrayList<>();
+            whElements = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
             
             List<Integer> values = new ArrayList<>();
-            for (WebElement w: warehouses) {
+            for (WebElement w: whElements) {
                 int util = 0;
                 if (!"".equals((w.getText()))) {
                     String u = w.getText();
@@ -102,6 +98,18 @@ public class WarehousesPage {
 
             return orderedValues.equals(values);
         }
+    }
+
+    public List<String> allWarehouses () {
+        List<WebElement> whElements = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+
+        whElements = driver.findElements(By.tagName("h5"));
+        
+        for (WebElement w: whElements) {
+            values.add(w.getText());
+        }
+        return values;
     }
 
 }
