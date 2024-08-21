@@ -7,7 +7,7 @@ Feature: Sort items
 
     Examples:
         |sortCriteria           |   order           |
-        # |Name (Alphabetical)    |   alphabetical    |
-        # |Quantity               |   quantity        |
+        |Name (Alphabetical)    |   alphabetical    |
+        |Quantity               |   quantity        |
         |Item Size              |   size            |
-        # |Total Size             |   total size      |
+        |Total Size             |   total size      |

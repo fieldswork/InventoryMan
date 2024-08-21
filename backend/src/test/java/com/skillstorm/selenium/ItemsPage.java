@@ -65,9 +65,8 @@ public class ItemsPage {
         } else {
 
             select.selectByValue("totalSize");
-            
+
         }
-        
     }
 
     public boolean iswarehousesOrdered(String sortingOrder) {
@@ -76,7 +75,6 @@ public class ItemsPage {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> iElements = new ArrayList<>();
 
         if (sortingOrder.equals("alphabetical")) {
             List<String> values = allItems();
@@ -89,22 +87,17 @@ public class ItemsPage {
 
             return orderedValues.equals(values);
 
-        } else if (sortingOrder.equals("quantity")) {
-            
-            List<Integer> values = allQts();
-
-            List<Integer> orderedValues = new ArrayList<>(values);
-            Collections.sort(orderedValues, Collections.reverseOrder());
-
-            System.out.println(values);
-            System.out.println(orderedValues);
-
-            return orderedValues.equals(values);
         } else {
-        //   else if (sortingOrder.equals("size")) {
-  
-            List<Integer> values = allSizes();
+            List<Integer> values;
 
+            if (sortingOrder.equals("quantity")){
+                values = allQts();
+            } else if (sortingOrder.equals("size")) {
+                values = allSizes();
+            } else {
+                values = itemsTotalSizes();
+            }
+            
             List<Integer> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues, Collections.reverseOrder());
 
@@ -113,22 +106,9 @@ public class ItemsPage {
 
             return orderedValues.equals(values);
         } 
-        // else {
-        //     Map<String, Integer> itemsTotalSizes = itemsTotalSizes();
-
-        //     // List<Integer> orderedTotalSizes = new ArrayList<>(itemsTotalSizes.values());
-
-        //     // Collections.sort(orderedValues, Collections.reverseOrder());
-
-        //     System.out.println(itemsTotalSizes);
-        //     // System.out.println(orderedValues);
-
-        //     return true;
-        //     // orderedValues.equals(values);
-        // }
     }
 
-    public List<String> allItems () {
+    public List<String> allItems() {
         List<WebElement> iElements = new ArrayList<>();
         List<String> values = new ArrayList<>();
 
@@ -140,7 +120,7 @@ public class ItemsPage {
         return values;
     }
 
-    public List<Integer> allQts () {
+    public List<Integer> allQts() {
         List<WebElement> iElements = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
 
@@ -157,12 +137,11 @@ public class ItemsPage {
         return values;
     }
 
-    public List<Integer> allSizes () {
+    public List<Integer> allSizes() {
         List<WebElement> iElements = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
 
         iElements = driver.findElements(By.cssSelector("p:nth-child(4)"));
-        System.out.println(iElements);
 
         for (WebElement w: iElements) {
             int util = 0;
@@ -175,21 +154,16 @@ public class ItemsPage {
         return values;
     }
 
-    // public Map<String, Integer> itemsTotalSizes() {
-    //     Map<String, Integer> itemsTotalSizes = new HashMap<>();
+    public List<Integer> itemsTotalSizes() {
+        List<Integer> itemsTotalSizes = new ArrayList<>();
 
-    //     Iterator<String> items = allItems().iterator();
-    //     Iterator<Integer> qts = allQts().iterator();
-    //     Iterator<Integer> sizes = allSizes().iterator();
+        List<String> items = allItems();
+        List<Integer> qts = allQts();
+        List<Integer> sizes = allSizes();
 
-    //     System.out.println(allItems());
-    //     System.out.println(allQts());
-    //     System.out.println(allSizes());
-
-    //     while (items.hasNext()) {
-    //         int totalSize = qts.next() * sizes.next();
-    //         itemsTotalSizes.put(items.next(), totalSize);
-    //     }
-    //     return itemsTotalSizes;
-    // }
+        for (int i = 0; i < items.size(); i++) {
+            itemsTotalSizes.add(qts.get(i) * sizes.get(i));
+        }
+        return itemsTotalSizes;
+    }
 }
