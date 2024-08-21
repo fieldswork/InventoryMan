@@ -27,8 +27,10 @@ public class WarehousesPage {
     @FindBy(id = "sortCriteria")
     private WebElement selectName;
 
-    // @Find({FindBy(tagName = "h5")})
-    // private List<WebElement> warehouses;
+    // @FindBy(className = "progress-bar progress-bar-striped bg-primary")
+    // private WebElement selectUtilization;
+
+
 
     public WarehousesPage(WebDriver driver) {
         this.driver = driver;
@@ -48,7 +50,7 @@ public class WarehousesPage {
         this.driver.get(url);
     }
 
-    public void selectSortByName() {
+    public void selectSortingOption(String sortingChoice) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
@@ -56,26 +58,60 @@ public class WarehousesPage {
         }
 
         Select select = new Select(selectName);
-        select.selectByValue("name");
+
+        if (sortingChoice.equals("Name (Alphabetical)")) {
+            select.selectByValue("name");
+        } else {
+            select.selectByValue("utilization");
+        }
+        
     }
 
-    public boolean iswarehousesOrderedByName() {
+    public boolean iswarehousesOrdered(String sortingOrder) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> warehouses = driver.findElements(By.tagName("h5"));
-        List<String> values = new ArrayList<>();
-        
-        for(WebElement w: warehouses){
-            values.add(w.getText());
-        }
-        List<String> orderedValues = new ArrayList<>(values);
-        Collections.sort(orderedValues);
+        List<WebElement> warehouses = new ArrayList<>();
 
-        System.out.println(values);
-        return orderedValues.equals(values);
+        if (sortingOrder.equals("alphabetical")) {
+            warehouses = driver.findElements(By.tagName("h5"));
+            List<String> values = new ArrayList<>();
+            
+            for (WebElement w: warehouses) {
+                values.add(w.getText());
+            }
+
+            List<String> orderedValues = new ArrayList<>(values);
+            Collections.sort(orderedValues);
+
+            System.out.println(values);
+            System.out.println(orderedValues);
+
+            return orderedValues.equals(values);
+
+        } else {
+            warehouses = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
+            
+            List<Integer> values = new ArrayList<>();
+            for (WebElement w: warehouses) {
+                int util = 0;
+                if (!"".equals((w.getText()))) {
+                    String u = w.getText();
+                    util = Integer.parseInt(u.replaceAll("%", ""));
+                }
+                values.add(util);
+            }
+
+            List<Integer> orderedValues = new ArrayList<>(values);
+            Collections.sort(orderedValues, Collections.reverseOrder());
+
+            System.out.println(values);
+            System.out.println(orderedValues);
+
+            return orderedValues.equals(values);
+        }
     }
 
 }

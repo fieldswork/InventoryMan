@@ -14,10 +14,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+
 public class SortWarehousesByNameSteps {
     
     private WebDriver driver;
     private WarehousesPage whPage;
+
 
     @Before("@sortWarehouses")
     public void before() {
@@ -33,15 +35,15 @@ public class SortWarehousesByNameSteps {
     }
 
     @When("I select {string} in the Sort By dropdown")
-    public void selectSortByName(String whOrder) {
-        System.out.println("Step: I select to sort warehouse by " + whOrder);
-        this.whPage.selectSortByName();
+    public void selectSortByName(String sortingOrder) {
+        System.out.println("Step: I select to sort warehouse by " + sortingOrder);
+        this.whPage.selectSortingOption(sortingOrder);
     }
 
      @Then("Warehouses should be displayed in the page by {string} order")
-    public void isWarehousesOrdered(String whOrder) {
-        System.out.println("Step: Warehouse should be order by" + whOrder);
-        assertTrue(whPage.iswarehousesOrderedByName());
+    public void isWarehousesOrdered(String sortingOrder) {
+        System.out.println("Step: Warehouse should be order by " + sortingOrder);
+        assertTrue(whPage.iswarehousesOrdered(sortingOrder));
     }
 
     @After("@sortWarehouses")

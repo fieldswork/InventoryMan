@@ -18,5 +18,5 @@ Feature: Sort warehouses
     Examples:
     |sortCriteria           |   order           |
     |Name (Alphabetical)    |   alphabetical    |
-    # |Utilization (%)        |   utilization     |
+    |Utilization (%)        |   utilization     |
 
