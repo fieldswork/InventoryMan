@@ -12,4 +12,6 @@ Feature: Add item
 
     Examples:
         |name                   |   description        |  quantity    |   size    |   warehouse    |
-        |validitem              |   validdescription   |  1           |   10      |   validtest    |
+        |validitem              |   validdescription   |  1           |   5       |   validtest    |
+        |validitem2             |   validdescription2  |  2           |   10      |   validtest2   |
+        
