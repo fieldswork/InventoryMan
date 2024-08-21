@@ -62,12 +62,11 @@ public class AddWarehouseSteps {
         assertTrue(awhPage.isWarehouseInWarehousesPage(warehouseName));
     }
 
-    //And I should see the capacity "<capacity>" in the Warehouses page
-    //@And("I should see the capacity {string} in the Warehouses page")
-    //public void isCapacityInWarehousesPage(String warehouseCapacity) {
-    //    System.out.println("Step: I should see the capacity" + warehouseCapacity + " in the Warehouses page");
-    //    assertTrue(awhPage.isCapacityInWarehousesPage(warehouseCapacity));
-    //}
+    @And("I should see the capacity {string} in the Warehouses page")
+    public void isCapacityInWarehousesPage(String warehouseCapacity) {
+        System.out.println("Step: I should see the capacity " + warehouseCapacity + " in the Warehouses page");
+        assertTrue(awhPage.isCapacityInWarehousesPage(warehouseCapacity));
+    }
 
     @After("@addWarehouse")
     public void tearDown() {

@@ -26,6 +26,8 @@ public class AddWarehousePage {
     @FindBy(xpath = "/html/body/div/div/div/form/button")
     private WebElement submitButton;
 
+    private int warehouseCard = 0;
+
     public AddWarehousePage(WebDriver driver) {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -81,24 +83,9 @@ public class AddWarehousePage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    //// Checks if the warehouse name is in the Warehouses page
-    //public boolean isWarehouseInWarehousesPage(String warehouseName) {
-    //    try {
-    //        Thread.sleep(1000);
-    //    } catch(InterruptedException e) {
-    //        e.printStackTrace();
-    //    }
-    //    List<WebElement> warehouses = this.driver.findElements(By.className("warehouse-name"));
-    //    for (WebElement warehouse : warehouses) {
-    //        if (warehouse.getText().equals(warehouseName)) {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
     // Using xpath /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 to find the warehouse name
     public boolean isWarehouseInWarehousesPage(String warehouseName) {
+        int warehouseCard = -1; // setting warehouseCard for error checking
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
@@ -115,35 +102,57 @@ public class AddWarehousePage {
             try {
                 WebElement warehouse = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + i + "]/div/h5"));
                 warehouses.add(warehouse);
-                values.add(warehouse.getText());
+                String warehouseText = warehouse.getText();
+                values.add(warehouseText);
+                if (warehouseText.equals(warehouseName)) {
+                    warehouseCard = i; // save the index to warehouseCard
+                    break; // breaks when found
+                }
             } catch (Exception e) {
                 break;
             }
         }
+        System.out.println("Warehouse card number: " + warehouseCard); // Print the warehouseCard for debugging
         return values.contains(warehouseName);
     }
 
     // /html/body/div/div/div/div/div[2]/div[<variable>]/div/p is the xpath for the capacity, but the capacity is formatted as "0 / <capacity> cubic feet utilized"
-    //public boolean isCapacityInWarehousesPage(String warehouseCapacity) {
-    //    try {
-    //        Thread.sleep(1000);
-    //    } catch(InterruptedException e) {
-    //        e.printStackTrace();
-    //    }
-    //    List<WebElement> capacities = new ArrayList<>();
-    //    List<String> values = new ArrayList<>();
-    //    for (int i = 1; i < 100; i++) {
-    //        try {
-    //            Thread.sleep(1000);
-    //        } catch(InterruptedException e) {
-    //            e.printStackTrace();
-    //        }
-    //        try {
-    //            parse text to get capacity
-    //        } catch (Exception e) {
-    //            break;
-    //        }
-    //    }
-    //    return values.contains(warehouseCapacity);
-    //}
+    // use the warehouseCard to find the correct warehouse card
+    public boolean isCapacityInWarehousesPage(String warehouseCapacity) {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> capacities = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        for (int i = 1; i < 100; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                WebElement capacity = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + i + "]/div/p"));
+                capacities.add(capacity);
+                String capacityText = capacity.getText();
+                values.add(capacityText);
+                
+                // Extract the capacity number from the string
+                String[] parts = capacityText.split(" / ");
+                if (parts.length > 1) {
+                    String[] capacityParts = parts[1].split(" ");
+                    if (capacityParts.length > 0) {
+                        String extractedCapacity = capacityParts[0];
+                        if (extractedCapacity.equals(warehouseCapacity)) {
+                            return true;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+        return values.contains(warehouseCapacity);
+    }
 }
