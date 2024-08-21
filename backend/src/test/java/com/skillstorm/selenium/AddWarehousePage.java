@@ -2,7 +2,6 @@ package com.skillstorm.selenium;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class AddWarehousePage {
     
@@ -85,7 +83,7 @@ public class AddWarehousePage {
 
     // Using xpath /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 to find the warehouse name
     public boolean isWarehouseInWarehousesPage(String warehouseName) {
-        int warehouseCard = -1; // setting warehouseCard for error checking
+        warehouseCard = -1; // setting warehouseCard for error checking
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
@@ -119,40 +117,26 @@ public class AddWarehousePage {
     // /html/body/div/div/div/div/div[2]/div[<variable>]/div/p is the xpath for the capacity, but the capacity is formatted as "0 / <capacity> cubic feet utilized"
     // use the warehouseCard to find the correct warehouse card
     public boolean isCapacityInWarehousesPage(String warehouseCapacity) {
+        if (warehouseCard == -1) {
+            return false; // warehouse not found
+        }
+    
         try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
+            WebElement capacityElement = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/p"));
+            String capacityText = capacityElement.getText();
+            
+            String[] parts = capacityText.split(" / ");
+            if (parts.length > 1) {
+                String[] capacityParts = parts[1].split(" ");
+                if (capacityParts.length > 0) {
+                    String extractedCapacity = capacityParts[0];
+                    return extractedCapacity.equals(warehouseCapacity);
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        List<WebElement> capacities = new ArrayList<>();
-        List<String> values = new ArrayList<>();
-        for (int i = 1; i < 100; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-            try {
-                WebElement capacity = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + i + "]/div/p"));
-                capacities.add(capacity);
-                String capacityText = capacity.getText();
-                values.add(capacityText);
-                
-                // Extract the capacity number from the string
-                String[] parts = capacityText.split(" / ");
-                if (parts.length > 1) {
-                    String[] capacityParts = parts[1].split(" ");
-                    if (capacityParts.length > 0) {
-                        String extractedCapacity = capacityParts[0];
-                        if (extractedCapacity.equals(warehouseCapacity)) {
-                            return true;
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-        return values.contains(warehouseCapacity);
+    
+        return false;
     }
 }
