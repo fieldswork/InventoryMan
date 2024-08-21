@@ -11,4 +11,4 @@ Feature: Add warehouse
 
     Examples:
         |name                   |   capacity        |
-        |ValidTest              |   10              |
+        |validtest              |   10              |
