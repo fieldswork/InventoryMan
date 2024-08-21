@@ -24,4 +24,6 @@ public class AddWarehousePage {
         this.driver.get(url);
     }
 
+    
+
 }
