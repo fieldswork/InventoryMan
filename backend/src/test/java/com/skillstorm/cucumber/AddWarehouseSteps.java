@@ -35,32 +35,39 @@ public class AddWarehouseSteps {
     @When("I enter a {string} in the warehouse name field")
     public void selectSortingOption(String warehouseName) {
         System.out.println("Step: I enter" + warehouseName + " in the warehouse name field");
-        //this.awhPage.enterWarehouseName(warehouseName);
+        this.awhPage.enterWarehouseName(warehouseName);
     }
 
     @And("I enter a {string} in the warehouse capacity field")
     public void enterWarehouseCapacity(String warehouseCapacity) {
-        System.out.println("Step: I enter" + warehouseCapacity + " in the warehouse capacity field");
-        //this.awhPage.enterWarehouseCapacity(warehouseCapacity);
+        System.out.println("Step: I enter " + warehouseCapacity + " in the warehouse capacity field");
+        this.awhPage.enterWarehouseCapacity(warehouseCapacity);
+    }
+
+    @And("I click the Create button")
+    public void clickSubmitButton() {
+        System.out.println("Step: I click the Create button");
+        this.awhPage.clickSubmitButton();
     }
 
     @Then("I should be redirected to the Warehouses page")
     public void isOnWarehousesPage() {
         System.out.println("Step: I should be redirected to the Warehouses page");
-        //assertTrue(whPage.amIOnWarehousesPage());
+        assertTrue(awhPage.amIOnWarehousesPage());
     }
 
     @And("I should see the warehouse {string} in the Warehouses page")
     public void isWarehouseInWarehousesPage(String warehouseName) {
         System.out.println("Step: I should see the warehouse" + warehouseName + " in the Warehouses page");
-        //assertTrue(whPage.isWarehouseInWarehousesPage(warehouseName));
+        assertTrue(awhPage.isWarehouseInWarehousesPage(warehouseName));
     }
 
-    @And("I should see the capacity {string} in the Warehouses page")
-    public void isCapacityInWarehousesPage(String warehouseCapacity) {
-        System.out.println("Step: I should see the capacity" + warehouseCapacity + " in the Warehouses page");
-        //assertTrue(whPage.isCapacityInWarehousesPage(warehouseCapacity));
-    }
+    //And I should see the capacity "<capacity>" in the Warehouses page
+    //@And("I should see the capacity {string} in the Warehouses page")
+    //public void isCapacityInWarehousesPage(String warehouseCapacity) {
+    //    System.out.println("Step: I should see the capacity" + warehouseCapacity + " in the Warehouses page");
+    //    assertTrue(awhPage.isCapacityInWarehousesPage(warehouseCapacity));
+    //}
 
     @After("@addWarehouse")
     public void tearDown() {
