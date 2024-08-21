@@ -1,6 +1,5 @@
 package com.skillstorm.selenium;
 
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,23 +12,22 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-
-public class WarehousesPage {
-
+public class ItemsPage {
+    
     private WebDriver driver;
-    private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses";
+    private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/items";
 
     @FindBy(id = "sortCriteria")
     private WebElement selectName;
 
-    public WarehousesPage(WebDriver driver) {
+    public ItemsPage(WebDriver driver) {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         PageFactory.initElements(driver, this);
     }
 
     /**
-     * Navigate to the Warehouses page
+     * Navigate to the Items page
      */
     public void get() {
         try {
@@ -52,7 +50,7 @@ public class WarehousesPage {
         if (sortingChoice.equals("Name (Alphabetical)")) {
             select.selectByValue("name");
         } else {
-            select.selectByValue("utilization");
+            select.selectByValue("quantity");
         }
         
     }
@@ -81,15 +79,15 @@ public class WarehousesPage {
 
             return orderedValues.equals(values);
 
-        } else {
-            warehouses = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
+        } else if (sortingOrder.equals("quantity")) {
+            warehouses = driver.findElements(By.cssSelector("p:nth-child(3)"));
             
             List<Integer> values = new ArrayList<>();
             for (WebElement w: warehouses) {
                 int util = 0;
                 if (!"".equals((w.getText()))) {
                     String u = w.getText();
-                    util = Integer.parseInt(u.replaceAll("%", ""));
+                    util = Integer.parseInt(u.replaceAll("Quantity: ", ""));
                 }
                 values.add(util);
             }
@@ -101,7 +99,49 @@ public class WarehousesPage {
             System.out.println(orderedValues);
 
             return orderedValues.equals(values);
-        }
-    }
+        } 
+        // else if (sortingOrder.equals("size")) {
+        else {
+            warehouses = driver.findElements(By.cssSelector("p:nth-child(4)"));
 
+            List<Integer> values = new ArrayList<>();
+            for (WebElement w: warehouses) {
+                int util = 0;
+                if (!"".equals((w.getText()))) {
+                    String u = w.getText().replaceAll("Size: ", "");
+                    util = Integer.parseInt(u.replaceAll(" cubic feet", ""));
+                }
+                values.add(util);
+            }
+
+            List<Integer> orderedValues = new ArrayList<>(values);
+            Collections.sort(orderedValues);
+
+            System.out.println(values);
+            System.out.println(orderedValues);
+
+            return orderedValues.equals(values);
+        } 
+        // else {
+        //     warehouses = driver.findElements(By.cssSelector("p:nth-child(3)"));
+            
+        //     List<Integer> values = new ArrayList<>();
+        //     for (WebElement w: warehouses) {
+        //         int util = 0;
+        //         if (!"".equals((w.getText()))) {
+        //             String u = w.getText();
+        //             util = Integer.parseInt(u.replaceAll("Quantity: ", ""));
+        //         }
+        //         values.add(util);
+        //     }
+
+        //     List<Integer> orderedValues = new ArrayList<>(values);
+        //     Collections.sort(orderedValues, Collections.reverseOrder());
+
+        //     System.out.println(values);
+        //     System.out.println(orderedValues);
+
+        //     return orderedValues.equals(values);
+        // }
+    }
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import com.skillstorm.selenium.WarehousesPage;
+import com.skillstorm.selenium.ItemsPage;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -14,39 +14,37 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-
-public class SortWarehousesByNameSteps {
-    
+public class SortItemsSteps {
     private WebDriver driver;
-    private WarehousesPage whPage;
+    private ItemsPage whPage;
 
 
-    @Before("@sortWarehouses")
+    @Before("@sortItems")
     public void before() {
         ChromeOptions options = new ChromeOptions();
         this.driver = new ChromeDriver(options);
-        this.whPage = new WarehousesPage(driver);
+        this.whPage = new ItemsPage(driver);
     }
 
-    @Given("I am in the Warehouses page")
+    @Given("I am in the Items page")
     public void loadWebsite() {
         System.out.println("Step: I am on the Warehouses page");
         this.whPage.get();
     }
 
-    @When("I select {string} in the Sort By dropdown")
-    public void selectSortByName(String sortingOrder) {
+    @When("I select {string} in the Sort By dropdown to sort Items")
+    public void selectSortingOption(String sortingOrder) {
         System.out.println("Step: I select to sort warehouse by " + sortingOrder);
         this.whPage.selectSortingOption(sortingOrder);
     }
 
-     @Then("Warehouses should be displayed in the page by {string} order")
+     @Then("Items should be displayed in the page by {string} order")
     public void isWarehousesOrdered(String sortingOrder) {
         System.out.println("Step: Warehouse should be order by " + sortingOrder);
         assertTrue(whPage.iswarehousesOrdered(sortingOrder));
     }
 
-    @After("@sortWarehouses")
+    @After("@sortItems")
     public void tearDown() {
        if (driver != null) {
            this.driver.quit();

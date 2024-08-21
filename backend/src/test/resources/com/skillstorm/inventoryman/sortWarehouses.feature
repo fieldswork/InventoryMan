@@ -7,7 +7,7 @@ Feature: Sort warehouses
 
     Scenario Outline: Sorted warehouses
         Given I am in the Warehouses page
-        When I select "<sortCriteria>" in the Sort By dropdown 
+        When I select "<sortCriteria>" in the Sort By dropdown to sort Warehouses
         Then Warehouses should be displayed in the page by "<order>" order
 
     # Scenario Outline: Unsorted warehouses
