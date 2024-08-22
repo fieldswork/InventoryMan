@@ -41,6 +41,10 @@ public class ItemsPage {
         this.driver.get(url);
     }
 
+    /**
+     * Selects the sorting criteria 
+     * @param sortingChoice
+     */
     public void selectSortingOption(String sortingChoice) {
         try {
             Thread.sleep(1000);
@@ -69,6 +73,11 @@ public class ItemsPage {
         }
     }
 
+    /**
+     * Checks if items are sorted by sorting criteria
+     * @param sortingOrder
+     * @return true if items are sorted by the sorting criteria, otherwise false
+     */
     public boolean iswarehousesOrdered(String sortingOrder) {
         try {
             Thread.sleep(1000);
@@ -82,9 +91,6 @@ public class ItemsPage {
             List<String> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues);
 
-            System.out.println(values);
-            System.out.println(orderedValues);
-
             return orderedValues.equals(values);
 
         } else {
@@ -95,19 +101,20 @@ public class ItemsPage {
             } else if (sortingOrder.equals("size")) {
                 values = allSizes();
             } else {
-                values = itemsTotalSizes();
+                values = itemsTotalSize();
             }
             
             List<Integer> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues, Collections.reverseOrder());
 
-            System.out.println(values);
-            System.out.println(orderedValues);
-
             return orderedValues.equals(values);
         } 
     }
 
+    /**
+     * Gets the list of all items on the Items page
+     * @return list of all items on the page
+     */
     public List<String> allItems() {
         List<WebElement> iElements = new ArrayList<>();
         List<String> values = new ArrayList<>();
@@ -120,6 +127,10 @@ public class ItemsPage {
         return values;
     }
 
+    /**
+     * Gets the list of all items quantity
+     * @return list of all items quantity on the page
+     */
     public List<Integer> allQts() {
         List<WebElement> iElements = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
@@ -137,6 +148,10 @@ public class ItemsPage {
         return values;
     }
 
+    /**
+     * Gets the list of all items size
+     * @return list of all items size on the page
+     */
     public List<Integer> allSizes() {
         List<WebElement> iElements = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
@@ -154,7 +169,11 @@ public class ItemsPage {
         return values;
     }
 
-    public List<Integer> itemsTotalSizes() {
+    /**
+     * Gets the list of all items total size
+     * @return list of all items total size on the page
+     */
+    public List<Integer> itemsTotalSize() {
         List<Integer> itemsTotalSizes = new ArrayList<>();
 
         List<String> items = allItems();
