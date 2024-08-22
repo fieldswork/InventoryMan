@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.skillstorm.selenium.ItemsPage;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -60,4 +61,10 @@ public class DeleteItemSteps {
         assertFalse(itPage.findItem(itemName));
     }
 
+    @After("@deleteItem")
+    public void tearDown() {
+       if (driver != null) {
+           this.driver.quit();
+       }
+    }
 }
