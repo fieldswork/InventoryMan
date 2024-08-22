@@ -139,4 +139,12 @@ public class AddWarehousePage {
     
         return false;
     }
+    public boolean isInvalidDataAlertDisplayed(String alertMessage) {
+        try {
+            Thread.sleep(2000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.alertMessage.getText().equals(alertMessage);
+    }
 }

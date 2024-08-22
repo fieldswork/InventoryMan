@@ -28,19 +28,19 @@ public class SortItemsSteps {
 
     @Given("I am in the Items page")
     public void loadWebsite() {
-        System.out.println("Step: I am on the Warehouses page");
+        System.out.println("Step: I am on the Items page");
         this.whPage.get();
     }
 
     @When("I select {string} in the Sort By dropdown to sort Items")
     public void selectSortingOption(String sortingOrder) {
-        System.out.println("Step: I select to sort warehouse by " + sortingOrder);
+        System.out.println("Step: I select to sort items by " + sortingOrder);
         this.whPage.selectSortingOption(sortingOrder);
     }
 
      @Then("Items should be displayed in the page by {string} order")
     public void isWarehousesOrdered(String sortingOrder) {
-        System.out.println("Step: Warehouse should be order by " + sortingOrder);
+        System.out.println("Step: Items should be order by " + sortingOrder);
         assertTrue(whPage.iswarehousesOrdered(sortingOrder));
     }
 

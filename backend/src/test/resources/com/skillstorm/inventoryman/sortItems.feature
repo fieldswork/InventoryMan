@@ -10,3 +10,4 @@ Feature: Sort items
         |Name (Alphabetical)    |   alphabetical    |
         |Quantity               |   quantity        |
         |Item Size              |   size            |
+        |Total Size             |   total size      |

@@ -126,4 +126,13 @@ public class AddItemPage {
         }
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
+    public boolean isInvalidDataAlertDisplayed(String alertMessage) {
+        try {
+            Thread.sleep(2000);
+            e.printStackTrace();
+        } catch(InterruptedException e) {
+        }
+        return this.alertMessage.getText().equals(alertMessage);
+    }
+
 }

@@ -53,6 +53,10 @@ public class WarehousesPage {
         this.driver.get(url);
     }
 
+    /**
+     * Selects the sorting criteria 
+     * @param sortingChoice
+     */
     public void selectSortingOption(String sortingChoice) {
         try {
             Thread.sleep(1000);
@@ -70,35 +74,33 @@ public class WarehousesPage {
         
     }
 
+    /**
+     * Checks if warehouses are sorted by sorting criteria
+     * @param sortingOrder
+     * @return true if warehouses are sorted by the sorting criteria, otherwise false
+     */
     public boolean iswarehousesOrdered(String sortingOrder) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> warehouses = new ArrayList<>();
 
         if (sortingOrder.equals("alphabetical")) {
-            warehouses = driver.findElements(By.tagName("h5"));
-            List<String> values = new ArrayList<>();
-            
-            for (WebElement w: warehouses) {
-                values.add(w.getText());
-            }
+        
+            List<String> values = allWarehouses();
 
             List<String> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues);
 
-            System.out.println(values);
-            System.out.println(orderedValues);
-
             return orderedValues.equals(values);
 
         } else {
-            warehouses = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
+            List<WebElement> whElements = new ArrayList<>();
+            whElements = driver.findElements(By.cssSelector("div.progress-bar.progress-bar-striped.bg-primary"));
             
             List<Integer> values = new ArrayList<>();
-            for (WebElement w: warehouses) {
+            for (WebElement w: whElements) {
                 int util = 0;
                 if (!"".equals((w.getText()))) {
                     String u = w.getText();
@@ -109,9 +111,6 @@ public class WarehousesPage {
 
             List<Integer> orderedValues = new ArrayList<>(values);
             Collections.sort(orderedValues, Collections.reverseOrder());
-
-            System.out.println(values);
-            System.out.println(orderedValues);
 
             return orderedValues.equals(values);
         }
@@ -250,4 +249,20 @@ public class WarehousesPage {
         }
         this.driver.switchTo().alert().accept();
     }
+    /**
+     * Gets the list of all warehouses on the Warehouses page
+     * @return list of all warehouses on the page
+     */
+    public List<String> allWarehouses () {
+        List<WebElement> whElements = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+
+        whElements = driver.findElements(By.tagName("h5"));
+        
+        for (WebElement w: whElements) {
+            values.add(w.getText());
+        }
+        return values;
+    }
+
 }
