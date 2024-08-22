@@ -286,4 +286,32 @@ public class ItemsPage {
         }
         return this.driver.getCurrentUrl().contains("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
+
+    //clickDeleteItemButton
+    public void clickDeleteItemButton() {
+        if (itemCard == -1) {
+            return;
+        }
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            WebElement deleteButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + itemCard + "]/div/div/button[2]"));
+            deleteButton.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Click the Ok dialog button from the browser alert
+    public void clickOKButton() {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.driver.switchTo().alert().accept();
+    }
 }
