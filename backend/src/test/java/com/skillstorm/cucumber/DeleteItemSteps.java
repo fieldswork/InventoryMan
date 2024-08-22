@@ -2,7 +2,6 @@ package com.skillstorm.cucumber;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.hibernate.sql.Delete;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
