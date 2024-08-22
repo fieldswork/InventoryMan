@@ -24,6 +24,9 @@ public class AddWarehousePage {
     @FindBy(xpath = "/html/body/div/div/div/form/button")
     private WebElement submitButton;
 
+    @FindBy(id = "alertMessageId")
+    private WebElement alertMessage;
+
     private int warehouseCard = 0;
 
     public AddWarehousePage(WebDriver driver) {
@@ -139,6 +142,7 @@ public class AddWarehousePage {
     
         return false;
     }
+
     public boolean isInvalidDataAlertDisplayed(String alertMessage) {
         try {
             Thread.sleep(2000);

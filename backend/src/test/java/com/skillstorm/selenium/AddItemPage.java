@@ -13,6 +13,9 @@ public class AddItemPage {
     private WebDriver driver;
     private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/add-item";
 
+    @FindBy(id = "alertMessageId")
+    private WebElement alertMessage;
+
     // /html/body/div/div/div/form/div[1]/input for the item name 
     @FindBy(xpath = "/html/body/div/div/div/form/div[1]/input")
     private WebElement itemName;
@@ -126,11 +129,12 @@ public class AddItemPage {
         }
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
+
     public boolean isInvalidDataAlertDisplayed(String alertMessage) {
         try {
             Thread.sleep(2000);
-            e.printStackTrace();
         } catch(InterruptedException e) {
+            e.printStackTrace();
         }
         return this.alertMessage.getText().equals(alertMessage);
     }
