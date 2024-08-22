@@ -14,4 +14,4 @@ Feature: Edit warehouse
     Examples:
         |name                   |   newName         |  newCapacity    |
         |validtest              |   editedtest      |  123            |
-        |validtest2             |   orphantest      |  456            |
+        |validtest2             |   orphantestwh    |  456            |
