@@ -1,4 +1,4 @@
-package com.skillstorm.cucumber;
+package com.skillstorm.cucumber.CRUDTests;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,45 +26,45 @@ public class AddItemSteps {
         this.aiPage = new AddItemPage(driver);
     }
 
-    @Given("I am on the Add Item page")
-    public void loadWebsite() {
+    @Given("I am on the Add an Item page")
+    public void loadAddItemWebsite() {
         System.out.println("Step: I am on the Add Item page");
         this.aiPage.get(); // Loads add item page
     }
 
-    @When("I enter {string} in the item name field") // I enter "<name>" in the item name field
+    @When("I enter {string} in the added item name field") // I enter "<name>" in the item name field
     public void enterItemName(String itemName) {
-        System.out.println("Step: I enter " + itemName + " in the item name field");
+        System.out.println("Step: I enter " + itemName + " in the added item name field");
         this.aiPage.enterItemName(itemName);
     }
 
-    @And("I enter {string} in the item description field") // I enter "<description>" in the item description field
-    public void enterItemDescription(String itemDescription) {
-        System.out.println("Step: I enter " + itemDescription + " in the item description field");
+    @And("I enter {string} in the added item description field") // I enter "<description>" in the item description field
+    public void enterAddedItemDescription(String itemDescription) {
+        System.out.println("Step: I enter " + itemDescription + " in the added item description field");
         this.aiPage.enterItemDescription(itemDescription);
     }
 
-    @And("I enter {string} in the item quantity field") // I enter "<quantity>" in the item quantity field
-    public void enterItemQuantity(String itemQuantity) {
+    @And("I enter {string} in the added item quantity field") // I enter "<quantity>" in the item quantity field
+    public void enterAddedItemQuantity(String itemQuantity) {
         System.out.println("Step: I enter " + itemQuantity + " in the item quantity field");
         this.aiPage.enterItemQuantity(itemQuantity);
     }
 
-    @And("I enter {string} in the item size field") // I enter "<size>" in the item size field
-    public void enterItemSize(String itemSize) {
+    @And("I enter {string} in the added item size field") // I enter "<size>" in the item size field
+    public void enterAddedItemSize(String itemSize) {
         System.out.println("Step: I enter " + itemSize + " in the item size field");
         this.aiPage.enterItemSize(itemSize);
     }
 
-    @And("I select {string} from the warehouse dropdown") // I select "<warehouse>" from the warehouse dropdown
-    public void selectWarehouse(String warehouse) {
+    @And("I select {string} from the warehouse dropdown for the added item") // I select "<warehouse>" from the warehouse dropdown
+    public void selectAddedItemWarehouse(String warehouse) {
         System.out.println("Step: I select " + warehouse + " from the warehouse dropdown");
         this.aiPage.selectWarehouse(warehouse);
     }
 
-    @And("I click the Create button to submit the item")
-    public void clickSubmitItemButton() {
-        System.out.println("Step: I click the Create button to submit the item");
+    @And("I click the Create button to submit the added item")
+    public void clickSubmitAddedItemButton() {
+        System.out.println("Step: I click the Create button to submit the added item");
         this.aiPage.clickSubmitButton();
     }
 

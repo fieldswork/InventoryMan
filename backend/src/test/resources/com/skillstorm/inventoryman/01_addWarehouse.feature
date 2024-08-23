@@ -1,15 +1,15 @@
 @addWarehouse
 Feature: Add warehouse
-    Scenario Outline: Adding warehouse
-        Given I am on the Add Warehouse page
-        When I enter a "<name>" in the warehouse name field
-        And I enter a "<capacity>" in the warehouse capacity field
-        And I click the Create button to submit the warehouse
-        Then I should be redirected to the Warehouses page if the warehouse is valid
-        And I should see the warehouse "<name>" in the Warehouses page
-        And I should see the capacity "<capacity>" in the Warehouses page
+    Scenario Outline: Adding a new warehouse
+        Given I have navigated to the Add Warehouse page
+        When I input the warehouse name "<name>"
+        And I provide the warehouse capacity "<capacity>"
+        And I press the Create button to submit the warehouse form
+        Then I should be taken to the Warehouses overview page if the warehouse details are valid
+        And I should see the new warehouse "<name>" listed on the Warehouses page
+        And I should find the capacity "<capacity>" shown on the Warehouses page
 
     Examples:
-        |name                   |   capacity        |
-        |validtest              |   10              |
-        |validtest2             |   100             |
+        | name      | capacity |
+        | validtest | 10       |
+        | validtest2| 100      |
