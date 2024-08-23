@@ -20,16 +20,16 @@ function App() {
           <NavLink to="/" className="navbar-brand" style={{ paddingLeft: '20px' }}>InventoryMan</NavLink>
           <div className="navbar-nav">
             <li className="nav-item">
-              <NavLink to="/warehouses" className="nav-link" activeClassName="active">Warehouses</NavLink>
+              <NavLink id='view-warehouse' to="/warehouses" className="nav-link" activeClassName="active">Warehouses</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/items" className="nav-link" activeClassName="active">Items</NavLink>
+              <NavLink id='view-items' to="/items" className="nav-link" activeClassName="active">Items</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/add-warehouse" className="nav-link" activeClassName="active">Add Warehouse</NavLink>
+              <NavLink id='add-warehouse' to="/add-warehouse" className="nav-link" activeClassName="active">Add Warehouse</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/add-item" className="nav-link" activeClassName="active">Add Item</NavLink>
+              <NavLink id='add-item' to="/add-item" className="nav-link" activeClassName="active">Add Item</NavLink>
             </li>
           </div>
         </nav>
