@@ -14,6 +14,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DeleteWarehouseSteps {
     
@@ -31,10 +32,12 @@ public class DeleteWarehouseSteps {
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--remote-debugging-port=9222"); 
 
-            // Set the binary path for headless Chrome and the ChromeDriver location
+            // Set the binary path for headless Chrome
             options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
-            System.setProperty("webdriver.chrome.driver", "/home/ec2-user/chromedriver-linux64/chromedriver");
         }
+
+        // Setup WebDriverManager to manage ChromeDriver
+        WebDriverManager.chromedriver().setup();
 
         this.driver = new ChromeDriver(options);
         this.whPage = new WarehousesPage(driver);
