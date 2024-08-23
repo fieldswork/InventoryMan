@@ -26,18 +26,19 @@ public class AddItemSteps {
 
         // Check if we are running in a headless environment
         if ("true".equals(System.getenv("HEADLESS"))) {
-            options.addArguments("--headless");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--window-size=1920,1080"); 
-
-            // Set the binary path for headless Chrome
-            options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
+            options.setBinary("/usr/bin/google-chrome");  // Set the correct binary path for Google Chrome
+            options.addArguments("--headless");           // Run Chrome in headless mode
+            options.addArguments("--no-sandbox");         // Bypass OS security model
+            options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
+            options.addArguments("--window-size=1920,1080"); // Set the window size if needed
+            options.addArguments("--disable-gpu");        // Disable GPU for headless mode (not necessary in some environments)
+            options.addArguments("--remote-debugging-port=9222"); // Allows ChromeDriver to interact with the headless Chrome
         }
 
         // Setup WebDriverManager to manage ChromeDriver
         WebDriverManager.chromedriver().setup();
 
+        // Initialize the ChromeDriver with the specified options
         this.driver = new ChromeDriver(options);
         this.aiPage = new AddItemPage(driver);
     }

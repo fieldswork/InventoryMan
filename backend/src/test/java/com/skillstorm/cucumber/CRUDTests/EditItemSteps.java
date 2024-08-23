@@ -32,7 +32,7 @@ public class EditItemSteps {
             options.addArguments("--window-size=1920,1080"); 
 
             // Set the binary path for headless Chrome
-            options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
+            options.setBinary("/usr/bin/google-chrome");
         }
 
         // Setup WebDriverManager to manage ChromeDriver
