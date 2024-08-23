@@ -22,6 +22,19 @@ public class DeleteItemSteps {
     @Before("@deleteItem")
     public void before() {
         ChromeOptions options = new ChromeOptions();
+
+        // Check if we are running in a headless environment
+        if ("true".equals(System.getenv("HEADLESS"))) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--remote-debugging-port=9222"); 
+
+            // Set the binary path for headless Chrome and the ChromeDriver location
+            options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
+            System.setProperty("webdriver.chrome.driver", "/home/ec2-user/chromedriver-linux64/chromedriver");
+        }
+
         this.driver = new ChromeDriver(options);
         this.itPage = new ItemsPage(driver);
     }

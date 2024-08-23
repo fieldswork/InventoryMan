@@ -24,10 +24,11 @@ public class AddItemSteps {
         ChromeOptions options = new ChromeOptions();
 
         // Check if we are running in a headless environment
-        if (System.getenv("HEADLESS") != null && System.getenv("HEADLESS").equals("true")) {
+        if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--remote-debugging-port=9222"); 
 
             // Set the binary path for headless Chrome and the ChromeDriver location
             options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
