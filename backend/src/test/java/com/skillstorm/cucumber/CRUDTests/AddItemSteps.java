@@ -22,6 +22,18 @@ public class AddItemSteps {
     @Before("@addItem")
     public void before() {
         ChromeOptions options = new ChromeOptions();
+
+        // Check if we are running in a headless environment
+        if (System.getenv("HEADLESS") != null && System.getenv("HEADLESS").equals("true")) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+
+            // Set the binary path for headless Chrome and the ChromeDriver location
+            options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
+            System.setProperty("webdriver.chrome.driver", "/home/ec2-user/chromedriver-linux64/chromedriver");
+        }
+
         this.driver = new ChromeDriver(options);
         this.aiPage = new AddItemPage(driver);
     }
