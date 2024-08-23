@@ -29,7 +29,7 @@ public class EditItemSteps {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--remote-debugging-port=9222"); 
+            options.addArguments("--window-size=1920,1080"); 
 
             // Set the binary path for headless Chrome
             options.setBinary("/home/ec2-user/chrome-headless-shell-linux64/chrome-headless-shell");
