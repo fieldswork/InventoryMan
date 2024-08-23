@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/usr/bin:$PATH"
+    }
+
     stages {
         stage('Build Frontend') {
             steps {
