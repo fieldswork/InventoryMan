@@ -24,7 +24,11 @@ public class AddWarehousePage {
     @FindBy(xpath = "/html/body/div/div/div/form/button")
     private WebElement submitButton;
 
-    @FindBy(id = "alertMessageId")
+    //@FindBy(id = "alertMessageId")
+    //private WebElement alertMessage;
+
+    // /html/body/div/div/div/form/div[3] for the alert message
+    @FindBy(xpath = "/html/body/div/div/div/form/div[3]")
     private WebElement alertMessage;
 
     private int warehouseCard = 0;

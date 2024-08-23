@@ -13,5 +13,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("com/skillstorm/inventoryman")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.skillstorm.cucumber.CRUDTests,com.skillstorm.cucumber.ValidationTests")
+//@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.skillstorm.cucumber.ValidationTests")
+//@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.skillstorm.cucumber.CRUDTests")
 public class RunCucumberTest {
 }

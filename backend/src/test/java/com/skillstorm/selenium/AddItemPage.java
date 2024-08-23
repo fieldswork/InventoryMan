@@ -13,7 +13,11 @@ public class AddItemPage {
     private WebDriver driver;
     private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/add-item";
 
-    @FindBy(id = "alertMessageId")
+    //@FindBy(id = "alertMessageId")
+    //private WebElement alertMessage;
+
+    // /html/body/div/div/div/form/div[6] for the alert message
+    @FindBy(xpath = "/html/body/div/div/div/form/div[6]")
     private WebElement alertMessage;
 
     // /html/body/div/div/div/form/div[1]/input for the item name 
