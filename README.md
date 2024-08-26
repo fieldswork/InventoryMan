@@ -6,6 +6,7 @@
 Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))
 
 **Update 8/26/24:** InventoryMan is back on AWS - this time, using the Aurora RDS, an Elastic Beanstalk backend, and utilizing a separate EC2 instance for Jenkins deployment/Selenium + Cucumber testing.
+
 ~~**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!~~
 
 
