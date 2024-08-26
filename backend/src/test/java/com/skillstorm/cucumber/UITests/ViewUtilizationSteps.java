@@ -18,7 +18,7 @@ public class ViewUtilizationSteps {
     private WebDriver driver;
     private WarehousesPage whPage;
 
-    @Before("@sortWarehouses")
+    @Before("@utilBarRendering")
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
@@ -54,7 +54,7 @@ public class ViewUtilizationSteps {
         this.whPage.findUtilization(warehouse, utilization);
     }
 
-    @After("@sortWarehouses")
+    @After("@utilBarRendering")
     public void after() {
         this.driver.quit();
     }
