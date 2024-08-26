@@ -41,7 +41,7 @@ pipeline {
 
                         sh "aws s3 cp backend/target/inventoryman-0.0.1-SNAPSHOT.jar s3://inventoryman-backend/${s3Key}"
                         sh "aws elasticbeanstalk create-application-version --application-name InventoryMan --version-label ${versionLabel} --source-bundle S3Bucket=inventoryman-backend,S3Key=${s3Key}"
-                        sh "aws elasticbeanstalk update-environment --environment-name InventoryManEnv --version-label ${versionLabel}"
+                        sh "aws elasticbeanstalk update-environment --environment-name InventoryMan-env --version-label ${versionLabel}"
                     }
                 }
             }
