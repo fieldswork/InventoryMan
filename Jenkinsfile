@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         PATH = "/usr/bin:$PATH"
+        HEADLESS = 'true'
     }
 
     stages {
