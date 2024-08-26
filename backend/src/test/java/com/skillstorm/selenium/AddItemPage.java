@@ -2,6 +2,7 @@ package com.skillstorm.selenium;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -102,7 +103,8 @@ public class AddItemPage {
     // Click the dropdown and select a warehouse from the dropdown
     public void selectWarehouse(String warehouse) {
         try {
-            warehouseDropdown.click();
+            //warehouseDropdown.click();
+            warehouseDropdown.sendKeys(Keys.ENTER);
     
             Select select = new Select(warehouseDropdown);
             select.selectByVisibleText(warehouse);
@@ -121,7 +123,8 @@ public class AddItemPage {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        this.submitButton.click();
+        //this.submitButton.click();
+        this.submitButton.sendKeys(Keys.ENTER);
     }
 
     // Checks if the user is redirected to the Warehouses page

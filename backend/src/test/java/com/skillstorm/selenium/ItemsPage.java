@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -227,7 +228,8 @@ public class ItemsPage {
             e.printStackTrace();
         }
         WebElement editButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + itemCard + "]/div/div/button[1]"));
-        editButton.click();
+        //editButton.click();
+        editButton.sendKeys(Keys.ENTER);
     }
 
     // http://inventoryman.s3-website-us-east-1.amazonaws.com/edit-item/*
@@ -291,7 +293,8 @@ public class ItemsPage {
     // Click the dropdown and select a warehouse from the dropdown
     public void selectNewWarehouse(String warehouse) {
         try {
-            warehouseDropdown.click();
+            //warehouseDropdown.click();
+            warehouseDropdown.sendKeys(Keys.ENTER);
     
             Select select = new Select(warehouseDropdown);
             select.selectByVisibleText(warehouse);
@@ -310,7 +313,8 @@ public class ItemsPage {
             e.printStackTrace();
         }
         WebElement submitButton = this.driver.findElement(By.xpath("/html/body/div/div/div/form/button"));
-        submitButton.click();
+        //submitButton.click();
+        submitButton.sendKeys(Keys.ENTER);
     }
 
     // amIOnWarehousesPage
@@ -335,7 +339,8 @@ public class ItemsPage {
         }
         try {
             WebElement deleteButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + itemCard + "]/div/div/button[2]"));
-            deleteButton.click();
+            //deleteButton.click();
+            deleteButton.sendKeys(Keys.ENTER);
         } catch (Exception e) {
             e.printStackTrace();
         }
