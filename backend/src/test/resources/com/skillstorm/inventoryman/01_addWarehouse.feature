@@ -10,6 +10,7 @@ Feature: Add warehouse
         And I should find the capacity "<capacity>" shown on the Warehouses page
 
     Examples:
-        | name      | capacity |
-        | validtest | 10       |
-        | validtest2| 100      |
+        | name       | capacity |
+        | validtest  | 10       |
+        | validtest2 | 100      |
+        | invalidtest| 1000     |

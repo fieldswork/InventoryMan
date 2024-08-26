@@ -11,3 +11,4 @@ Feature: Delete Warehouse
         |warehouse           |
         |orphantestwh        | 
         |editedtest          |
+        |invalidtest         |

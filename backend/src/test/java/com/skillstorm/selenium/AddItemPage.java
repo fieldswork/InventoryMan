@@ -16,8 +16,8 @@ public class AddItemPage {
     //@FindBy(id = "alertMessageId")
     //private WebElement alertMessage;
 
-    // /html/body/div/div/div/form/div[6] for the alert message
-    @FindBy(xpath = "/html/body/div/div/div/form/div[6]")
+    // //*[@id="root"]/div/div/form/div[6] for the alert message
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/form/div[6]")
     private WebElement alertMessage;
 
     // /html/body/div/div/div/form/div[1]/input for the item name 
