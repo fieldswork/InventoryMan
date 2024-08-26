@@ -13,6 +13,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class SortWarehousesSteps {
@@ -24,6 +25,17 @@ public class SortWarehousesSteps {
     @Before("@sortWarehouses")
     public void before() {
         ChromeOptions options = new ChromeOptions();
+
+        if ("true".equals(System.getenv("HEADLESS"))) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-debugging-port=9222");
+        }
+
+        WebDriverManager.chromedriver().setup();
         this.driver = new ChromeDriver(options);
         this.whPage = new WarehousesPage(driver);
     }

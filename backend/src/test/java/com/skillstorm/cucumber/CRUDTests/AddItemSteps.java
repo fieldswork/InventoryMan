@@ -24,16 +24,14 @@ public class AddItemSteps {
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
-        //if ("true".equals(System.getenv("HEADLESS"))) {
-            //options.setBinary("/usr/bin/google-chrome");
-            System.out.println("RUNNING IN HEADLESS MODE");
+        if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--window-size=1920,1080");
             options.addArguments("--disable-gpu");
             options.addArguments("--remote-debugging-port=9222");
-        //}
+        }
 
         WebDriverManager.chromedriver().setup();
 

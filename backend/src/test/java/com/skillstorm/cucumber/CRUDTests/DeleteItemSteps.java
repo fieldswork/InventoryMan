@@ -24,20 +24,15 @@ public class DeleteItemSteps {
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
-        // Check if we are running in a headless environment
-        //if ("true".equals(System.getenv("HEADLESS"))) {
+        if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--window-size=1920,1080");
             options.addArguments("--disable-gpu");
             options.addArguments("--remote-debugging-port=9222");
+        }
 
-            // Set the binary path for headless Chrome
-            //options.setBinary("/usr/bin/google-chrome");
-        //}
-
-        // Setup WebDriverManager to manage ChromeDriver
         WebDriverManager.chromedriver().setup();
 
         this.driver = new ChromeDriver(options);
