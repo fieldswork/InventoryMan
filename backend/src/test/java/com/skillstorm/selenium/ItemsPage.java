@@ -424,7 +424,7 @@ public class ItemsPage {
                 items.add(itemElement);
                 values.add(itemElement.getText());
                 if (itemElement.getText().equals(item)) {
-                    return false;
+                    return true;
                 }
             } catch (Exception e) {
                 break;
