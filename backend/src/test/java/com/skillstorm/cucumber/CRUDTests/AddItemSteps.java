@@ -44,6 +44,8 @@ public class AddItemSteps {
     @Given("I am on the Add an Item page")
     public void loadAddItemWebsite() {
         System.out.println("Step: I am on the Add Item page");
+        System.out.println("HEADLESS value: '" + System.getenv("HEADLESS") + "'");
+
         this.aiPage.get(); // Loads add item page
     }
 
