@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import com.github.dockerjava.core.dockerfile.DockerfileStatement.Add;
-import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.selenium.LandingPage;
 
 import io.cucumber.java.After;
