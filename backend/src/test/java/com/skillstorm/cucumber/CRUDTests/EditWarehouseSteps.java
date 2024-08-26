@@ -30,9 +30,11 @@ public class EditWarehouseSteps {
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-debugging-port=9222");
 
             // Set the binary path for headless Chrome
-            options.setBinary("/usr/bin/google-chrome");
+            //options.setBinary("/usr/bin/google-chrome");
         }
 
         // Setup WebDriverManager to manage ChromeDriver

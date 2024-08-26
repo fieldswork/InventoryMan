@@ -24,21 +24,19 @@ public class AddItemSteps {
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
-        // Check if we are running in a headless environment
-        if ("true".equals(System.getenv("HEADLESS"))) {
-            options.setBinary("/usr/bin/google-chrome");  // Set the correct binary path for Google Chrome
-            options.addArguments("--headless");           // Run Chrome in headless mode
-            options.addArguments("--no-sandbox");         // Bypass OS security model
-            options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
-            options.addArguments("--window-size=1920,1080"); // Set the window size if needed
-            options.addArguments("--disable-gpu");        // Disable GPU for headless mode (not necessary in some environments)
-            options.addArguments("--remote-debugging-port=9222"); // Allows ChromeDriver to interact with the headless Chrome
-        }
+        //if ("true".equals(System.getenv("HEADLESS"))) {
+            //options.setBinary("/usr/bin/google-chrome");
+            System.out.println("RUNNING IN HEADLESS MODE");
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-debugging-port=9222");
+        //}
 
-        // Setup WebDriverManager to manage ChromeDriver
         WebDriverManager.chromedriver().setup();
 
-        // Initialize the ChromeDriver with the specified options
         this.driver = new ChromeDriver(options);
         this.aiPage = new AddItemPage(driver);
     }
