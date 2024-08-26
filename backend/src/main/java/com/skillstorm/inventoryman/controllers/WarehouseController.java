@@ -3,6 +3,8 @@ package com.skillstorm.inventoryman.controllers;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/warehouses")
 public class WarehouseController {
-
+    
     @Autowired
     private WarehouseService warehouseService;
 
@@ -38,8 +40,9 @@ public class WarehouseController {
     }
 
     @DeleteMapping("/{id}") // Deletes a warehouse by id
-    public void deleteWarehouse(@PathVariable Long id) {
+    public ResponseEntity<Warehouse>  deleteWarehouse(@PathVariable Long id) {
         warehouseService.deleteWarehouse(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}/space-used") // Gets the current space used in a warehouse by id
