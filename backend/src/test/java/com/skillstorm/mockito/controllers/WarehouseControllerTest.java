@@ -72,6 +72,7 @@ public class WarehouseControllerTest {
 
     @Test
     public void updateWarehouseTest() {
+
         Warehouse inputWH = new Warehouse();
         Warehouse updatedWH = new Warehouse();
 
@@ -84,12 +85,11 @@ public class WarehouseControllerTest {
 
     @Test
     public void deleteWarehouseTest() {
-        long warehouseId = 1;
         Warehouse inputWH = new Warehouse();
         Warehouse deletedWH = new Warehouse();
         when(whService.deleteWarehouse(inputWH.getId())).thenReturn(deletedWH);
 
-        ResponseEntity<Warehouse>  response = whController.deleteWarehouse(warehouseId);;
+        ResponseEntity<Warehouse> response = whController.deleteWarehouse(inputWH.getId());;
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
     }
