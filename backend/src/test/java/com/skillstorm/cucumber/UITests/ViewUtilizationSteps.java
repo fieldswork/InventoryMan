@@ -37,12 +37,12 @@ public class ViewUtilizationSteps {
     }
 
     // Given I am on the Warehouses page
-    @Given("I am on the Warehouses page with a warehouse {string}")
+    @Given("I am on the Warehouses page")
     public void onWarehousesPageString(String warehouse) {
         this.whPage.get();
     }
 
-    //When the warehouse "<warehouse>" is displaying on the page
+    // When the warehouse "<warehouse>" is displaying on the page
     @When("the warehouse {string} is displaying on the page")
     public void warehouseIsDisplaying(String warehouse) {
         this.whPage.findWarehouse(warehouse);
