@@ -398,4 +398,33 @@ public class ItemsPage {
         }
         return true;
     }
+
+    // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5 is the item name
+    public boolean isItemPresent(String item) {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> items = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        for (int i = 1; i < 100; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                WebElement itemElement = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
+                items.add(itemElement);
+                values.add(itemElement.getText());
+                if (itemElement.getText().equals(item)) {
+                    return false;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+        return true;
+    }
 }

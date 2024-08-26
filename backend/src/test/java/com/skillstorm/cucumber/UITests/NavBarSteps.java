@@ -1,5 +1,7 @@
 package com.skillstorm.cucumber.UITests;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

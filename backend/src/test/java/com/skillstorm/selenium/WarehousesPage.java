@@ -118,7 +118,6 @@ public class WarehousesPage {
 
     // findWarehouse - Find a warehouse by name
     // /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 for the warehouse name
-    // Save the variable of the matching warehouse to warehouseCard for later use
     public boolean findWarehouse(String warehouseName) {
         warehouseCard = -1; // setting warehouseCard for error checking
         try {
@@ -265,4 +264,23 @@ public class WarehousesPage {
         return values;
     }
 
+    // findUtilization - Find the utilization bar for a warehouse and check if it matches the utilization provided. use the warehouseCard variable
+    // /html/body/div/div/div/div/div[2]/div[card]/div/div[1]/div for the utilization bar
+    public boolean findUtilization(String warehouseName, String utilization) {
+        if (warehouseCard == -1) {
+            return false;
+        }
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            WebElement utilizationBar = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[1]/div"));
+            String utilizationText = utilizationBar.getText();
+            return utilizationText.equals(utilization);
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -21,7 +21,6 @@ public class SortWarehousesSteps {
     private WebDriver driver;
     private WarehousesPage whPage;
 
-
     @Before("@sortWarehouses")
     public void before() {
         ChromeOptions options = new ChromeOptions();

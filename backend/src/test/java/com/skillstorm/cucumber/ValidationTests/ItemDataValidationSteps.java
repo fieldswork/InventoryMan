@@ -20,7 +20,7 @@ public class ItemDataValidationSteps {
     private WebDriver driver;
     private AddItemPage aiPage;
 
-    @Before("@addingItemDataValidation")
+    @Before("@itemDataValidation")
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
