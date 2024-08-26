@@ -10,6 +10,7 @@ import com.skillstorm.selenium.LandingPage;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -81,10 +82,10 @@ public class NavBarSteps {
         assertTrue(lPage.warehousesButtonHighlighted());
     }
 
-    //And that I am on the Warehouses page
-    @Then("I am on the Warehouses page")
+    //And I am on the page with the Warehouses
+    @And("I am on the page with the Warehouses")
     public void onWarehousesPage() {
-        System.out.println("Step: I am on the Warehouses page");
+        System.out.println("Step: I am on the page with the Warehouses");
         assertTrue(lPage.onWarehousesPage());
     }
 
@@ -102,9 +103,9 @@ public class NavBarSteps {
         assertTrue(lPage.itemsButtonHighlighted());
     }
 
-    //And that I am on the Items page
-    @Then("I am on the Items page")
-    public void onItemsPage() {
+    //And that I am on the page with the Items
+    @And("I am on the page with the Items")
+    public void onThePageItemsPage() {
         System.out.println("Step: I am on the Items page");
         assertTrue(lPage.onItemsPage());
     }
@@ -124,9 +125,9 @@ public class NavBarSteps {
     }
 
     //And that I am on the Add Warehouse page
-    @Then("I am on the Add Warehouse page")
+    @And("I am on the page where I can add Warehouses")
     public void onAddWarehousePage() {
-        System.out.println("Step: I am on the Add Warehouse page");
+        System.out.println("Step: I am on the page where I can add Warehouses");
         assertTrue(lPage.onAddWarehousePage());
     }
 
@@ -144,10 +145,10 @@ public class NavBarSteps {
         assertTrue(lPage.addItemButtonHighlighted());
     }
     
-    //And that I am on the Add Item page
-    @Then("I am on the Add Item page")
-    public void onAddItemPage() {
-        System.out.println("Step: I am on the Add Item page");
+    //And I am on the page where I can add items
+    @And("I am on the page where I can add items")
+    public void onTheAddItemPage() {
+        System.out.println("Step: I am on the page where I can add items");
         assertTrue(lPage.onAddItemPage());
     }
 
