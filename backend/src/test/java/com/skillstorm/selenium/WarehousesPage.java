@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -164,7 +166,8 @@ public class WarehousesPage {
         }
         try {
             WebElement editButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[2]/button[1]"));
-            editButton.click();
+            //editButton.click();
+            editButton.sendKeys(Keys.ENTER);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,7 +212,8 @@ public class WarehousesPage {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        this.updateButton.click();
+        //this.updateButton.click();
+        this.updateButton.sendKeys(Keys.ENTER);
     }
 
     // Check if the user is on the Warehouses page
@@ -234,7 +238,8 @@ public class WarehousesPage {
         }
         try {
             WebElement deleteButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[2]/button[2]"));
-            deleteButton.click();
+            //deleteButton.click();
+            deleteButton.sendKeys(Keys.ENTER);
         } catch (Exception e) {
             e.printStackTrace();
         }
