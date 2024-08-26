@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-30defe16-ac83-4d49-945f-d3a3883a6567"
+<testsuite name="TestNGTest-2e9fa9a7-3989-4e3a-b6dd-2d420f9aebba"
            tests="1"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.038">
+           time="0.044">
     <properties></properties>
 
 
 
             <testcase
-                name="deleteWarehouseTest"
-                time="0.038"
+                name="getCurrentSpaceUsedTest"
+                time="0.044"
                 classname="com.skillstorm.mockito.controllers.WarehouseControllerTest">
             </testcase>
 </testsuite>

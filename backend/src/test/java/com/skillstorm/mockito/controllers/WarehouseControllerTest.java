@@ -16,7 +16,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.skillstorm.inventoryman.controllers.WarehouseController;
-import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.WarehouseService;
 
@@ -96,11 +95,10 @@ public class WarehouseControllerTest {
 
     @Test
     public void getCurrentSpaceUsedTest() {
-        long warehouseId = 1;
         Warehouse inputWarehouse = new Warehouse();
         Warehouse expectedWH = new Warehouse();
 
-        when(whService.getCurrentSpaceUsed(warehouseId)).thenReturn(expectedWH.getUsedCapacity());
+        when(whService.getCurrentSpaceUsed(inputWarehouse.getId())).thenReturn(expectedWH.getUsedCapacity());
 
         double response = whController.getCurrentSpaceUsed(inputWarehouse.getId());
 

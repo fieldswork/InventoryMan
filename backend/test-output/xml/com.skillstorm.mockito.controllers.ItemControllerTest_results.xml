@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-7e83eb59-12c1-42a8-880a-e5d8d7bc839d"
-           tests="5"
+<testsuite name="TestNGTest-b2d0b569-b028-4082-9b2f-6408458bfcf5"
+           tests="1"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.051">
+           time="0.045">
     <properties></properties>
 
 
 
             <testcase
-                name="createItemTest"
-                time="0.047"
-                classname="com.skillstorm.mockito.controllers.ItemControllerTest">
-            </testcase>
-            <testcase
-                name="getAllItemsTest"
-                time="0.001"
-                classname="com.skillstorm.mockito.controllers.ItemControllerTest">
-            </testcase>
-            <testcase
                 name="deleteItemTest"
-                time="0.001"
-                classname="com.skillstorm.mockito.controllers.ItemControllerTest">
-            </testcase>
-            <testcase
-                name="getItemByIdTest"
-                time="0.001"
-                classname="com.skillstorm.mockito.controllers.ItemControllerTest">
-            </testcase>
-            <testcase
-                name="updateItemTest"
-                time="0.001"
+                time="0.045"
                 classname="com.skillstorm.mockito.controllers.ItemControllerTest">
             </testcase>
 </testsuite>

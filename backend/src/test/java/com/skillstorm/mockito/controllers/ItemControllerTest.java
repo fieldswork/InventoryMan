@@ -37,13 +37,13 @@ public class ItemControllerTest {
     @Test
     public void getAllItemsTest() {
         
-        List<Item> expectedItem = Arrays.asList(new Item(), new Item());
+        List<Item> expectedItems = Arrays.asList(new Item(), new Item());
 
-        when(itService.getAllItems()).thenReturn(expectedItem);
+        when(itService.getAllItems()).thenReturn(expectedItems);
 
         List<Item> response = itController.getAllItems();
 
-        Assert.assertEquals(response, expectedItem);
+        Assert.assertEquals(response, expectedItems);
     }
 
     @Test
@@ -85,12 +85,11 @@ public class ItemControllerTest {
 
     @Test
     public void deleteItemTest() {
-        long itemId = 1;
         Item inputItem = new Item();
         Item deletedItem = new Item();
         when(itService.deleteItem(inputItem.getId())).thenReturn(deletedItem);
 
-        ResponseEntity<Item>  response = itController.deleteItem(itemId);;
+        ResponseEntity<Item>  response = itController.deleteItem(inputItem.getId());;
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
     }
