@@ -25,7 +25,7 @@ public class AddWarehouseSteps {
         ChromeOptions options = new ChromeOptions();
 
         // Check if we are running in a headless environment
-        if ("true".equals(System.getenv("HEADLESS"))) {
+        //if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
@@ -35,7 +35,7 @@ public class AddWarehouseSteps {
             
             // Set the binary path for headless Chrome
             //options.setBinary("/usr/bin/google-chrome");
-        }
+        //}
 
         // Setup WebDriverManager to manage ChromeDriver
         WebDriverManager.chromedriver().setup();
