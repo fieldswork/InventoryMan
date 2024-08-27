@@ -1,6 +1,4 @@
-package com.skillstorm.cucumber.ValidationTests;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package com.skillstorm.cucumber.UITests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,13 +13,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
-public class SortWarehousesSteps {
-    
+public class ViewUtilizationSteps {
+ 
     private WebDriver driver;
     private WarehousesPage whPage;
 
-    @Before("@sortWarehouses")
+    @Before("@utilBarRendering")
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
@@ -39,28 +36,26 @@ public class SortWarehousesSteps {
         this.whPage = new WarehousesPage(driver);
     }
 
-    @Given("I am in the Warehouses page")
-    public void loadWebsite() {
-        System.out.println("Step: I am on the Warehouses page");
+    // Given I am on the page with the Warehouses cards
+    @Given("I am on the page with the Warehouses cards")
+    public void onWarehousesPageString() {
         this.whPage.get();
     }
 
-    @When("I select {string} in the Sort By dropdown to sort Warehouses")
-    public void selectSortingOption(String sortingOrder) {
-        System.out.println("Step: I select to sort warehouse by " + sortingOrder);
-        this.whPage.selectSortingOption(sortingOrder);
+    // When the warehouse "<warehouse>" is displaying on the page
+    @When("the warehouse {string} is displaying on the page")
+    public void warehouseIsDisplaying(String warehouse) {
+        this.whPage.findWarehouse(warehouse);
     }
 
-     @Then("Warehouses should be displayed in the page by {string} order")
-    public void isWarehousesOrdered(String sortingOrder) {
-        System.out.println("Step: Warehouse should be order by " + sortingOrder);
-        assertTrue(whPage.iswarehousesOrdered(sortingOrder));
+    //Then I should see the utilization bar for the "<warehouse>" warehouse displaying "<utilization>" utilization
+    @Then("I should see the utilization bar for the {string} warehouse displaying {string} utilization")
+    public void utilizationBarIsDisplaying(String warehouse, String utilization) {
+        this.whPage.findUtilization(warehouse, utilization);
     }
 
-    @After("@sortWarehouses")
-    public void tearDown() {
-       if (driver != null) {
-           this.driver.quit();
-       }
+    @After("@utilBarRendering")
+    public void after() {
+        this.driver.quit();
     }
 }

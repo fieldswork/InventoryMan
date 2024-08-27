@@ -27,6 +27,10 @@ public class ItemsPage {
     @FindBy(xpath = "/html/body/div/div/div/form/div[5]/select")
     private WebElement warehouseDropdown;
 
+    // //*[@id="filterWarehouse"] - Filter by Warehouse dropdown
+    @FindBy(xpath = "//*[@id=\"filterWarehouse\"]")
+    private WebElement filterWarehouse;
+
     public ItemsPage(WebDriver driver) {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -354,5 +358,75 @@ public class ItemsPage {
             e.printStackTrace();
         }
         this.driver.switchTo().alert().accept();
+    }
+
+    // filterWarehouse - Select a warehouse from the dropdown
+    public void filterByWarehouse(String warehouse) {
+        try {
+            //filterWarehouse.click();
+            filterWarehouse.sendKeys(Keys.ENTER);
+    
+            Select select = new Select(filterWarehouse);
+            select.selectByVisibleText(warehouse);
+    
+            System.out.println("Selected warehouse: " + warehouse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // areItemsFiltered - Check if items are filtered by warehouse
+    // warehouse names at /html/body/div/div/div/div/div[3]/div[<variable>]/div/p[4] 
+    public boolean areItemsFiltered(String warehouse) {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> items = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        for (int i = 1; i < 100; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                WebElement item = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/p[4]"));
+                items.add(item);
+                values.add(item.getText());
+                if (!item.getText().equals("Warehouse: " + warehouse)) { // formatted as Warehouse: <name>
+                    return false;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+        return true;
+    }
+
+    // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5 is the item name
+    public boolean isItemPresent(String item) {
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i < 100; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                WebElement itemName = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
+                if (itemName.getText().equals(item)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+        return false;
     }
 }
