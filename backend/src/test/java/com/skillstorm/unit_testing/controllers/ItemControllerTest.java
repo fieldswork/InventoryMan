@@ -1,4 +1,4 @@
-package com.skillstorm.mockito.controllers;
+package com.skillstorm.unit_testing.controllers;
 
 import java.util.List;
 import java.util.Arrays;
