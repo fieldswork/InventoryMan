@@ -21,7 +21,7 @@ pipeline {
                             npm install
                             npm run test -- --coverage
                             npx sonar-scanner \
-                                -Dsonar.projectKey=salmoncore_InventoryMan \ 
+                                -Dsonar.projectKey=salmoncore_InventoryMan \
                                 -Dsonar.projectName=InventoryMan \
                                 -Dsonar.sources=src \
                                 -Dsonar.exclusions=**/__tests__/** \
