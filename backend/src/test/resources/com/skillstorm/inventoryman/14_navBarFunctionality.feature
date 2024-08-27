@@ -13,7 +13,7 @@ Feature: Navigation Bar Functionality
         And that I am on the page with the Items
         When I am on the page where I can add Warehouses
         Then I should see that the Add Warehouse button is highlighted
-        And that I am on the Add Warehouse page
+        And that I am on the page where I can add Warehouses
         When I select the Add Item button
         Then I should see that the Add Item button is highlighted
         And I am on the page where I can add items

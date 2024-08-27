@@ -62,7 +62,7 @@ public class NavBarSteps {
     }
 
     //And that I am on the landing page for InventoryMan
-    @Then("I am on the landing page for InventoryMan")
+    @Then("that I am on the landing page for InventoryMan")
     public void onInventoryManLandingPage() {
         System.out.println("Step: I am on the landing page for InventoryMan");
         assertTrue(lPage.onInventoryManLandingPage());
@@ -104,14 +104,14 @@ public class NavBarSteps {
     }
 
     //And that I am on the page with the Items
-    @And("I am on the page with the Items")
+    @And("that I am on the page with the Items")
     public void onThePageItemsPage() {
         System.out.println("Step: I am on the Items page");
         assertTrue(lPage.onItemsPage());
     }
 
-    //When I select the Add Warehouse button
-    @When("I select the Add Warehouse button")
+    //When I am on the page where I can add Warehouses
+    @When("I am on the page where I can add Warehouses")
     public void selectAddWarehouse() {
         System.out.println("Step: I select the Add Warehouse button");
         this.lPage.selectAddWarehouse();
@@ -124,8 +124,8 @@ public class NavBarSteps {
         assertTrue(lPage.addWarehouseButtonHighlighted());
     }
 
-    //And that I am on the Add Warehouse page
-    @And("I am on the page where I can add Warehouses")
+    //And that I am on the page where I can add Warehouses
+    @And("that I am on the page where I can add Warehouses")
     public void onAddWarehousePage() {
         System.out.println("Step: I am on the page where I can add Warehouses");
         assertTrue(lPage.onAddWarehousePage());
