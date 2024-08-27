@@ -118,7 +118,7 @@ pipeline {
 
                     // If both frontend and backend are ready, proceed with tests
                     if (frontendReady && backendReady) {
-                        sh "cd backend && mvn test -P selenium" // Run Selenium tests
+                        sh "cd backend && mvn test" // Run Selenium tests
                     } else {
                         error "One or both services are not ready. Aborting tests."
                     }
