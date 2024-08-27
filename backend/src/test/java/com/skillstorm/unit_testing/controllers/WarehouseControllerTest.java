@@ -1,8 +1,10 @@
 package com.skillstorm.unit_testing.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
@@ -71,26 +73,27 @@ public class WarehouseControllerTest {
 
     @Test
     public void updateWarehouseTest() {
+        long warehouseId = 1;
 
         Warehouse inputWH = new Warehouse();
         Warehouse updatedWH = new Warehouse();
 
+        when(whService.getWarehouseById(warehouseId)).thenReturn(inputWH);
         when(whService.saveWarehouse(inputWH)).thenReturn(updatedWH);
 
-        Warehouse response = whController.updateWarehouse(inputWH.getId(), inputWH);
+        Warehouse response = whController.updateWarehouse(warehouseId, inputWH);
 
         Assert.assertEquals(response, updatedWH);
     }
 
     @Test
     public void deleteWarehouseTest() {
-        Warehouse inputWH = new Warehouse();
-        Warehouse deletedWH = new Warehouse();
-        when(whService.deleteWarehouse(inputWH.getId())).thenReturn(deletedWH);
+        long warehouseId = 1;
+        Warehouse expectedWH = new Warehouse();
+        
+        when(whService.getWarehouseById(warehouseId)).thenReturn(expectedWH);
 
-        ResponseEntity<Warehouse> response = whController.deleteWarehouse(inputWH.getId());;
-
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+        assertAll(() -> whController.deleteWarehouse(warehouseId));
     }
 
     @Test

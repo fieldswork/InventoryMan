@@ -9,7 +9,7 @@ import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.models.Warehouse;
 
 /**
- * Unit testing for the inventoryman Item model
+ * Unit testing for the inventoryman Item model with TestNG
  */
 public class ItemTest {
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-96daabca-c01c-416b-bc3d-60ebe5cac6c0"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.039">
+    <properties></properties>
+
+
+
+            <testcase
+                name="getCurrentSpaceUsedTest"
+                time="0.039"
+                classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
+            </testcase>
+</testsuite>

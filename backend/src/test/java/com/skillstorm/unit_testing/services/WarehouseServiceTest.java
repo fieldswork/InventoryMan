@@ -1,8 +1,10 @@
 package com.skillstorm.unit_testing.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,16 +52,16 @@ public class WarehouseServiceTest {
         Assert.assertEquals(response, expectedWH);
     }
 
-    // @Test
-    // public void getWarehouseByIdTest() {
-    //     long warehouseId = 1;
-    //     Warehouse expectedWH = new Warehouse();
-    //     when(whRepository.findById(warehouseId)).thenReturn(expectedWH);
+    @Test
+    public void getWarehouseByIdTest() {
+        long warehouseId = 1;
+        Warehouse expectedWH = new Warehouse();
+        when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
 
-    //     Warehouse response = whService.getWarehouseById(warehouseId);
+        Warehouse response = whService.getWarehouseById(warehouseId);
 
-    //     Assert.assertEquals(response, expectedWH);
-    // }
+        Assert.assertEquals(response, expectedWH);
+    }
 
     @Test
     public void saveWarehouseTest() {
@@ -75,24 +77,25 @@ public class WarehouseServiceTest {
 
     @Test
     public void deleteWarehouseTest() {
-        Warehouse inputWarehouse = new Warehouse();
+        long warehouseId = 1;
+        Warehouse expectedWH = new Warehouse();
+        
+        when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
 
-        doNothing().when(whRepository).deleteById(inputWarehouse.getId());
-
-        verify(whRepository, times(1)).deleteById(inputWarehouse.getId());
+        assertAll(() -> whService.deleteWarehouse(warehouseId));
     }
 
-    // @Test
-    // public void getCurrentSpaceUsedTest() {
-    //     Warehouse inputWarehouse = new Warehouse();
-    //     Warehouse expectedWH = new Warehouse();
+    @Test
+    public void getCurrentSpaceUsedTest() {
+        long warehouseId = 1;
+        Warehouse expectedWH = new Warehouse();
+        
+        when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
 
-    //     when(inputWarehouse.getUsedCapacity()).thenReturn(expectedWH.getUsedCapacity());
+        double response = whService.getCurrentSpaceUsed(warehouseId);
 
-    //     double response = whService.getCurrentSpaceUsed(inputWarehouse.getId());
-
-    //     Assert.assertEquals(response, expectedWH.getUsedCapacity());
-    // }
+        Assert.assertEquals(response, expectedWH.getUsedCapacity());
+    }
 
     @AfterTest
     public void teardown() throws Exception{

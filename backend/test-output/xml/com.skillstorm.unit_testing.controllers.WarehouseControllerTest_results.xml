@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-2f1f20e5-2c6c-4256-95c6-0a4bbabbf7ed"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.044">
+    <properties></properties>
+
+
+
+            <testcase
+                name="deleteWarehouseTest"
+                time="0.044"
+                classname="com.skillstorm.unit_testing.controllers.WarehouseControllerTest">
+            </testcase>
+</testsuite>

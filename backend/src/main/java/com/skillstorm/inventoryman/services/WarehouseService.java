@@ -25,10 +25,8 @@ public class WarehouseService {
         return warehouseRepository.save(warehouse);
     }
 
-    public Warehouse deleteWarehouse(Long id) { // Method that deletes a warehouse by id
-        Warehouse warehouse = warehouseRepository.findById(id).orElse(null);
+    public void deleteWarehouse(Long id) { // Method that deletes a warehouse by id
         warehouseRepository.deleteById(id);
-        return warehouse;
     }
 
     public double getCurrentSpaceUsed(Long id) { // Method that returns the current space used in a warehouse by id

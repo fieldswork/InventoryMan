@@ -33,6 +33,7 @@ public class WarehouseController {
 
     @PutMapping("/{id}") // Updates a warehouse by id
     public Warehouse updateWarehouse(@PathVariable Long id, @RequestBody Warehouse warehouseDetails) {
+        System.out.println(warehouseService.getWarehouseById(id));
         Warehouse warehouse = warehouseService.getWarehouseById(id);
         warehouse.setName(warehouseDetails.getName());
         warehouse.setCapacity(warehouseDetails.getCapacity());
@@ -40,9 +41,8 @@ public class WarehouseController {
     }
 
     @DeleteMapping("/{id}") // Deletes a warehouse by id
-    public ResponseEntity<Warehouse>  deleteWarehouse(@PathVariable Long id) {
+    public void deleteWarehouse(@PathVariable Long id) {
         warehouseService.deleteWarehouse(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}/space-used") // Gets the current space used in a warehouse by id
