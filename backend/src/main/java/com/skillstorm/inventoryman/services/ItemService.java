@@ -46,7 +46,7 @@ public class ItemService {
         return itemRepository.save(item); // Saves the item if it fits in the warehouse
     }
 
-    public Item deleteItem(Long id) { // Method that deletes an item by id
+    public void deleteItem(Long id) { // Method that deletes an item by id
         Item item = itemRepository.findById(id).orElse(null);
 
         if (item != null) { 
@@ -57,9 +57,7 @@ public class ItemService {
                 warehouseRepository.save(warehouse);
             }
             itemRepository.deleteById(id);
-            return item;
         }
-        return null;
     }
 
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id

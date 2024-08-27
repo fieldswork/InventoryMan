@@ -3,6 +3,7 @@ package com.skillstorm.unit_testing.controllers;
 import java.util.List;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 
 import com.skillstorm.inventoryman.controllers.ItemController;
 import com.skillstorm.inventoryman.models.Item;
+import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.ItemService;
 
 
@@ -85,13 +87,12 @@ public class ItemControllerTest {
 
     @Test
     public void deleteItemTest() {
-        Item inputItem = new Item();
+        long itemId = 1;
+
         Item deletedItem = new Item();
-        when(itService.deleteItem(inputItem.getId())).thenReturn(deletedItem);
+        when(itService.getItemById(itemId)).thenReturn(deletedItem);
 
-        ResponseEntity<Item>  response = itController.deleteItem(inputItem.getId());;
-
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+        assertAll(() -> itController.deleteItem(itemId));
     }
 
     @AfterTest

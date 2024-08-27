@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-b894e663-eebc-4c4e-8622-23aab3432a33"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.057">
+    <properties></properties>
+
+
+
+            <testcase
+                name="deleteItemTest"
+                time="0.057"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+</testsuite>

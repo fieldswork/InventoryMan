@@ -1,7 +1,6 @@
 package com.skillstorm.unit_testing.controllers;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -10,8 +9,6 @@ import static org.mockito.Mockito.when;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -90,7 +87,7 @@ public class WarehouseControllerTest {
     public void deleteWarehouseTest() {
         long warehouseId = 1;
         Warehouse expectedWH = new Warehouse();
-        
+
         when(whService.getWarehouseById(warehouseId)).thenReturn(expectedWH);
 
         assertAll(() -> whController.deleteWarehouse(warehouseId));

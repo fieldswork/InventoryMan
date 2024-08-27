@@ -5,22 +5,16 @@ import java.util.Optional;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.skillstorm.inventoryman.controllers.WarehouseController;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.repositories.WarehouseRepository;
 import com.skillstorm.inventoryman.services.WarehouseService;
