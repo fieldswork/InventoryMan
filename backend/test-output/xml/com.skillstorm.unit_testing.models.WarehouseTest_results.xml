@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-98fb8fce-20f2-4728-96b6-b49c5b542e2a"
+           tests="2"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.029">
+    <properties></properties>
+
+
+
+            <testcase
+                name="testItemSetters"
+                time="0.000"
+                classname="com.skillstorm.unit_testing.models.WarehouseTest">
+            </testcase>
+            <testcase
+                name="testItemGetters"
+                time="0.029"
+                classname="com.skillstorm.unit_testing.models.WarehouseTest">
+            </testcase>
+</testsuite>
