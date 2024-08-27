@@ -36,9 +36,9 @@ public class ViewUtilizationSteps {
         this.whPage = new WarehousesPage(driver);
     }
 
-    // Given I am on the Warehouses page
-    @Given("I am on the Warehouses page")
-    public void onWarehousesPageString(String warehouse) {
+    // Given I am on the page with the Warehouses cards
+    @Given("I am on the page with the Warehouses cards")
+    public void onWarehousesPageString() {
         this.whPage.get();
     }
 

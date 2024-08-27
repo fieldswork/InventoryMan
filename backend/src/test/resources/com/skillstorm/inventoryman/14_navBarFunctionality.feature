@@ -17,5 +17,3 @@ Feature: Navigation Bar Functionality
         When I select the Add Item button
         Then I should see that the Add Item button is highlighted
         And I am on the page where I can add items
-
-    Examples:

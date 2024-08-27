@@ -8,5 +8,3 @@ Feature: Navigation between pages
         Then I should see the Warehouses page
         When I navigate forward using the browser forward button
         Then I should see the Items page
-
-    Examples:

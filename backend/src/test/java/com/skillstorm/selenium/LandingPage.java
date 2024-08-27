@@ -2,6 +2,7 @@ package com.skillstorm.selenium;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -62,12 +63,14 @@ public class LandingPage {
 
     //selectWarehousesPage
     public void selectWarehousesPage() {
-        this.warehousesButton.click();
+        //this.warehousesButton.click();
+        this.warehousesButton.sendKeys(Keys.ENTER);
     }
 
     // selectItemsPage
     public void selectItemsPage() {
-        this.itemsButton.click();
+        //this.itemsButton.click();
+        this.itemsButton.sendKeys(Keys.ENTER);
     }
 
     // amIOnWarehousesPage
@@ -92,7 +95,8 @@ public class LandingPage {
 
     // selectInventoryMan
     public void selectInventoryMan() {
-        this.inventoryManButton.click();
+        //this.inventoryManButton.click();
+        this.inventoryManButton.sendKeys(Keys.ENTER);
     }
 
     public boolean noOtherButtonsHighlighted() {
@@ -114,7 +118,8 @@ public class LandingPage {
 
     // selectWarehouses
     public void selectWarehouses() {
-        this.warehousesButton.click();
+        //this.warehousesButton.click();
+        this.warehousesButton.sendKeys(Keys.ENTER);
     }
 
     // warehousesButtonHighlighted
@@ -134,7 +139,8 @@ public class LandingPage {
 
     // selectItems
     public void selectItems() {
-        this.itemsButton.click();
+        //this.itemsButton.click();
+        this.itemsButton.sendKeys(Keys.ENTER);
     }
 
     // itemsButtonHighlighted
@@ -154,7 +160,8 @@ public class LandingPage {
 
     // selectAddWarehouse   
     public void selectAddWarehouse() {
-        this.addWarehouseButton.click();
+        //this.addWarehouseButton.click();
+        this.addWarehouseButton.sendKeys(Keys.ENTER);
     }
 
     // addWarehouseButtonHighlighted
@@ -174,7 +181,8 @@ public class LandingPage {
 
     // selectAddItem
     public void selectAddItem() {
-        this.addItemButton.click();
+        //this.addItemButton.click();
+        this.addItemButton.sendKeys(Keys.ENTER);
     }
 
     // addItemButtonHighlighted

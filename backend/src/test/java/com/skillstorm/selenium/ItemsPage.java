@@ -363,7 +363,8 @@ public class ItemsPage {
     // filterWarehouse - Select a warehouse from the dropdown
     public void filterByWarehouse(String warehouse) {
         try {
-            filterWarehouse.click();
+            //filterWarehouse.click();
+            filterWarehouse.sendKeys(Keys.ENTER);
     
             Select select = new Select(filterWarehouse);
             select.selectByVisibleText(warehouse);
@@ -411,8 +412,6 @@ public class ItemsPage {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> items = new ArrayList<>();
-        List<String> values = new ArrayList<>();
         for (int i = 1; i < 100; i++) {
             try {
                 Thread.sleep(1000);
@@ -420,16 +419,14 @@ public class ItemsPage {
                 e.printStackTrace();
             }
             try {
-                WebElement itemElement = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
-                items.add(itemElement);
-                values.add(itemElement.getText());
-                if (itemElement.getText().equals(item)) {
+                WebElement itemName = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
+                if (itemName.getText().equals(item)) {
                     return true;
                 }
             } catch (Exception e) {
                 break;
             }
         }
-        return true;
+        return false;
     }
 }
