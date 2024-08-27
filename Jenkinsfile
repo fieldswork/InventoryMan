@@ -17,16 +17,18 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarCloud') {
-                        sh '''
-                            npm install
-                            npm run test -- --coverage
-                            npx sonar-scanner \
-                                -Dsonar.projectKey=salmoncore_InventoryMan \
-                                -Dsonar.projectName=InventoryMan \
-                                -Dsonar.sources=src \
-                                -Dsonar.exclusions=**/__tests__/** \
-                                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                            ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_InventoryMan
+                        dir('frontend') {
+                            sh '''
+                                npm install
+                                npm run test -- --coverage
+                                npx sonar-scanner \
+                                    -Dsonar.projectKey=salmoncore_InventoryMan \
+                                    -Dsonar.projectName=InventoryMan \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.exclusions=**/__tests__/** \
+                                    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                                ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_InventoryMan
+                        }
                     }
                 }
             }
