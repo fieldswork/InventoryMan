@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-30831f60-0def-4ce6-8529-c4803f08a789"
+           tests="5"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.070">
+    <properties></properties>
+
+
+
+            <testcase
+                name="getAllItemsTest"
+                time="0.001"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+            <testcase
+                name="createItemTest"
+                time="0.061"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+            <testcase
+                name="deleteItemTest"
+                time="0.006"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+            <testcase
+                name="getItemByIdTest"
+                time="0.001"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+            <testcase
+                name="updateItemTest"
+                time="0.001"
+                classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
+            </testcase>
+</testsuite>
