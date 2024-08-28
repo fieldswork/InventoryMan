@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-96daabca-c01c-416b-bc3d-60ebe5cac6c0"
-           tests="1"
+<testsuite name="TestNGTest-5a4cd6fb-310d-4161-99ad-92dc2af3f6a8"
+           tests="5"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.039">
+           time="0.050">
     <properties></properties>
 
 
 
             <testcase
+                name="deleteWarehouseTest"
+                time="0.043"
+                classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
+            </testcase>
+            <testcase
                 name="getCurrentSpaceUsedTest"
-                time="0.039"
+                time="0.002"
+                classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
+            </testcase>
+            <testcase
+                name="getWarehouseByIdTest"
+                time="0.001"
+                classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
+            </testcase>
+            <testcase
+                name="getAllWarehousesTest"
+                time="0.003"
+                classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
+            </testcase>
+            <testcase
+                name="saveWarehouseTest"
+                time="0.001"
                 classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
             </testcase>
 </testsuite>

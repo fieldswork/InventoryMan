@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-a713ef9f-f86d-4cc2-bdba-97d3c5dec70c"
+<testsuite name="TestNGTest-f342547c-4e59-460d-b7ee-75411364cfc5"
            tests="2"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.022">
+           time="0.023">
     <properties></properties>
 
 
@@ -16,7 +16,7 @@
             </testcase>
             <testcase
                 name="testItemGetters"
-                time="0.022"
+                time="0.023"
                 classname="com.skillstorm.unit_testing.models.ItemTest">
             </testcase>
 </testsuite>

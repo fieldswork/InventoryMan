@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 
 import com.skillstorm.inventoryman.controllers.ItemController;
 import com.skillstorm.inventoryman.models.Item;
-import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.ItemService;
 
 

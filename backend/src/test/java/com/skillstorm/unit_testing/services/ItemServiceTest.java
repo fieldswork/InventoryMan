@@ -5,24 +5,16 @@ import java.util.Optional;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.skillstorm.inventoryman.controllers.ItemController;
 import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.repositories.ItemRepository;
@@ -72,15 +64,12 @@ public class ItemServiceTest {
     public void saveItemTest() {     
         // Warehouse wh = new Warehouse();  
         long itemId = 1;
- 
-        Item inputItem = new Item();
-        Item savedItem = new Item();
-
         long warehouseId = 1;
 
+        Item inputItem = new Item();
+        Item savedItem = new Item();
         Warehouse wh = new Warehouse();
 
-        inputItem.setWarehouse(wh);
         wh.setId(warehouseId);
         wh.setCapacity(2000);
 
@@ -114,15 +103,12 @@ public class ItemServiceTest {
     @Test
     public void updateItemTest() {
         long itemId = 1;
+        long warehouseId = 1;
 
         Item inputItem = new Item();
         Item savedItem = new Item();
-
-        long warehouseId = 1;
-
         Warehouse wh = new Warehouse();
 
-        inputItem.setWarehouse(wh);
         wh.setId(warehouseId);
         wh.setCapacity(2000);
 
