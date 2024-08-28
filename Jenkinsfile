@@ -118,11 +118,16 @@ pipeline {
 
                     // If both frontend and backend are ready, proceed with tests
                     if (frontendReady && backendReady) {
-                        sh "cd backend && mvn test" // Run Selenium tests
+                        sh "cd backend && mvn test jacoco:report" // Run Selenium tests, generate coverage report
                     } else {
                         error "One or both services are not ready. Aborting tests."
                     }
                 }
+            }
+        }
+        stage('Archive JaCoCo Report') {
+            steps {
+                archiveArtifacts artifacts: 'backend/target/site/jacoco/*', allowEmptyArchive: true
             }
         }
     }
