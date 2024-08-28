@@ -26,6 +26,7 @@ import com.skillstorm.inventoryman.controllers.ItemController;
 import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.repositories.ItemRepository;
+import com.skillstorm.inventoryman.repositories.WarehouseRepository;
 import com.skillstorm.inventoryman.services.ItemService;
 
 
@@ -33,6 +34,9 @@ public class ItemServiceTest {
     
     @Mock
     private ItemRepository itRepo;
+
+    @Mock
+    private WarehouseRepository whRepo;
 
     @InjectMocks
     private ItemService itService;
@@ -66,33 +70,41 @@ public class ItemServiceTest {
 
     @Test
     public void saveItemTest() {     
-        Warehouse wh = new Warehouse();  
+        // Warehouse wh = new Warehouse();  
         long itemId = 1;
  
         Item inputItem = new Item();
         Item savedItem = new Item();
 
-        // inputItem.setId(1L);
-        // inputItem.setName("shirt");
-        // inputItem.setDescription("Top clothes");
-        // inputItem.setQuantity(20);
-        // inputItem.setSizeInCubicFt(20);
-        // inputItem.setWarehouse(wh);
+        long warehouseId = 1;
 
-        // savedItem.setId(1L);
-        // savedItem.setName("shirt");
-        // savedItem.setDescription("Top clothes");
-        // savedItem.setQuantity(20);
-        // savedItem.setSizeInCubicFt(20);
-        // savedItem.setWarehouse(wh);
+        Warehouse wh = new Warehouse();
+
+        inputItem.setWarehouse(wh);
+        wh.setId(warehouseId);
+        wh.setCapacity(2000);
+
+        inputItem.setId(1L);
+        inputItem.setName("shirt");
+        inputItem.setDescription("Top clothes");
+        inputItem.setQuantity(20);
+        inputItem.setSizeInCubicFt(20);
+        inputItem.setWarehouse(wh);
+
+        savedItem.setId(1L);
+        savedItem.setName("shirt");
+        savedItem.setDescription("Top clothes");
+        savedItem.setQuantity(20);
+        savedItem.setSizeInCubicFt(20);
+        savedItem.setWarehouse(wh);
 
         System.out.println(inputItem.getId());
         System.out.println(savedItem.getId());
         System.out.println(inputItem.getWarehouse());
 
         when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
+        when(whRepo.findById(warehouseId)).thenReturn(Optional.ofNullable(wh));
         when(itRepo.save(inputItem)).thenReturn(savedItem);
-
 
         Item response = itService.saveItem(inputItem);
 
@@ -106,7 +118,30 @@ public class ItemServiceTest {
         Item inputItem = new Item();
         Item savedItem = new Item();
 
+        long warehouseId = 1;
+
+        Warehouse wh = new Warehouse();
+
+        inputItem.setWarehouse(wh);
+        wh.setId(warehouseId);
+        wh.setCapacity(2000);
+
+        inputItem.setId(1L);
+        inputItem.setName("shirt");
+        inputItem.setDescription("Top clothes");
+        inputItem.setQuantity(20);
+        inputItem.setSizeInCubicFt(20);
+        inputItem.setWarehouse(wh);
+
+        savedItem.setId(1L);
+        savedItem.setName("shirt");
+        savedItem.setDescription("Top clothes");
+        savedItem.setQuantity(20);
+        savedItem.setSizeInCubicFt(20);
+        savedItem.setWarehouse(wh);
+
         when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
+        when(whRepo.findById(warehouseId)).thenReturn(Optional.ofNullable(wh));
         when(itRepo.save(inputItem)).thenReturn(savedItem);
 
         Item response = itService.updateItem(itemId, inputItem);

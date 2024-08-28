@@ -63,6 +63,7 @@ public class ItemService {
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
+            System.out.println(warehouseRepository.findById(item.getWarehouse().getId()));
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
             Warehouse newWarehouse = warehouseRepository.findById(itemDetails.getWarehouse().getId()).orElse(null);
     
