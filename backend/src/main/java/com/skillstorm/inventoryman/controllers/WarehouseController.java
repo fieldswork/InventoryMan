@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/warehouses")
 public class WarehouseController {
-
+    
     @Autowired
     private WarehouseService warehouseService;
 
@@ -31,6 +31,7 @@ public class WarehouseController {
 
     @PutMapping("/{id}") // Updates a warehouse by id
     public Warehouse updateWarehouse(@PathVariable Long id, @RequestBody Warehouse warehouseDetails) {
+        System.out.println(warehouseService.getWarehouseById(id));
         Warehouse warehouse = warehouseService.getWarehouseById(id);
         warehouse.setName(warehouseDetails.getName());
         warehouse.setCapacity(warehouseDetails.getCapacity());
