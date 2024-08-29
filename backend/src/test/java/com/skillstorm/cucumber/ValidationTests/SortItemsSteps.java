@@ -53,7 +53,7 @@ public class SortItemsSteps {
      @Then("Items should be displayed in the page by {string} order")
     public void isWarehousesOrdered(String sortingOrder) {
         System.out.println("Step: Items should be order by " + sortingOrder);
-        assertTrue(whPage.iswarehousesOrdered(sortingOrder));
+        assertTrue(whPage.isItemsOrdered(sortingOrder));
     }
 
     @After("@sortItems")

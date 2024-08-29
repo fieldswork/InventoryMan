@@ -86,7 +86,7 @@ public class ItemsPage {
      * @param sortingOrder
      * @return true if items are sorted by the sorting criteria, otherwise false
      */
-    public boolean iswarehousesOrdered(String sortingOrder) {
+    public boolean isItemsOrdered(String sortingOrder) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
@@ -97,7 +97,10 @@ public class ItemsPage {
             List<String> values = allItems();
 
             List<String> orderedValues = new ArrayList<>(values);
-            Collections.sort(orderedValues);
+            Collections.sort(orderedValues, String.CASE_INSENSITIVE_ORDER);
+
+            System.out.println(values);
+            System.out.println(orderedValues);
 
             return orderedValues.equals(values);
 

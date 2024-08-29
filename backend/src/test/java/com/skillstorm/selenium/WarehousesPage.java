@@ -92,8 +92,11 @@ public class WarehousesPage {
             List<String> values = allWarehouses();
 
             List<String> orderedValues = new ArrayList<>(values);
-            Collections.sort(orderedValues);
+            Collections.sort(orderedValues, String.CASE_INSENSITIVE_ORDER);
 
+            System.out.println(values);
+            System.out.println(orderedValues);
+            
             return orderedValues.equals(values);
 
         } else {
