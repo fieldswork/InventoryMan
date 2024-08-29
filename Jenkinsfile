@@ -13,24 +13,9 @@ pipeline {
                 sh "cd frontend && npm install && npm run build"
             }
         }
-        stage('Analyze Frontend with SonarCloud') {
+        stage('Build Backend') {
             steps {
-                script {
-                    withSonarQubeEnv('SonarCloud') {
-                        dir('frontend') {
-                            sh '''
-                                npm install
-                                npm run test -- --coverage
-                                npx sonar-scanner \
-                                    -Dsonar.projectKey=salmoncore_InventoryMan \
-                                    -Dsonar.projectName=InventoryMan \
-                                    -Dsonar.sources=src \
-                                    -Dsonar.exclusions=**/__tests__/** \
-                                    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                                ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_InventoryMan
-                        }
-                    }
-                }
+                sh "cd backend && mvn clean install -DskipTests=true" // skip tests for deployment
             }
         }
         stage('Deploy Frontend') {
@@ -43,28 +28,6 @@ pipeline {
                     } catch (Exception e) {
                         echo "${e}"
                         throw e
-                    }
-                }
-            }
-        }
-        stage('Build Backend') {
-            steps {
-                sh "cd backend && mvn clean install -DskipTests=true" // skip tests for deployment
-            }
-        }
-        stage('Analyze Backend with SonarCloud') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarCloud') {
-                        dir('backend') {
-                            sh '''
-                                mvn sonar:sonar \
-                                    -Dsonar.projectKey=salmoncore_inventoryman-backend \
-                                    -Dsonar.projectName=InventoryMan_Backend \
-                                    -Dsonar.java.binaries=target/classes \
-                                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                                ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_inventoryman-backend
-                        }
                     }
                 }
             }
@@ -83,7 +46,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Selenium Tests') {
+        stage('Run Tests') {
             steps {
                 script {
                     def frontendReady = false
@@ -118,7 +81,7 @@ pipeline {
 
                     // If both frontend and backend are ready, proceed with tests
                     if (frontendReady && backendReady) {
-                        sh "cd backend && mvn test jacoco:report" // Run Selenium tests, generate coverage report
+                        sh "cd backend && mvn test jacoco:report" // Run Selenium, Cucumber, and Mockito tests, generate coverage report
                     } else {
                         error "One or both services are not ready. Aborting tests."
                     }
@@ -128,6 +91,41 @@ pipeline {
         stage('Archive JaCoCo Report') {
             steps {
                 archiveArtifacts artifacts: 'backend/target/site/jacoco/*', allowEmptyArchive: true
+            }
+        }
+        stage('Analyze Frontend with SonarCloud') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarCloud') {
+                        dir('frontend') {
+                            sh '''
+                                npx sonar-scanner \
+                                    -Dsonar.projectKey=salmoncore_InventoryMan \
+                                    -Dsonar.projectName=InventoryMan \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.exclusions=**/__tests__/** \
+                                    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                                ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_InventoryMan
+                        }
+                    }
+                }
+            }
+        }
+        stage('Analyze Backend with SonarCloud') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarCloud') {
+                        dir('backend') {
+                            sh '''
+                                mvn sonar:sonar \
+                                    -Dsonar.projectKey=salmoncore_inventoryman-backend \
+                                    -Dsonar.projectName=InventoryMan_Backend \
+                                    -Dsonar.java.binaries=target/classes \
+                                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                                ''' // Project: https://sonarcloud.io/project/information?id=salmoncore_inventoryman-backend
+                        }
+                    }
+                }
             }
         }
     }
