@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
@@ -259,21 +262,20 @@ public class ItemServiceTest {
         assertThrows(IllegalArgumentException.class, () -> itService.updateItem(itemId, inputItem));
     }
 
-    // @Test
-    // public void updateItemTest4() {
-    //     long itemId = 1;
+    @Test
+    public void updateItemTest4() {
+        long itemId = 1;
 
-    //     Item inputItem = new Item();
-    //     Item savedItem = new Item();
+        Item inputItem = null;
+        Item savedItem = null;
 
-    //     when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
-    //     when(itRepo.save(inputItem)).thenReturn(savedItem);
-    //     // when(itRepo.save(inputItem)).thenThrow(NullPointerException.class);
-        
-        
-    //     Item response = itService.updateItem(itemId, inputItem);
-    //     Assert.assertEquals(response, null);
-    // }
+
+        when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
+        when(itRepo.save(inputItem)).thenReturn(savedItem);
+  
+        assertThrows(NullPointerException.class, () -> itService.updateItem(itemId, inputItem));
+
+    }
     
 
     /**

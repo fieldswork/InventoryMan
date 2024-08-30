@@ -63,7 +63,7 @@ public class ItemService {
 
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
-         System.out.println(item);
+        System.out.println(item);
         if (item != null) {
 
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
@@ -101,8 +101,10 @@ public class ItemService {
             item.setSizeInCubicFt(itemDetails.getSizeInCubicFt());
             item.setWarehouse(newWarehouse);
             return itemRepository.save(item);
+        } else {
+            System.out.println("here");
+            throw new NullPointerException("The item you are trying to update does not exist");
         }
-        return null;
     }
     
 }
