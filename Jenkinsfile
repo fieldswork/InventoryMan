@@ -4,6 +4,9 @@ pipeline {
     environment {
         PATH = "/usr/bin:$PATH"
         HEADLESS = 'true'
+        OUT = 'jmeter.save.saveservice.output_format'
+        JMX = '/opt/apache-jmeter-5.6.3/bin/InventoryMan_JMeter_Test.jmx'
+        JTL = '/opt/apache-jmeter-5.6.3/reports/InventoryMan_JMeter_Test.report.jtl'
     }
 
     stages {
@@ -126,6 +129,20 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        stage('Run JMeter Test') {
+            steps {
+                script {
+                    sh """
+                        /opt/apache-jmeter-5.6.3/bin/jmeter -j \$OUT=xml -n -t \$JMX -l \$JTL
+                    """
+                }
+            }
+        }
+        stage('Publish JMeter Report') {
+            steps {
+                perfReport filterRegex: '', sourceDataFiles: '/opt/apache-jmeter-5.6.3/reports/InventoryMan_JMeter_Test.report.jtl'
             }
         }
     }
