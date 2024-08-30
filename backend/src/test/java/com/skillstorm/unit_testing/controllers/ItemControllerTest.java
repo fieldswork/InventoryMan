@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 
 import com.skillstorm.inventoryman.controllers.ItemController;
 import com.skillstorm.inventoryman.models.Item;
+import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.ItemService;
 
 
@@ -59,20 +60,39 @@ public class ItemControllerTest {
         Assert.assertEquals(response, expectedItem);
     }
 
-    // @Test
-    // public void createItemTest() {
-    //     Item inputItem = new Item();
-    //     Item savedItem = new Item();
+    @Test
+    public void createItemTest() {
+        Item inputItem = new Item();
+        Item savedItem = new Item();
 
-    //     when(itService.saveItem(inputItem)).thenReturn(savedItem);
+        when(itService.saveItem(inputItem)).thenReturn(savedItem);
 
-    //     ResponseEntity<Item> response = itController.createItem(inputItem);
+        ResponseEntity<Item> response = itController.createItem(inputItem);
 
-    //     Assert.assertEquals(response.getBody(), savedItem);
-    //     Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
-    //     // Assert.assertThrows(IllegalArgumentException.class, () -> itController.createItem(null));
+        Assert.assertEquals(response.getBody(), savedItem);
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
 
-    // }
+    /**
+     * Testing if an item with null value for warehouse would throw an error and return a BAD_REQUEST http status code
+     */
+    @Test
+    public void createItemTes2() {
+
+        Item inputItem = new Item();
+        Warehouse wh = new Warehouse();
+
+        inputItem.setId(1L);
+        inputItem.setName("shirt");
+        inputItem.setDescription("Top clothes");
+        inputItem.setQuantity(20);
+        inputItem.setSizeInCubicFt(20);
+        inputItem.setWarehouse(wh);
+
+        when(itService.saveItem(inputItem)).thenThrow(IllegalArgumentException.class);
+        
+        Assert.assertEquals(itController.createItem(inputItem).getStatusCode(), HttpStatus.BAD_REQUEST);
+    }
 
     @Test
     public void updateItemTest() {
@@ -85,6 +105,35 @@ public class ItemControllerTest {
 
         Assert.assertEquals(response.getBody(), updatedItem);
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
+
+        /**
+     * Testing if an item with null value for warehouse would throw an error and return a BAD_REQUEST http status code
+     */
+    @Test
+    public void updateItemTes2() {
+
+        Item inputItem = new Item();
+        Item updatedItem = new Item();
+        Warehouse wh = new Warehouse();
+
+        inputItem.setId(1L);
+        inputItem.setName("shirt");
+        inputItem.setDescription("Top clothes");
+        inputItem.setQuantity(20);
+        inputItem.setSizeInCubicFt(20);
+        inputItem.setWarehouse(wh);
+
+        updatedItem.setId(1L);
+        updatedItem.setName("shirt");
+        updatedItem.setDescription("Top clothes");
+        updatedItem.setQuantity(20);
+        updatedItem.setSizeInCubicFt(20);
+        updatedItem.setWarehouse(wh);
+
+        when(itService.updateItem(1L, inputItem)).thenThrow(IllegalArgumentException.class);
+        
+        Assert.assertEquals(itController.updateItem(1L, inputItem).getStatusCode(), HttpStatus.BAD_REQUEST);
     }
 
     @Test

@@ -102,7 +102,6 @@ public class ItemService {
             item.setWarehouse(newWarehouse);
             return itemRepository.save(item);
         } else {
-            System.out.println("here");
             throw new NullPointerException("The item you are trying to update does not exist");
         }
     }
