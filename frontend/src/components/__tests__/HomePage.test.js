@@ -1,3 +1,12 @@
-test('test', () => {
-    expect(1).toBe(1);
+import React from 'react';
+import { render } from '@testing-library/react';
+import HomePage from '../HomePage';
+
+// Test the HomePage component renders the correct content
+test('renders the correct content', () => {
+    const { getByText } = render(<HomePage />);
+    expect(getByText('InventoryMan')).toBeInTheDocument();
+    expect(getByText('A basic inventory management application created as part of the SkillStorm SDET Apprenticeship.')).toBeInTheDocument();
+    expect(getByText((content, element) => content.startsWith('Source for this project is available on'))).toBeInTheDocument();
+    expect(getByText('GitHub')).toBeInTheDocument();
 });
