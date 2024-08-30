@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import ItemList from '../ItemList';
 import ItemService from '../../services/itemService';
 import WarehouseService from '../../services/warehouseService';
@@ -8,6 +8,13 @@ import WarehouseService from '../../services/warehouseService';
 // Service mocks
 jest.mock('../../services/itemService.js');
 jest.mock('../../services/warehouseService.js');
+
+// Mock useNavigate
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockNavigate,
+}));
 
 const mockItems = [
     { id: 1, name: 'Item A', description: 'Description A', quantity: 10, sizeInCubicFt: 5, warehouse: { id: 1, name: 'Warehouse 1' } },
@@ -26,7 +33,7 @@ describe('ItemList', () => {
     });
 
     afterEach(() => {
-        jest.restoreAllMocks(); // Restore original implementations
+        jest.clearAllMocks(); // Clear mock calls
     });
 
     it('should render the page title', async () => {
@@ -84,7 +91,19 @@ describe('ItemList', () => {
         });
     });
 
-    // should navigate to edit item page
+    it('should navigate to the edit item page', async () => {
+        render(
+            <BrowserRouter>
+                <ItemList />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            const editButtons = screen.getAllByText('Edit');
+            fireEvent.click(editButtons[0]); // Click the first Edit button
+            expect(mockNavigate).toHaveBeenCalledWith('/edit-item/1');
+        });
+    });
 
     // should delete an item
 
