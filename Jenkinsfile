@@ -84,6 +84,7 @@ pipeline {
 
                     // If both frontend and backend are ready, proceed with tests
                     if (frontendReady && backendReady) {
+                        sh "cd frontend && npm test -- --coverage" // Run Jest tests, generate coverage report
                         sh "cd backend && mvn test jacoco:report" // Run Selenium, Cucumber, and Mockito tests, generate coverage report
                     } else {
                         error "One or both services are not ready. Aborting tests."
