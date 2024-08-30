@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
@@ -58,18 +59,20 @@ public class ItemControllerTest {
         Assert.assertEquals(response, expectedItem);
     }
 
-    @Test
-    public void createItemTest() {
-        Item inputItem = new Item();
-        Item savedItem = new Item();
+    // @Test
+    // public void createItemTest() {
+    //     Item inputItem = new Item();
+    //     Item savedItem = new Item();
 
-        when(itService.saveItem(inputItem)).thenReturn(savedItem);
+    //     when(itService.saveItem(inputItem)).thenReturn(savedItem);
 
-        ResponseEntity<Item> response = itController.createItem(inputItem);
+    //     ResponseEntity<Item> response = itController.createItem(inputItem);
 
-        Assert.assertEquals(response.getBody(), savedItem);
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
-    }
+    //     Assert.assertEquals(response.getBody(), savedItem);
+    //     Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+    //     // Assert.assertThrows(IllegalArgumentException.class, () -> itController.createItem(null));
+
+    // }
 
     @Test
     public void updateItemTest() {

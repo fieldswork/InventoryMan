@@ -28,6 +28,7 @@ public class ItemService {
 
     public Item saveItem(Item item) { // Method that creates a new item
         Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
+        
         if (warehouse == null) {
             throw new IllegalArgumentException("Warehouse not found");
         }
@@ -62,23 +63,31 @@ public class ItemService {
 
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
+         System.out.println(item);
         if (item != null) {
+
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
             Warehouse newWarehouse = warehouseRepository.findById(itemDetails.getWarehouse().getId()).orElse(null);
-    
+
             if (newWarehouse == null) {
                 throw new IllegalArgumentException("New Warehouse not found");
             }
     
             if (oldWarehouse != null) {
                 double oldItemSize = item.getQuantity() * item.getSizeInCubicFt();
-                oldWarehouse.setUsedCapacity(oldWarehouse.getUsedCapacity() - oldItemSize);
+                oldWarehouse.setUsedCapacity((int) Math.abs(oldWarehouse.getUsedCapacity() - oldItemSize));
                 warehouseRepository.save(oldWarehouse);
             }
 
             double newItemSize = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
             double newUsedCapacity = newWarehouse.getUsedCapacity() + newItemSize;
     
+            System.out.println(itemDetails.getQuantity());
+            System.out.println(itemDetails.getSizeInCubicFt());
+            System.out.println(newWarehouse.getUsedCapacity());
+            System.out.println(newItemSize);
+            System.out.println(newUsedCapacity);
+            System.out.println(newWarehouse.getCapacity());
             if (newUsedCapacity > newWarehouse.getCapacity()) { // If the new used capacity is greater than the warehouse capacity, frontend will display an error message
                 throw new IllegalArgumentException("New Warehouse capacity exceeded");
             }

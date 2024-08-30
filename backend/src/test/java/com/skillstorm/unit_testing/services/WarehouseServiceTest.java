@@ -80,7 +80,7 @@ public class WarehouseServiceTest {
     }
 
     @Test
-    public void getCurrentSpaceUsedTest() {
+    public void getCurrentSpaceUsedTest1() {
         long warehouseId = 1;
         Warehouse expectedWH = new Warehouse();
         
@@ -89,6 +89,18 @@ public class WarehouseServiceTest {
         double response = whService.getCurrentSpaceUsed(warehouseId);
 
         Assert.assertEquals(response, expectedWH.getUsedCapacity());
+    }
+
+    @Test
+    public void getCurrentSpaceUsedTest2() {
+        long warehouseId = 1;
+        Warehouse expectedWH = new Warehouse();
+        
+        when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
+
+        double response = whService.getCurrentSpaceUsed(0L);
+
+        Assert.assertEquals(response, 0.0);
     }
 
     @AfterTest
