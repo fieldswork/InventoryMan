@@ -146,6 +146,25 @@ public class ItemControllerTest {
         assertAll(() -> itController.deleteItem(itemId));
     }
 
+    @Test
+    public void deleteItemTest2() {
+        long itemId = 1;
+
+        Item deletedItem = new Item();
+        Warehouse wh = new Warehouse();
+
+        deletedItem.setId(1L);
+        deletedItem.setName("shirt");
+        deletedItem.setDescription("Top clothes");
+        deletedItem.setQuantity(20);
+        deletedItem.setSizeInCubicFt(20);
+        deletedItem.setWarehouse(wh);
+
+        when(itService.getItemById(itemId)).thenReturn(deletedItem);
+
+        assertAll(() -> itController.deleteItem(itemId));
+    }
+
     @AfterTest
     public void teardown() throws Exception{
         closeable.close();

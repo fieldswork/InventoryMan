@@ -197,6 +197,9 @@ public class ItemServiceTest {
         Assert.assertEquals(response, savedItem);
     }
 
+    /**
+     * Testing if new item size exceeds warehouse capacity
+     */
     @Test
     public void updateItemTest2() {
         long itemId = 1;
@@ -204,11 +207,49 @@ public class ItemServiceTest {
 
         Item inputItem = new Item();
         Item savedItem = new Item();
-        Warehouse wh = new Warehouse();
+        Warehouse wh1 = new Warehouse();
+        Warehouse wh2 = new Warehouse();
 
-        wh.setId(warehouseId);
-        wh.setCapacity(100);
-        wh.setUsedCapacity(100);
+        wh1.setId(warehouseId);
+        wh1.setCapacity(100);
+        wh1.setUsedCapacity(100);
+
+        wh2.setId(2L);
+        wh2.setCapacity(100);
+        wh2.setUsedCapacity(100);
+
+        inputItem.setId(1L);
+        inputItem.setName("shirt");
+        inputItem.setDescription("Top clothes");
+        inputItem.setQuantity(10);
+        inputItem.setSizeInCubicFt(10);
+        inputItem.setWarehouse(wh1);
+
+        savedItem.setId(1L);
+        savedItem.setName("short");
+        savedItem.setDescription("Top clothes");
+        savedItem.setQuantity(20);
+        savedItem.setSizeInCubicFt(20);
+        savedItem.setWarehouse(wh2);
+
+        when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
+        when(whRepo.findById(1L)).thenReturn(Optional.ofNullable(wh1));
+        when(whRepo.findById(2L)).thenReturn(Optional.ofNullable(wh2));
+        when(itRepo.save(inputItem)).thenThrow(IllegalArgumentException.class);
+        
+        assertThrows(IllegalArgumentException.class, () -> itService.updateItem(itemId, savedItem));
+    }
+
+    /**
+     * Testing the branch that checks if warehouse is null when updating an item
+     */
+    @Test
+    public void updateItemTest3() {
+        long itemId = 1;
+        long warehouseId = 1;
+
+        Item inputItem = new Item();
+        Warehouse wh = new Warehouse();
 
         inputItem.setId(1L);
         inputItem.setName("shirt");
@@ -216,13 +257,6 @@ public class ItemServiceTest {
         inputItem.setQuantity(20);
         inputItem.setSizeInCubicFt(20);
         inputItem.setWarehouse(wh);
-
-        savedItem.setId(1L);
-        savedItem.setName("shirt");
-        savedItem.setDescription("Top clothes");
-        savedItem.setQuantity(20);
-        savedItem.setSizeInCubicFt(20);
-        savedItem.setWarehouse(wh);
 
         when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
         when(whRepo.findById(warehouseId)).thenReturn(Optional.ofNullable(wh));
@@ -232,36 +266,8 @@ public class ItemServiceTest {
     }
 
     /**
-     * Testing the branch that checks if warehouse is null when updating an item
+     * Testing the branch when Item is null
      */
-    @Test
-    public void updateItemTest3() {
-        long itemId = 1;
-
-        Item inputItem = new Item();
-        Item savedItem = new Item();
-        Warehouse wh = new Warehouse();
-
-        inputItem.setId(1L);
-        inputItem.setName("shirt");
-        inputItem.setDescription("Top clothes");
-        inputItem.setQuantity(20);
-        inputItem.setSizeInCubicFt(20);
-        inputItem.setWarehouse(wh);
-
-        savedItem.setId(1L);
-        savedItem.setName("shirt");
-        savedItem.setDescription("Top clothes");
-        savedItem.setQuantity(20);
-        savedItem.setSizeInCubicFt(20);
-        savedItem.setWarehouse(wh);
-
-        when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
-        when(itRepo.save(inputItem)).thenThrow(IllegalArgumentException.class);
-        
-        assertThrows(IllegalArgumentException.class, () -> itService.updateItem(itemId, inputItem));
-    }
-
     @Test
     public void updateItemTest4() {
         long itemId = 1;
@@ -269,14 +275,51 @@ public class ItemServiceTest {
         Item inputItem = null;
         Item savedItem = null;
 
-
         when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
         when(itRepo.save(inputItem)).thenReturn(savedItem);
   
         assertThrows(NullPointerException.class, () -> itService.updateItem(itemId, inputItem));
 
     }
-    
+
+    /**
+     *  Testing old warehouse = null
+     */
+
+     @Test
+     public void updateItemTest5() {
+         long itemId = 1;
+ 
+         Item inputItem = new Item();
+         Item savedItem = new Item();
+         Warehouse wh1 = new Warehouse();
+         Warehouse wh2 = new Warehouse();
+ 
+         wh2.setId(2L);
+         wh2.setCapacity(100);
+         wh2.setUsedCapacity(100);
+ 
+         inputItem.setId(1L);
+         inputItem.setName("shirt");
+         inputItem.setDescription("Top clothes");
+         inputItem.setQuantity(10);
+         inputItem.setSizeInCubicFt(10);
+         inputItem.setWarehouse(wh1);
+ 
+         savedItem.setId(1L);
+         savedItem.setName("short");
+         savedItem.setDescription("Top clothes");
+         savedItem.setQuantity(20);
+         savedItem.setSizeInCubicFt(20);
+         savedItem.setWarehouse(wh2);
+ 
+         when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(inputItem));
+         when(whRepo.findById(1L)).thenReturn(Optional.ofNullable(wh1));
+         when(whRepo.findById(2L)).thenReturn(Optional.ofNullable(wh2));
+         when(itRepo.save(inputItem)).thenThrow(IllegalArgumentException.class);
+         
+         assertThrows(IllegalArgumentException.class, () -> itService.updateItem(itemId, savedItem));
+     }
 
     /**
      * Testing if an item can be deleted
@@ -310,6 +353,8 @@ public class ItemServiceTest {
      */    
     @Test
     public void deleteItemTest2() {
+        long itemId = 1;
+        long warehouseId = 1;
 
         Item deletedItem = new Item();
         Warehouse wh = new Warehouse();
@@ -321,11 +366,15 @@ public class ItemServiceTest {
         deletedItem.setSizeInCubicFt(20);
         deletedItem.setWarehouse(wh);
 
-        when(itRepo.findById(0L)).thenReturn(Optional.ofNullable(deletedItem));
+        when(whRepo.findById(warehouseId)).thenReturn(Optional.ofNullable(wh));
+        when(itRepo.findById(itemId)).thenReturn(Optional.ofNullable(deletedItem));
 
         assertAll(() -> itService.deleteItem(deletedItem.getId()));
     }
 
+    /**
+     * Tests when item is null
+     */
     @Test
     public void deleteItemTest3() {
 

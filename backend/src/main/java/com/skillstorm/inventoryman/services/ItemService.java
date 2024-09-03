@@ -52,6 +52,7 @@ public class ItemService {
 
         if (item != null) { 
             Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null); // Gets the warehouse of the item, if it exists
+            System.out.println(warehouse);
             if (warehouse != null) {
                 double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt()); // Calculates the new used capacity of the warehouse
                 warehouse.setUsedCapacity(newUsedCapacity);
@@ -63,7 +64,6 @@ public class ItemService {
 
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
-        System.out.println(item);
         if (item != null) {
 
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
@@ -72,22 +72,16 @@ public class ItemService {
             if (newWarehouse == null) {
                 throw new IllegalArgumentException("New Warehouse not found");
             }
-    
+
             if (oldWarehouse != null) {
                 double oldItemSize = item.getQuantity() * item.getSizeInCubicFt();
-                oldWarehouse.setUsedCapacity((int) Math.abs(oldWarehouse.getUsedCapacity() - oldItemSize));
+                oldWarehouse.setUsedCapacity(oldWarehouse.getUsedCapacity() - oldItemSize);
                 warehouseRepository.save(oldWarehouse);
             }
 
             double newItemSize = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
             double newUsedCapacity = newWarehouse.getUsedCapacity() + newItemSize;
-    
-            System.out.println(itemDetails.getQuantity());
-            System.out.println(itemDetails.getSizeInCubicFt());
-            System.out.println(newWarehouse.getUsedCapacity());
-            System.out.println(newItemSize);
-            System.out.println(newUsedCapacity);
-            System.out.println(newWarehouse.getCapacity());
+
             if (newUsedCapacity > newWarehouse.getCapacity()) { // If the new used capacity is greater than the warehouse capacity, frontend will display an error message
                 throw new IllegalArgumentException("New Warehouse capacity exceeded");
             }
