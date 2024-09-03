@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { act } from 'react';
 import ItemList from '../ItemList';
 import ItemService from '../../services/itemService';
 import WarehouseService from '../../services/warehouseService';
@@ -37,23 +38,27 @@ describe('ItemList', () => {
     });
 
     it('should render the page title', async () => {
-        render(
-            <BrowserRouter>
-                <ItemList />
-            </BrowserRouter>
-        );
-
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
+    
         await waitFor(() => {
             expect(screen.getByText('Items')).toBeInTheDocument();
         });
     });
 
     it('should render items and warehouses', async () => {
-        render(
-            <BrowserRouter>
-                <ItemList />
-            </BrowserRouter>
-        );
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
 
         await waitFor(() => {
             expect(screen.getByText('Item A')).toBeInTheDocument();
@@ -64,11 +69,13 @@ describe('ItemList', () => {
     });
 
     it('should sort items by name', async () => {
-        render(
-            <BrowserRouter>
-                <ItemList />
-            </BrowserRouter>
-        );
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
 
         await waitFor(() => {
             const options = screen.getAllByRole('option');
@@ -78,11 +85,13 @@ describe('ItemList', () => {
     });
 
     it('should filter items by warehouse', async () => {
-        render(
-            <BrowserRouter>
-                <ItemList />
-            </BrowserRouter>
-        );
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
 
         await waitFor(() => {
             fireEvent.change(screen.getByLabelText('Filter by Warehouse:'), { target: { value: '1' } });
@@ -92,11 +101,13 @@ describe('ItemList', () => {
     });
 
     it('should navigate to the edit item page', async () => {
-        render(
-            <BrowserRouter>
-                <ItemList />
-            </BrowserRouter>
-        );
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
 
         await waitFor(() => {
             const editButtons = screen.getAllByText('Edit');
