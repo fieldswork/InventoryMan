@@ -27,13 +27,13 @@ const ItemForm = ({ onSave }) => {
         setDescription(item.description);
         setQuantity(item.quantity);
         setSizeInCubicFt(item.sizeInCubicFt);
-        setWarehouseId(item.warehouse.id);
+        setWarehouseId(item.warehouse.id.toString()); // Ensure warehouseId is a string
         setInitialItem(item);
       });
     }
   }, [id]);
 
-  useEffect(() => { // Fetch warehouse data to calculate available capacity
+  useEffect(() => {
     if (warehouseId) {
       WarehouseService.get(warehouseId).then(response => {
         const warehouse = response.data;
@@ -86,9 +86,10 @@ const ItemForm = ({ onSave }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Name</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
+          id="name"
           className="form-control"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -96,9 +97,10 @@ const ItemForm = ({ onSave }) => {
         />
       </div>
       <div className="form-group">
-        <label>Description</label>
+        <label htmlFor="description">Description</label>
         <input
           type="text"
+          id="description"
           className="form-control"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -106,9 +108,10 @@ const ItemForm = ({ onSave }) => {
         />
       </div>
       <div className="form-group">
-        <label>Quantity</label>
+        <label htmlFor="quantity">Quantity</label>
         <input
           type="number"
+          id="quantity"
           className="form-control"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
@@ -116,10 +119,11 @@ const ItemForm = ({ onSave }) => {
         />
       </div>
       <div className="form-group">
-        <label>Size (in cubic feet)</label>
+        <label htmlFor="sizeInCubicFt">Size (in cubic feet)</label>
         <input
           type="number"
           step="0.01"
+          id="sizeInCubicFt"
           className="form-control"
           value={sizeInCubicFt}
           onChange={(e) => setSizeInCubicFt(e.target.value)}
@@ -127,8 +131,9 @@ const ItemForm = ({ onSave }) => {
         />
       </div>
       <div className="form-group">
-        <label>Warehouse</label>
+        <label htmlFor="warehouseId">Warehouse</label>
         <select
+          id="warehouseId"
           className="form-control"
           value={warehouseId}
           onChange={(e) => setWarehouseId(e.target.value)}
@@ -136,7 +141,7 @@ const ItemForm = ({ onSave }) => {
         >
           <option value="">Select a Warehouse</option>
           {warehouses.map(warehouse => (
-            <option key={warehouse.id} value={warehouse.id}>
+            <option key={warehouse.id} value={warehouse.id.toString()}>
               {warehouse.name}
             </option>
           ))}
