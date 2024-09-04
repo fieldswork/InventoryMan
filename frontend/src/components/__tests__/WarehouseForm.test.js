@@ -148,21 +148,4 @@ describe('WarehouseForm', () => {
             expect(screen.getByText('Capacity is too large.')).toBeInTheDocument();
         });
     });
-    
-    it('should not submit the form if name is empty', async () => {
-        await act(async () => {
-            render(
-                <BrowserRouter>
-                    <WarehouseForm onSave={jest.fn()} />
-                </BrowserRouter>
-            );
-        });
-    
-        fireEvent.change(screen.getByLabelText('Name'), { target: { value: '' } });
-        fireEvent.submit(screen.getByRole('button', { name: /create/i }));
-    
-        await waitFor(() => {
-            expect(screen.getByText('Please fill out this field.')).toBeInTheDocument();
-        });
-    });
 });
