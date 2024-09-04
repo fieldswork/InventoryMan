@@ -29,6 +29,8 @@ describe('WarehouseList', () => {
         jest.clearAllMocks(); // Clear mock calls
     });
 
+
+
     it('should render the page title', async () => {
         await act(async () => {
             render(
@@ -108,6 +110,31 @@ describe('WarehouseList', () => {
         });
     });
 
+    it('should not delete a warehouse if the user cancels the confirmation', async () => {
+        window.confirm = jest.fn(() => false);
+    
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <WarehouseList />
+                </BrowserRouter>
+            );
+        });
+    
+        await waitFor(() => {
+            expect(screen.getByText('Warehouse A')).toBeInTheDocument();
+            expect(screen.getByText('Warehouse B')).toBeInTheDocument();
+        });
+    
+        const deleteButtons = screen.getAllByText('Delete');
+        fireEvent.click(deleteButtons[0]);
+    
+        await waitFor(() => {
+            expect(screen.getByText('Warehouse A')).toBeInTheDocument();
+            expect(screen.getByText('Warehouse B')).toBeInTheDocument();
+        });
+    });
+    
     it('should delete a warehouse', async () => {
         // Mock the delete method
         WarehouseService.delete.mockResolvedValue({});
