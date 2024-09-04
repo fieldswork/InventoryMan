@@ -99,4 +99,70 @@ describe('WarehouseForm', () => {
         expect(mockOnSave).toHaveBeenCalled();
         });
     });
+
+    it('should display validation error when used capacity exceeds capacity', async () => {
+        // Mocking `useParams` to return an id of 1
+        jest.mock('react-router-dom', () => ({
+            ...jest.requireActual('react-router-dom'),
+            useParams: () => ({ id: '1' }),
+        }));
+    
+        const mockWarehouse = {
+            id: 1,
+            name: 'Warehouse A',
+            capacity: 100, // Initial capacity
+            usedCapacity: 150, // Exceeds the initial capacity
+        };
+    
+        WarehouseService.get.mockResolvedValue({ data: mockWarehouse });
+    
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <WarehouseForm onSave={jest.fn()} />
+                </BrowserRouter>
+            );
+        });
+    
+        await waitFor(() => {
+            fireEvent.change(screen.getByLabelText('Capacity'), { target: { value: '100' } });
+            fireEvent.submit(screen.getByRole('button', { name: /update/i }));
+    
+            expect(screen.getByText('Used capacity exceeds new capacity.')).toBeInTheDocument();
+        });
+    });   
+
+    it('should display an error if capacity exceeds MAX_SAFE_INTEGER', async () => {
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <WarehouseForm onSave={jest.fn()} />
+                </BrowserRouter>
+            );
+        });
+    
+        fireEvent.change(screen.getByLabelText('Capacity'), { target: { value: `${Number.MAX_SAFE_INTEGER + 1}` } });
+        fireEvent.submit(screen.getByRole('button', { name: /update/i }));
+    
+        await waitFor(() => {
+            expect(screen.getByText('Capacity is too large.')).toBeInTheDocument();
+        });
+    });
+    
+    it('should not submit the form if name is empty', async () => {
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <WarehouseForm onSave={jest.fn()} />
+                </BrowserRouter>
+            );
+        });
+    
+        fireEvent.change(screen.getByLabelText('Name'), { target: { value: '' } });
+        fireEvent.submit(screen.getByRole('button', { name: /create/i }));
+    
+        await waitFor(() => {
+            expect(screen.getByText('Please fill out this field.')).toBeInTheDocument();
+        });
+    });
 });
