@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-bc252566-08f1-402c-83e6-c443c2eb0fb0"
+<testsuite name="TestNGTest-e302eeda-33b3-4d8e-908d-1b078a5aec10"
            tests="1"
            failures="0"
            errors="0"
@@ -10,7 +10,7 @@
 
 
             <testcase
-                name="updateItemTest5"
+                name="updateItemTest1"
                 time="0.031"
                 classname="com.skillstorm.unit_testing.services.ItemServiceTest">
             </testcase>

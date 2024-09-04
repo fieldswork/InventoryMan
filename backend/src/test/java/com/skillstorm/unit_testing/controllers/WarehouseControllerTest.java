@@ -18,21 +18,29 @@ import com.skillstorm.inventoryman.controllers.WarehouseController;
 import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.services.WarehouseService;
 
-
+/**
+ * Mockito tests for WarehouseController
+ */
 public class WarehouseControllerTest {
     
     @Mock
-    private WarehouseService whService;
+    private WarehouseService whService; // the mock object
 
     @InjectMocks
-    private WarehouseController whController;
-    private AutoCloseable closeable;
+    private WarehouseController whController;   // the tested class which the mock object will be injected to
+    private AutoCloseable closeable;            // used to manage mock objects (open and close them)
 
+    /**
+     * Opening all mock objects
+     */
     @BeforeTest
     public void setup() {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Test for getAllWarehouses method
+     */
     @Test
     public void getAllWarehousesTest() {
         
@@ -45,6 +53,9 @@ public class WarehouseControllerTest {
         Assert.assertEquals(response, expectedWH);
     }
 
+    /**
+     * Test for getWarehouseById method
+     */
     @Test
     public void getWarehouseByIdTest() {
         long warehouseId = 1;
@@ -56,6 +67,9 @@ public class WarehouseControllerTest {
         Assert.assertEquals(response, expectedWH);
     }
 
+    /**
+     * Test for createWarehouse method
+     */
     @Test
     public void createWarehouseTest() {
         Warehouse inputWH = new Warehouse();
@@ -68,6 +82,9 @@ public class WarehouseControllerTest {
         Assert.assertEquals(response, savedWH);
     }
 
+    /**
+     * Test for updateWarehouse method
+     */
     @Test
     public void updateWarehouseTest() {
         long warehouseId = 1;
@@ -83,6 +100,9 @@ public class WarehouseControllerTest {
         Assert.assertEquals(response, updatedWH);
     }
 
+    /**
+     * Test for deleteWarehouse method
+     */
     @Test
     public void deleteWarehouseTest() {
         long warehouseId = 1;
@@ -93,6 +113,9 @@ public class WarehouseControllerTest {
         assertAll(() -> whController.deleteWarehouse(warehouseId));
     }
 
+    /**
+     * Test for getCurrentSpaceUsed method
+     */
     @Test
     public void getCurrentSpaceUsedTest() {
         Warehouse inputWarehouse = new Warehouse();
@@ -106,6 +129,10 @@ public class WarehouseControllerTest {
 
     }
 
+    /**
+     * Closes all mock objects
+     * @throws Exception
+     */
     @AfterTest
     public void teardown() throws Exception{
         closeable.close();

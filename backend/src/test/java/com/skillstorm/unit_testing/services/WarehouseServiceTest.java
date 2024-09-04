@@ -19,21 +19,29 @@ import com.skillstorm.inventoryman.models.Warehouse;
 import com.skillstorm.inventoryman.repositories.WarehouseRepository;
 import com.skillstorm.inventoryman.services.WarehouseService;
 
-
+/**
+ * Mockito tests for WarehouseService
+ */
 public class WarehouseServiceTest {
     
     @Mock
-    private WarehouseRepository whRepository;
+    private WarehouseRepository whRepository;   // the mock object
 
     @InjectMocks
-    private WarehouseService whService;
-    private AutoCloseable closeable;
+    private WarehouseService whService;     // the tested class which the mock object will be injected to
+    private AutoCloseable closeable;        // used to manage mock objects (open and close them)
 
+    /**
+     * Opening all mock objects
+     */
     @BeforeTest
     public void setup() {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Test for getAllWarehouses method
+     */
     @Test
     public void getAllWarehousesTest() {
         
@@ -46,6 +54,9 @@ public class WarehouseServiceTest {
         Assert.assertEquals(response, expectedWH);
     }
 
+    /**
+     * Test for getWarehouseById method
+     */
     @Test
     public void getWarehouseByIdTest() {
         long warehouseId = 1;
@@ -57,6 +68,9 @@ public class WarehouseServiceTest {
         Assert.assertEquals(response, expectedWH);
     }
 
+    /**
+     * Test for saveWarehouse method
+     */
     @Test
     public void saveWarehouseTest() {
         Warehouse inputWH = new Warehouse();
@@ -69,6 +83,9 @@ public class WarehouseServiceTest {
         Assert.assertEquals(response, savedWH);
     }
 
+    /**
+     * Test for deleteWarehouse method
+     */
     @Test
     public void deleteWarehouseTest() {
         long warehouseId = 1;
@@ -79,30 +96,28 @@ public class WarehouseServiceTest {
         assertAll(() -> whService.deleteWarehouse(warehouseId));
     }
 
+    /**
+     * Test for getCurrentSpaceUsed method
+     */
     @Test
-    public void getCurrentSpaceUsedTest1() {
+    public void getCurrentSpaceUsedTest() {
         long warehouseId = 1;
         Warehouse expectedWH = new Warehouse();
         
         when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
 
-        double response = whService.getCurrentSpaceUsed(warehouseId);
+        double response1 = whService.getCurrentSpaceUsed(warehouseId);
+        double response2 = whService.getCurrentSpaceUsed(0L);
 
-        Assert.assertEquals(response, expectedWH.getUsedCapacity());
+        Assert.assertEquals(response1, expectedWH.getUsedCapacity());   // Tests if the response and expected values for the current space used of an existing warhouse are the same
+        Assert.assertEquals(response2, 0.0);                   // Tests if the response and expected values for the current space used of a warhouse that does not exist (null) are the same
+
     }
 
-    @Test
-    public void getCurrentSpaceUsedTest2() {
-        long warehouseId = 1;
-        Warehouse expectedWH = new Warehouse();
-        
-        when(whRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(expectedWH));
-
-        double response = whService.getCurrentSpaceUsed(0L);
-
-        Assert.assertEquals(response, 0.0);
-    }
-
+    /**
+     * Closes all mock objects
+     * @throws Exception
+     */
     @AfterTest
     public void teardown() throws Exception{
         closeable.close();

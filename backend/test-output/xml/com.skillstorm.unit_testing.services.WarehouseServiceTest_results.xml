@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-8c099795-2259-4807-9783-634ce161cb19"
+<testsuite name="TestNGTest-16a6af98-f97b-46bc-b261-123368d0b105"
            tests="1"
            failures="0"
            errors="0"
@@ -10,7 +10,7 @@
 
 
             <testcase
-                name="getCurrentSpaceUsedTest2"
+                name="getCurrentSpaceUsedTest1"
                 time="0.028"
                 classname="com.skillstorm.unit_testing.services.WarehouseServiceTest">
             </testcase>

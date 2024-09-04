@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestNGTest-b57552e8-ebb7-46aa-a81f-37584ffd2486"
+<testsuite name="TestNGTest-77f10058-ac11-4c13-9615-602b7bd76626"
            tests="1"
            failures="0"
            errors="0"
@@ -10,7 +10,7 @@
 
 
             <testcase
-                name="updateItemTes2"
+                name="deleteItemTest"
                 time="0.038"
                 classname="com.skillstorm.unit_testing.controllers.ItemControllerTest">
             </testcase>
