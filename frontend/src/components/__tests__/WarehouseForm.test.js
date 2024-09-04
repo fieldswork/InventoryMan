@@ -26,77 +26,77 @@ describe('WarehouseForm', () => {
         WarehouseService.get.mockResolvedValue({ data: mockWarehouse });
         WarehouseService.update.mockResolvedValue({});
         WarehouseService.create.mockResolvedValue({});
-    }); 
+    });
 
     afterEach(() => {
-        jest.clearAllMocks();   
+        jest.clearAllMocks();
     });
 
     it('should render the form fields', async () => {
-    await act(async () => {
+        await act(async () => {
         render(
-        <BrowserRouter>
+            <BrowserRouter>
             <WarehouseForm onSave={jest.fn()} />
-        </BrowserRouter>
+            </BrowserRouter>
         );
-    });
+        });
 
-    await waitFor(() => {
+        await waitFor(() => {
         expect(screen.getByLabelText('Name')).toBeInTheDocument();
         expect(screen.getByLabelText('Capacity')).toBeInTheDocument();
-        expect(screen.getByLabelText('Used Capacity')).toBeInTheDocument();
-    });
+        expect(screen.getByText('Used Capacity')).toBeInTheDocument();
+        });
     });
 
     it('should fetch and populate warehouse data when editing', async () => {
-    await act(async () => {
+        await act(async () => {
         render(
-        <BrowserRouter>
+            <BrowserRouter>
             <WarehouseForm onSave={jest.fn()} />
-        </BrowserRouter>
+            </BrowserRouter>
         );
-    });
+        });
 
-    await waitFor(() => {
-            expect(screen.getByDisplayValue('Warehouse A')).toBeInTheDocument();
-            expect(screen.getByDisplayValue('100')).toBeInTheDocument();
-            expect(screen.getByDisplayValue('50')).toBeInTheDocument();
+        await waitFor(() => {
+        expect(screen.getByDisplayValue('Warehouse A')).toBeInTheDocument();
+        expect(screen.getByDisplayValue('100')).toBeInTheDocument();
+        expect(screen.getByText('50%')).toBeInTheDocument();
         });
     });
 
     it('should display validation errors', async () => {
         await act(async () => {
-            render(
+        render(
             <BrowserRouter>
-                <WarehouseForm onSave={jest.fn()} />
+            <WarehouseForm onSave={jest.fn()} />
             </BrowserRouter>
-            );
+        );
         });
 
         fireEvent.change(screen.getByLabelText('Capacity'), { target: { value: '0' } });
         fireEvent.submit(screen.getByRole('button', { name: /update/i }));
 
-            await waitFor(() => {
-                expect(screen.getByText('Capacity must be positive.')).toBeInTheDocument();
-            });
+        await waitFor(() => {
+        expect(screen.getByText('Capacity must be positive.')).toBeInTheDocument();
+        });
     });
 
     it('should submit the form and call onSave', async () => {
         const mockOnSave = jest.fn();
         await act(async () => {
-            render(
+        render(
             <BrowserRouter>
-                <WarehouseForm onSave={mockOnSave} />
+            <WarehouseForm onSave={mockOnSave} />
             </BrowserRouter>
-            );
+        );
         });
 
         fireEvent.change(screen.getByLabelText('Capacity'), { target: { value: '100' } });
         fireEvent.submit(screen.getByRole('button', { name: /update/i }));
 
         await waitFor(() => {
-            expect(WarehouseService.update).toHaveBeenCalledWith('1', expect.any(Object));
-            expect(mockOnSave).toHaveBeenCalled();
+        expect(WarehouseService.update).toHaveBeenCalledWith('1', expect.any(Object));
+        expect(mockOnSave).toHaveBeenCalled();
         });
     });
 });
