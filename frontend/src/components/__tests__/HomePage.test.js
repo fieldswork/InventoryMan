@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import { act } from 'react';
 import HomePage from '../HomePage';
 
-// Test the HomePage component renders the correct content
 test('renders the correct content', () => {
     let getByText;
     act(() => {
