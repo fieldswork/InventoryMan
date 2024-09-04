@@ -28,6 +28,7 @@ public class ItemService {
 
     public Item saveItem(Item item) { // Method that creates a new item
         Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
+        
         if (warehouse == null) {
             throw new IllegalArgumentException("Warehouse not found");
         }
@@ -51,6 +52,7 @@ public class ItemService {
 
         if (item != null) { 
             Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null); // Gets the warehouse of the item, if it exists
+            System.out.println(warehouse);
             if (warehouse != null) {
                 double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt()); // Calculates the new used capacity of the warehouse
                 warehouse.setUsedCapacity(newUsedCapacity);
@@ -63,13 +65,14 @@ public class ItemService {
     public Item updateItem(Long id, Item itemDetails) { // Method that updates an item by id
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
+
             Warehouse oldWarehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null);
             Warehouse newWarehouse = warehouseRepository.findById(itemDetails.getWarehouse().getId()).orElse(null);
-    
+
             if (newWarehouse == null) {
                 throw new IllegalArgumentException("New Warehouse not found");
             }
-    
+
             if (oldWarehouse != null) {
                 double oldItemSize = item.getQuantity() * item.getSizeInCubicFt();
                 oldWarehouse.setUsedCapacity(oldWarehouse.getUsedCapacity() - oldItemSize);
@@ -78,7 +81,7 @@ public class ItemService {
 
             double newItemSize = itemDetails.getQuantity() * itemDetails.getSizeInCubicFt();
             double newUsedCapacity = newWarehouse.getUsedCapacity() + newItemSize;
-    
+
             if (newUsedCapacity > newWarehouse.getCapacity()) { // If the new used capacity is greater than the warehouse capacity, frontend will display an error message
                 throw new IllegalArgumentException("New Warehouse capacity exceeded");
             }
@@ -92,8 +95,9 @@ public class ItemService {
             item.setSizeInCubicFt(itemDetails.getSizeInCubicFt());
             item.setWarehouse(newWarehouse);
             return itemRepository.save(item);
+        } else {
+            throw new NullPointerException("The item you are trying to update does not exist");
         }
-        return null;
     }
     
 }

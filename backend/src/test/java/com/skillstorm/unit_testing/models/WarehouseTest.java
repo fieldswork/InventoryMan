@@ -12,13 +12,16 @@ import com.skillstorm.inventoryman.models.Item;
 import com.skillstorm.inventoryman.models.Warehouse;
 
 /**
- * Unit testing for the inventoryman Item model with TestNG
+ * Unit testing for the inventoryman Warehouse model with TestNG
  */
 public class WarehouseTest {
 
     private Warehouse warehouse;
     private List<Item> items;
 
+    /**
+     * Declaring and initializing a Warehouse
+     */
     @BeforeTest
     public void init() {
         System.out.println("Before Testing: Initializing Warehouse");
@@ -38,6 +41,9 @@ public class WarehouseTest {
         warehouse.setItems(items);
     }
 
+    /**
+     * Testing all the Warehouse getter methods
+     */
     @Test
     public void testItemGetters() {
         Assert.assertEquals(1L, warehouse.getId());
@@ -47,6 +53,9 @@ public class WarehouseTest {
         Assert.assertEquals(items, warehouse.getItems());
     }
 
+    /**
+     * Testing all the Warehouse setter methods
+     */
     @Test
     public void testItemSetters() {
         List<Item> items2 = new ArrayList<>();
@@ -68,6 +77,9 @@ public class WarehouseTest {
         Assert.assertEquals(items2, warehouse.getItems());
     }
 
+    /**
+     * Prints out a msg when all tests for the Warehouse model has been done running
+     */
     @AfterTest
     public void afterTest() {
         System.out.println("After Testing: Finished testing!");

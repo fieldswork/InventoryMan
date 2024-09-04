@@ -16,6 +16,9 @@ public class ItemTest {
     private Item item;
     private Warehouse warehouse;
 
+    /**
+     * Declaring and initializing an Item
+     */
     @BeforeTest
     public void init() {
         System.out.println("Before Testing: Initializing Item");
@@ -30,6 +33,9 @@ public class ItemTest {
         item.setWarehouse(warehouse);
     }
 
+    /**
+     * Testing all the Item getter methods
+     */
     @Test
     public void testItemGetters() {
         Assert.assertEquals(1L, item.getId());
@@ -40,6 +46,9 @@ public class ItemTest {
         Assert.assertEquals(warehouse, item.getWarehouse());
     }
 
+    /**
+     * Testing all the Item setter methods
+     */
     @Test
     public void testItemSetters() {
         Warehouse wh = new Warehouse();
@@ -58,6 +67,9 @@ public class ItemTest {
         Assert.assertEquals(wh, item.getWarehouse());
     }
 
+    /**
+     * Prints out a msg when all tests for the Item model has been done running
+     */
     @AfterTest
     public void afterTest() {
         System.out.println("After Testing: Finished testing!");
