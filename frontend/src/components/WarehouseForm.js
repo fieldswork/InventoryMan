@@ -57,9 +57,10 @@ const WarehouseForm = ({ onSave }) => { // Warehouse form component, used for bo
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Name</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
+          id="name"
           className="form-control"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -67,9 +68,10 @@ const WarehouseForm = ({ onSave }) => { // Warehouse form component, used for bo
         />
       </div>
       <div className="form-group">
-        <label>Capacity</label>
+        <label htmlFor="capacity">Capacity</label>
         <input
           type="number"
+          id="capacity"
           className="form-control"
           value={capacity}
           onChange={(e) => setCapacity(e.target.value)}
@@ -78,7 +80,7 @@ const WarehouseForm = ({ onSave }) => { // Warehouse form component, used for bo
       </div>
       {id && (
         <div className="form-group">
-          <label>Used Capacity</label>
+          <label htmlFor="usedCapacity">Used Capacity</label>
           <UtilizationBar usedCapacity={usedCapacity} capacity={capacity} />
         </div>
       )}
