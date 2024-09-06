@@ -197,7 +197,11 @@ public class ItemsPage {
         return itemsTotalSizes;
     }
 
-    // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5
+    /**
+     * Find a specific item
+     * @param itemName
+     * @return
+     */
     public boolean findItem(String itemName) {
         itemCard = -1; // setting itemCard for error checking
         try {
@@ -214,6 +218,7 @@ public class ItemsPage {
                 e.printStackTrace();
             }
             try {
+                // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5
                 WebElement item = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
                 items.add(item);
                 values.add(item.getText());
@@ -228,6 +233,9 @@ public class ItemsPage {
         return false;
     }
 
+    /**
+     * Click the Edit button
+     */
     public void clickEditItemButton() {
         try {
             Thread.sleep(1000);
@@ -239,7 +247,9 @@ public class ItemsPage {
         editButton.sendKeys(Keys.ENTER);
     }
 
-    // http://inventoryman.s3-website-us-east-1.amazonaws.com/edit-item/*
+    /**
+     * Redirects to the Edit Item page
+     */
     public boolean amIOnEditItemPage() {
         try {
             Thread.sleep(1000);
@@ -249,49 +259,63 @@ public class ItemsPage {
         return this.driver.getCurrentUrl().contains("http://inventoryman.s3-website-us-east-1.amazonaws.com/edit-item/");
     }
 
-    // /html/body/div/div/div/form/div[1]/input for the item name
+    /**
+     * Enter new item name
+     */
     public void enterNewItemName(String itemName) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
+        // /html/body/div/div/div/form/div[1]/input for the item name
         WebElement itemNameField = this.driver.findElement(By.xpath("/html/body/div/div/div/form/div[1]/input"));
         itemNameField.clear();
         itemNameField.sendKeys(itemName);
     }
 
-    // /html/body/div/div/div/form/div[2]/input for the item description
+    /**
+     * Enter new item description
+     */
     public void enterNewItemDescription(String itemDescription) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
+        // /html/body/div/div/div/form/div[2]/input for the item description
         WebElement itemDescriptionField = this.driver.findElement(By.xpath("/html/body/div/div/div/form/div[2]/input"));
         itemDescriptionField.clear();
         itemDescriptionField.sendKeys(itemDescription);
     }
 
-    // /html/body/div/div/div/form/div[3]/input for the item quantity
+    /**
+     * Enter new item quantity
+     * @param itemQuantity
+     */
     public void enterNewItemQuantity(String itemQuantity) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
+        // /html/body/div/div/div/form/div[3]/input for the item quantity
         WebElement itemQuantityField = this.driver.findElement(By.xpath("/html/body/div/div/div/form/div[3]/input"));
         itemQuantityField.clear();
         itemQuantityField.sendKeys(itemQuantity);
     }
 
-    // /html/body/div/div/div/form/div[4]/input for the item size
+    /**
+     * Enter the new item size
+     * @param itemSize
+     */
     public void enterNewItemSize(String itemSize) {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
+        // /html/body/div/div/div/form/div[4]/input for the item size
         WebElement itemSizeField = this.driver.findElement(By.xpath("/html/body/div/div/div/form/div[4]/input"));
         itemSizeField.clear();
         itemSizeField.sendKeys(itemSize);
@@ -312,19 +336,24 @@ public class ItemsPage {
         }
     }
 
-    // /html/body/div/div/div/form/button for the submit button
+    /**
+     * Click the submit button
+     */
     public void clickSubmitItemButton() {
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
+        // /html/body/div/div/div/form/button for the submit button
         WebElement submitButton = this.driver.findElement(By.xpath("/html/body/div/div/div/form/button"));
         //submitButton.click();
         submitButton.sendKeys(Keys.ENTER);
     }
 
-    // amIOnWarehousesPage
+    /**
+     * Checks if I am in the Warehouses page
+     */
     public boolean amIOnWarehousesPage() {
         try {
             Thread.sleep(1000);
@@ -334,7 +363,9 @@ public class ItemsPage {
         return this.driver.getCurrentUrl().contains("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    //clickDeleteItemButton
+    /**
+     * Click the Delete button
+     */
     public void clickDeleteItemButton() {
         if (itemCard == -1) {
             return;
@@ -353,7 +384,9 @@ public class ItemsPage {
         }
     }
 
-    // Click the Ok dialog button from the browser alert
+    /**
+     * Click the Ok dialog button from the browser alert
+     */
     public void clickOKButton() {
         try {
             Thread.sleep(1000);
@@ -363,7 +396,9 @@ public class ItemsPage {
         this.driver.switchTo().alert().accept();
     }
 
-    // filterWarehouse - Select a warehouse from the dropdown
+    /**
+     * Select a warehouse from the dropdown
+     */
     public void filterByWarehouse(String warehouse) {
         try {
             //filterWarehouse.click();
@@ -378,8 +413,11 @@ public class ItemsPage {
         }
     }
 
-    // areItemsFiltered - Check if items are filtered by warehouse
-    // warehouse names at /html/body/div/div/div/div/div[3]/div[<variable>]/div/p[4] 
+    /**
+     * Check if items are filtered by warehouse
+     * @param warehouse
+     * @return
+     */
     public boolean areItemsFiltered(String warehouse) {
         try {
             Thread.sleep(1000);
@@ -395,6 +433,7 @@ public class ItemsPage {
                 e.printStackTrace();
             }
             try {
+                // warehouse names at /html/body/div/div/div/div/div[3]/div[<variable>]/div/p[4] 
                 WebElement item = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/p[4]"));
                 items.add(item);
                 values.add(item.getText());
@@ -408,7 +447,11 @@ public class ItemsPage {
         return true;
     }
 
-    // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5 is the item name
+    /**
+     * Checks if a item is displayed on Items page
+     * @param item
+     * @return
+     */
     public boolean isItemPresent(String item) {
         try {
             Thread.sleep(1000);
@@ -422,6 +465,7 @@ public class ItemsPage {
                 e.printStackTrace();
             }
             try {
+                // /html/body/div/div/div/div/div[3]/div[<variable>]/div/h5 is the item name
                 WebElement itemName = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[3]/div[" + i + "]/div/h5"));
                 if (itemName.getText().equals(item)) {
                     return true;
