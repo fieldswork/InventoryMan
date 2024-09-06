@@ -14,7 +14,7 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
 
 ## Test Reports
 
-[Full console output from Jenkins](readme_attachments\im_cicd_output.txt)
+[Full console output from Jenkins](readme_attachments/im_cicd_output.txt)
 
 *Tests were executed on Jenkins running on an EC2 instance that pulls from this Github repository via a webhook on the main branch.*
 
@@ -22,22 +22,22 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
 
 > **32 tests** were run across **14 feature files**, with **100% passing**.
 
-![Cucumber test results reads 100% passed 32 tests, with 7 minutes to run. Below are all the tests listed out.](readme_attachments\cucumber_results.png)
+![Cucumber test results reads 100% passed 32 tests, with 7 minutes to run. Below are all the tests listed out.](readme_attachments/cucumber_results.png)
 
 ### Mockito Test Results
 > **84% statement coverage**, **88% branch coverage**.
 
-![A chart that displays 84% statement coverage, with 88% branch coverage.](readme_attachments\jacoco_mockito_results.png)
+![A chart that displays 84% statement coverage, with 88% branch coverage.](readme_attachments/jacoco_mockito_results.png)
 
 ### SonarCloud Test Results
 
 > Frontend has **87% reported code coverage** with A ratings in Security, Reliability, and Maintainability.
 
-![SonarCloud Report Information for the Frontend](readme_attachments\sonarcloud_frontend.png)
+![SonarCloud Report Information for the Frontend](readme_attachments/sonarcloud_frontend.png)
 
 > Backend has **90% reported code coverage** with A ratings in Security, Reliability, and a B rating for Maintainability.
 
-![SonarCloud Report Information for the Frontend](readme_attachments\sonarcloud_backend.png)
+![SonarCloud Report Information for the Frontend](readme_attachments/sonarcloud_backend.png)
 
 *Links to the full reports:*
 
@@ -49,7 +49,7 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
 
 > **88% statement coverage**, with **81% branch coverage**.
 
-![Jest test results](readme_attachments\jest_results.png)
+![Jest test results](readme_attachments/jest_results.png)
 
 ### Burp Suite Demo
 
@@ -59,9 +59,9 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
 
 > 10 samples were taken, with an **average response time of 45 milliseconds** and **0% errors**.
 
-![Throughput, response time, and Percentage of errors](readme_attachments\jmeter_graphs.png)
+![Throughput, response time, and Percentage of errors](readme_attachments/jmeter_graphs.png)
 
-![Performance chart](readme_attachments\jmeter_chart.png)
+![Performance chart](readme_attachments/jmeter_chart.png)
 
 ## Facts and Features
  - End-to-end testing with Cucumber, Selenium, Jest, Mockito, SonarCloud, and more
