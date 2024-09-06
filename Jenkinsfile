@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                        def versionLabel = "0.0.1-${new Date().format('yyyyMMddHHmmss')}" // change version number here
+                        def versionLabel = "0.0.1-${new Date().format('yyyyMMddHHmmss')}" // Change version label for each deployment
                         def s3Key = "inventoryman-${versionLabel}.jar"
 
                         sh "aws s3 cp backend/target/inventoryman-0.0.1-SNAPSHOT.jar s3://inventoryman-backend/${s3Key}"
