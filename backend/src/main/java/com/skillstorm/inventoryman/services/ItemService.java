@@ -52,7 +52,7 @@ public class ItemService {
 
         if (item != null) { 
             Warehouse warehouse = warehouseRepository.findById(item.getWarehouse().getId()).orElse(null); // Gets the warehouse of the item, if it exists
-            System.out.println(warehouse);
+            
             if (warehouse != null) {
                 double newUsedCapacity = warehouse.getUsedCapacity() - (item.getQuantity() * item.getSizeInCubicFt()); // Calculates the new used capacity of the warehouse
                 warehouse.setUsedCapacity(newUsedCapacity);
