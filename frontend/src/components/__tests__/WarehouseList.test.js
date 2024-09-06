@@ -15,12 +15,12 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
 }));
 
-const mockWarehouses = [
+const mockWarehouses = [ // Mocking a list of warehouses with properties listed below
     { id: 1, name: 'Warehouse A', usedCapacity: 50, capacity: 100 },
     { id: 2, name: 'Warehouse B', usedCapacity: 30, capacity: 100 },
 ];
 
-describe('WarehouseList', () => {
+describe('WarehouseList', () => { // WarehouseList is the page that lists all the warehouses
     beforeEach(() => {
         WarehouseService.getAll.mockResolvedValue({ data: mockWarehouses });
     });
@@ -29,9 +29,7 @@ describe('WarehouseList', () => {
         jest.clearAllMocks(); // Clear mock calls
     });
 
-
-
-    it('should render the page title', async () => {
+    it('should render the page title', async () => { // Checks if the page title is rendered
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -40,12 +38,12 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
+        await waitFor(() => { // Wait for the page title to be rendered
             expect(screen.getByText('Warehouses')).toBeInTheDocument();
         });
     });
 
-    it('should render warehouses', async () => {
+    it('should render warehouses', async () => { // Checks if the warehouses are rendered
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -54,13 +52,13 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
-            expect(screen.getByText('Warehouse A')).toBeInTheDocument();
+        await waitFor(() => { // Wait for the warehouses to be rendered
+            expect(screen.getByText('Warehouse A')).toBeInTheDocument(); // Check if Warehouse A renders and for Warehouse B too
             expect(screen.getByText('Warehouse B')).toBeInTheDocument();
         });
     });
 
-    it('should sort warehouses by name', async () => {
+    it('should sort warehouses by name', async () => { // Checks if the warehouses are sorted by name
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -69,15 +67,15 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'name' } });
-            const warehouses = screen.getAllByRole('heading', { level: 5 });
-            expect(warehouses[0]).toHaveTextContent('Warehouse A');
-            expect(warehouses[1]).toHaveTextContent('Warehouse B');
+        await waitFor(() => { // Wait for the warehouses to be rendered
+            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'name' } }); // Sort the warehouses by name
+            const warehouses = screen.getAllByRole('heading', { level: 5 }); // Get all the warehouses, which are headings for their names
+            expect(warehouses[0]).toHaveTextContent('Warehouse A'); // Check if Warehouse A is the first warehouse
+            expect(warehouses[1]).toHaveTextContent('Warehouse B'); // .. and Warehouse B is the second
         });
     });
 
-    it('should sort warehouses by utilization', async () => {
+    it('should sort warehouses by utilization', async () => { // Checks if the warehouses are sorted by utilization
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -86,15 +84,15 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'utilization' } });
+        await waitFor(() => { // Wait for the warehouses to be rendered
+            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'utilization' } }); // Sort the warehouses by utilization
             const warehouses = screen.getAllByRole('heading', { level: 5 });
             expect(warehouses[0]).toHaveTextContent('Warehouse A'); // Higher utilization
-            expect(warehouses[1]).toHaveTextContent('Warehouse B');
+            expect(warehouses[1]).toHaveTextContent('Warehouse B'); // Lower utilization - should be second
         });
     });
 
-    it('should navigate to the edit warehouse page', async () => {
+    it('should navigate to the edit warehouse page', async () => { // Checks if the user can navigate to the edit warehouse page
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -103,14 +101,14 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
+        await waitFor(() => { // Wait for the warehouses to be rendered, then click the edit button for the first warehouse
             const editButtons = screen.getAllByText('Edit');
             fireEvent.click(editButtons[0]); // Click the first Edit button
-            expect(mockNavigate).toHaveBeenCalledWith('/edit-warehouse/1');
+            expect(mockNavigate).toHaveBeenCalledWith('/edit-warehouse/1'); // Check if the user is navigated to the edit warehouse page
         });
     });
 
-    it('should not delete a warehouse if the user cancels the confirmation', async () => {
+    it('should not delete a warehouse if the user cancels the confirmation', async () => { // Checks if the user cancels the confirmation to delete a warehouse
         window.confirm = jest.fn(() => false);
     
         await act(async () => {
@@ -121,21 +119,21 @@ describe('WarehouseList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Wait for the warehouses to be rendered
             expect(screen.getByText('Warehouse A')).toBeInTheDocument();
             expect(screen.getByText('Warehouse B')).toBeInTheDocument();
         });
     
-        const deleteButtons = screen.getAllByText('Delete');
-        fireEvent.click(deleteButtons[0]);
+        const deleteButtons = screen.getAllByText('Delete'); // Find the delete button for the first warehouse
+        fireEvent.click(deleteButtons[0]); // Simulate clicking the first Delete button - should not delete the warehouse, since window.confirm is false implicitly
     
-        await waitFor(() => {
+        await waitFor(() => { // Wait for the warehouses to be rendered, then check if they are still there (should be)
             expect(screen.getByText('Warehouse A')).toBeInTheDocument();
             expect(screen.getByText('Warehouse B')).toBeInTheDocument();
         });
     });
     
-    it('should delete a warehouse', async () => {
+    it('should delete a warehouse', async () => { // Checks if the warehouse is deleted when the user confirms the deletion
         // Mock the delete method
         WarehouseService.delete.mockResolvedValue({});
 
@@ -147,7 +145,7 @@ describe('WarehouseList', () => {
             );
         });
 
-        await waitFor(() => {
+        await waitFor(() => { // Warehouses for deletion
             expect(screen.getByText('Warehouse A')).toBeInTheDocument();
             expect(screen.getByText('Warehouse B')).toBeInTheDocument();
         });
@@ -159,7 +157,7 @@ describe('WarehouseList', () => {
         const deleteButtons = screen.getAllByText('Delete');
         fireEvent.click(deleteButtons[0]); // Click the first Delete button
 
-        await waitFor(() => {
+        await waitFor(() => { // A should be deleted, B should still be there
             expect(screen.queryByText('Warehouse A')).not.toBeInTheDocument();
         });
     });
