@@ -14,9 +14,6 @@ public class AddItemPage {
     private WebDriver driver;
     private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/add-item";
 
-    //@FindBy(id = "alertMessageId")
-    //private WebElement alertMessage;
-
     // //*[@id="root"]/div/div/form/div[6] for the alert message
     @FindBy(xpath = "//*[@id=\"root\"]/div/div/form/div[6]")
     private WebElement alertMessage;
@@ -51,6 +48,7 @@ public class AddItemPage {
         PageFactory.initElements(driver, this);
     }
 
+    // loads the page
     public void get() {
         try {
             Thread.sleep(1000);
@@ -115,7 +113,6 @@ public class AddItemPage {
         }
     }
     
-
     // Clicks the submit button
     public void clickSubmitButton() {
         try {
@@ -137,6 +134,7 @@ public class AddItemPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
+    // Checks if the alert message is displayed on the page
     public boolean isInvalidDataAlertDisplayed(String alertMessage) {
         try {
             Thread.sleep(2000);

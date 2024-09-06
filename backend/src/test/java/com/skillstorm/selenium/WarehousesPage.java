@@ -33,6 +33,7 @@ public class WarehousesPage {
     @FindBy(xpath = "/html/body/div/div/div/form/button")
     private WebElement updateButton;
 
+    // select name 
     @FindBy(id = "sortCriteria")
     private WebElement selectName;
 
@@ -78,7 +79,6 @@ public class WarehousesPage {
     /**
      * Checks if warehouses are sorted by sorting criteria
      * @param sortingOrder
-     * @return true if warehouses are sorted by the sorting criteria, otherwise false
      */
     public boolean iswarehousesOrdered(String sortingOrder) {
         try {
@@ -120,8 +120,9 @@ public class WarehousesPage {
         }
     }
 
-    // findWarehouse - Find a warehouse by name
-    // /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 for the warehouse name
+    /** 
+     * Find a warehouse by name
+     */
     public boolean findWarehouse(String warehouseName) {
         warehouseCard = -1; // setting warehouseCard for error checking
         try {
@@ -138,6 +139,7 @@ public class WarehousesPage {
                 e.printStackTrace();
             }
             try {
+                // /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 for the warehouse name
                 WebElement warehouse = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + i + "]/div/h5"));
                 warehouses.add(warehouse);
                 String warehouseText = warehouse.getText();
@@ -154,8 +156,9 @@ public class WarehousesPage {
         return values.contains(warehouseName);
     }
 
-    // Using warehouseCard to select the edit button for clickEditButton
-    // /html/body/div/div/div/div/div[2]/div[<variable>]/div/div[2]/button[1] for the edit button
+    /**
+     * Using warehouseCard to select the edit button for clickEditButton
+     */
     public void clickEditButton() {
         if (warehouseCard == -1) {
             return;
@@ -166,6 +169,7 @@ public class WarehousesPage {
             e.printStackTrace();
         }
         try {
+            // /html/body/div/div/div/div/div[2]/div[<variable>]/div/div[2]/button[1] for the edit button
             WebElement editButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[2]/button[1]"));
             //editButton.click();
             editButton.sendKeys(Keys.ENTER);
@@ -174,7 +178,9 @@ public class WarehousesPage {
         }
     }
 
-    // Check if the user is on the Edit Warehouse page
+    /**
+     * Check if the user is on the Edit Warehouse page
+     */
     public boolean amIOnEditWarehousePage() {
         try {
             Thread.sleep(1000);
@@ -184,7 +190,9 @@ public class WarehousesPage {
         return this.driver.getCurrentUrl().contains("http://inventoryman.s3-website-us-east-1.amazonaws.com/edit-warehouse/");
     }
 
-    // Clear and enter a string into the warehouse name field
+    /**
+     * Clear and enter a string into the warehouse name field
+     */
     public void enterWarehouseName(String warehouseName) {
         try {
             Thread.sleep(1000);
@@ -195,7 +203,9 @@ public class WarehousesPage {
         this.editWarehouseName.sendKeys(warehouseName);
     }
 
-    // Clear and enter a string into the warehouse capacity field
+    /**
+     * Clear and enter a string into the warehouse capacity field
+     */
     public void enterWarehouseCapacity(String warehouseCapacity) {
         try {
             Thread.sleep(1000);
@@ -206,7 +216,9 @@ public class WarehousesPage {
         this.editWarehouseCapacity.sendKeys(warehouseCapacity);
     }
 
-    // Click the Update button to submit the warehouse
+    /**
+     * Click the Update button to submit the warehouse
+     */
     public void clickSubmitWarehouseButton() {
         try {
             Thread.sleep(1000);
@@ -217,7 +229,9 @@ public class WarehousesPage {
         this.updateButton.sendKeys(Keys.ENTER);
     }
 
-    // Check if the user is on the Warehouses page
+    /**
+     * Check if the user is on the Warehouses page
+     */
     public boolean amIOnWarehousesPage() {
         try {
             Thread.sleep(1000);
@@ -227,7 +241,9 @@ public class WarehousesPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    // clickDeleteButton - /html/body/div/div/div/div/div[2]/div[<warehouseCard>]/div/div[2]/button[2]
+    /**
+     * Click the Delete button
+     */
     public void clickDeleteButton() {
         if (warehouseCard == -1) {
             return;
@@ -238,6 +254,7 @@ public class WarehousesPage {
             e.printStackTrace();
         }
         try {
+            // clickDeleteButton - /html/body/div/div/div/div/div[2]/div[<warehouseCard>]/div/div[2]/button[2]
             WebElement deleteButton = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[2]/button[2]"));
             //deleteButton.click();
             deleteButton.sendKeys(Keys.ENTER);
@@ -246,7 +263,9 @@ public class WarehousesPage {
         }
     }
 
-    // clickOKButton - Click the Ok dialog button from the browser alert
+    /**
+     * Click the Ok dialog button from the browser alert
+     */
     public void clickOKButton() {
         try {
             Thread.sleep(1000);
@@ -257,7 +276,6 @@ public class WarehousesPage {
     }
     /**
      * Gets the list of all warehouses on the Warehouses page
-     * @return list of all warehouses on the page
      */
     public List<String> allWarehouses () {
         List<WebElement> whElements = new ArrayList<>();
@@ -271,8 +289,11 @@ public class WarehousesPage {
         return values;
     }
 
-    // findUtilization - Find the utilization bar for a warehouse and check if it matches the utilization provided. use the warehouseCard variable
-    // /html/body/div/div/div/div/div[2]/div[card]/div/div[1]/div for the utilization bar
+    /**
+     * Find the utilization bar for a warehouse and check if it matches the utilization provided. use the warehouseCard variable
+     * @param warehouseName
+     * @param utilization
+     */
     public boolean findUtilization(String warehouseName, String utilization) {
         if (warehouseCard == -1) {
             return false;
@@ -283,6 +304,7 @@ public class WarehousesPage {
             e.printStackTrace();
         }
         try {
+            // /html/body/div/div/div/div/div[2]/div[card]/div/div[1]/div for the utilization bar
             WebElement utilizationBar = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/div[1]/div"));
             String utilizationText = utilizationBar.getText();
             return utilizationText.equals(utilization);
