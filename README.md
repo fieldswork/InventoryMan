@@ -5,12 +5,66 @@
 ### This project is hosted on AWS! 
 Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))
 
+
+**Update 9/6/24:** Project 2 content has been added, including additional tests with Mockito, Jest, and more configured in our Jenkinsfile! ***Huge thanks to my groupmate for this project, Bruna Vicente!***
+
 **Update 8/26/24:** InventoryMan is back on AWS - this time, using the Aurora RDS, an Elastic Beanstalk backend, and utilizing a separate EC2 instance for Jenkins deployment/Selenium + Cucumber testing.
 
 ~~**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!~~
 
+## Test Reports
+
+[Full console output from Jenkins](readme_attachments\im_cicd_output.txt)
+
+*Tests were executed on Jenkins running on an EC2 instance that pulls from this Github repository via a webhook on the main branch.*
+
+### Cucumber Test Results
+
+> **32 tests** were run across **14 feature files**, with **100% passing**.
+
+![Cucumber test results reads 100% passed 32 tests, with 7 minutes to run. Below are all the tests listed out.](readme_attachments\cucumber_results.png)
+
+### Mockito Test Results
+> **84% statement coverage**, **88% branch coverage**.
+
+![A chart that displays 84% statement coverage, with 88% branch coverage.](readme_attachments\jacoco_mockito_results.png)
+
+### SonarCloud Test Results
+
+> Frontend has **87% reported code coverage** with A ratings in Security, Reliability, and Maintainability.
+
+![SonarCloud Report Information for the Frontend](readme_attachments\sonarcloud_frontend.png)
+
+> Backend has **90% reported code coverage** with A ratings in Security, Reliability, and a B rating for Maintainability.
+
+![SonarCloud Report Information for the Frontend](readme_attachments\sonarcloud_backend.png)
+
+*Links to the full reports:*
+
+[SonarCloud InventoryMan Frontend Report](https://sonarcloud.io/summary/overall?id=salmoncore_InventoryMan)
+
+[SonarCloud InventoryMan Backend Report](https://sonarcloud.io/summary/overall?id=salmoncore_inventoryman-backend)
+
+### Jest Test Results
+
+> **88% statement coverage**, with **81% branch coverage**.
+
+![Jest test results](readme_attachments\jest_results.png)
+
+### Burp Suite Demo
+
+[Video Recording on Google Drive](https://drive.google.com/file/d/1gKqvzeaNlauKmKzCstGmns3A_ZwsYgZ2/view?usp=sharing)
+
+### JMeter Results
+
+> 10 samples were taken, with an **average response time of 45 milliseconds** and **0% errors**.
+
+![Throughput, response time, and Percentage of errors](readme_attachments\jmeter_graphs.png)
+
+![Performance chart](readme_attachments\jmeter_chart.png)
 
 ## Facts and Features
+ - End-to-end testing with Cucumber, Selenium, Jest, Mockito, SonarCloud, and more
  - Full-stack application made with SpringBoot, PostgreSQL, and React
  - CRUD functionality for managing warehouses and inventory
  - Bootstrap UI with card layout for improved readability
@@ -21,9 +75,10 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
  - Responsive design for mobile and desktop
 
 ## AWS Deployment
- - PostgreSQL database hosted on AWS RDS
- - SpringBoot application hosted on AWS EC2
+ - Amazon Aurora postgres-compatable database hosted on AWS RDS
+ - SpringBoot application hosted on Elastic Beanstalk
  - React front-end hosted on AWS S3
+ - Jenkins CI/CD pipeline hosted on Amazon EC2
 
 ## Running InventoryMan Locally
  - Clone the repository
@@ -38,74 +93,6 @@ Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http:
 ## Project Structure
  - `backend` contains the SpringBoot application
  - `frontend` contains the React front-end
-
-Below is a simplified version of the project structure. The full structure includes additional files and folders for configuration and dependencies.
-```
-INVENTORYMAN/
-├── .vscode/ <NOT INCLUDED>
-│   ├── launch.json
-│   └── settings.json
-├── backend/
-│   ├── .mvn
-│   └── src/
-│       └── main/
-│           ├── java/com/skillstorm/inventoryman/
-│           │   ├── controllers/
-│           │   │   ├── ItemController.java
-│           │   │   └── WarehouseController.java
-│           │   ├── models/
-│           │   │   ├── Item.java
-│           │   │   └── Warehouse.java
-│           │   ├── repositories/
-│           │   │   ├── ItemRepository.java
-│           │   │   └── WarehouseRepository.java
-│           │   ├── services/
-│           │   │   ├── ItemService.java
-│           │   │   └── WarehouseService.java
-│           │   ├── InventoryManApplication.java
-│           │   └── WebConfig.java
-│           └── resources/
-│               └── application.properties
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── HomePage.js
-│   │   │   ├── ItemForm.js
-│   │   │   ├── ItemList.js
-│   │   │   ├── UtilizationBar.js
-│   │   │   ├── WarehouseForm.js
-│   │   │   └── WarehouseList.js
-│   │   ├── services/
-│   │   │   ├── itemService.js
-│   │   │   └── warehouseService.js
-│   │   ├── App.css
-│   │   ├── App.js
-│   │   ├── index.css
-│   │   └── index.js
-│   ├── package-lock.json
-│   └── package.json
-├── .gitignore
-└── README.md
-```
-
-### FAQ
- - **Q:** Why is it called InventoryMan?
-   - **A:** It's like *Inventory* and *Manager*, but the *ager* part was cut off. It's a work in progress, and a pun.
- - **Q:** How were the backend and frontend created?
-   - **A:** Backend was created with Spring Initializr, and the frontend was created with Create React App.
- - **Q:** How were the different parts of the project connected?
-   - **A:** The React frontend makes HTTP requests to the SpringBoot back-end using Axios.
-   - **A:** The SpringBoot backend uses JPA to interact with the PostgreSQL database.
-   - **A:** The PostgreSQL database, in the latest version, is hosted on AWS RDS.
- - **Q:** How was the project tested?
-   - **A:** The project was tested manually using Postman and the browser.
-   - **A:** A lot of edge cases were tested manually, and bugs were fixed as they were found.
- - **Q:** What was the most challenging part of the project?
-   - **A:** The most challenging part was getting the front-end and back-end to communicate properly.
-   - **A:** The backend was easy to set up, but the front-end required a lot of trial and error.
- - **Q:** Why is the project webpage up, but I can't add or view any cards?
-   - **A:** It seems that EC2 spins down after a while, and the database connection is lost.
-   - **A:** Since the frontend is hosted on S3, it may look like it's up and working, but it can't connect to the backend.
 
 ### Resources I heavily relied on:
  - For getting the initial CRUD functionality set up between the database and backend, this was a great resource: [Spring Boot + React CRUD Example](https://www.bezkoder.com/spring-boot-react-postgresql/)

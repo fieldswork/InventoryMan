@@ -1,0 +1,2253 @@
+Started by GitHub push by salmoncore
+Obtained Jenkinsfile from git https://github.com/salmoncore/InventoryMan
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Github Webhook Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Github Webhook Pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/salmoncore/InventoryMan # timeout=10
+Fetching upstream changes from https://github.com/salmoncore/InventoryMan
+ > git --version # timeout=10
+ > git --version # 'git version 2.40.1'
+ > git fetch --tags --force --progress -- https://github.com/salmoncore/InventoryMan +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 32040c41515d89e18104623e4143711051ab3523 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 32040c41515d89e18104623e4143711051ab3523 # timeout=10
+Commit message: "Presentation 2 content"
+ > git rev-list --no-walk f5b504f447ae9e83cfe9ae995c4b888b967c9faf # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build Frontend)
+[Pipeline] sh
++ echo Building frontend
+Building frontend
+[Pipeline] sh
++ cd frontend
++ npm install
+
+up to date, audited 1574 packages in 7s
+
+263 packages are looking for funding
+  run `npm fund` for details
+
+11 vulnerabilities (4 moderate, 7 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
++ npm run build
+
+> frontend@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+Compiled successfully.
+
+File sizes after gzip:
+
+  69.24 kB (+5 B)  build/static/js/main.5f617db6.js
+  31.96 kB         build/static/css/main.890bbc14.css
+  1.78 kB          build/static/js/453.8ab44547.chunk.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Backend)
+[Pipeline] sh
++ cd backend
++ mvn clean install -DskipTests=true
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.skillstorm:inventoryman >---------------------
+[INFO] Building InventoryMan 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ inventoryman ---
+[INFO] Deleting /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:prepare-agent (default) @ inventoryman ---
+[INFO] argLine set to "-javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=/var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec"
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ inventoryman ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ inventoryman ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 10 source files to /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ inventoryman ---
+[INFO] Copying 16 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ inventoryman ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 27 source files to /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ inventoryman ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:report (report) @ inventoryman ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:check (report) @ inventoryman ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-jar-plugin:3.4.2:jar (default-jar) @ inventoryman ---
+[INFO] Building jar: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/inventoryman-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:3.3.2:repackage (repackage) @ inventoryman ---
+[INFO] Replacing main artifact /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/inventoryman-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/inventoryman-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:report (default) @ inventoryman ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- maven-install-plugin:3.1.2:install (default-install) @ inventoryman ---
+[INFO] Installing /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/pom.xml to /var/lib/jenkins/.m2/repository/com/skillstorm/inventoryman/0.0.1-SNAPSHOT/inventoryman-0.0.1-SNAPSHOT.pom
+[INFO] Installing /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/inventoryman-0.0.1-SNAPSHOT.jar to /var/lib/jenkins/.m2/repository/com/skillstorm/inventoryman/0.0.1-SNAPSHOT/inventoryman-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.401 s
+[INFO] Finished at: 2024-09-06T15:37:52Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Frontend)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withAWS
+Constructing AWS CredentialsSetting AWS region us-east-1 
+ [Pipeline] {
+[Pipeline] sh
++ aws s3 sync frontend/build s3://inventoryman
+Completed 517 Bytes/~812.7 KiB (8.9 KiB/s) with ~9 file(s) remaining (calculating...)upload: frontend/build/asset-manifest.json to s3://inventoryman/asset-manifest.json  
+Completed 517 Bytes/~812.7 KiB (8.9 KiB/s) with ~8 file(s) remaining (calculating...)Completed 1021 Bytes/2.0 MiB (6.9 KiB/s) with 12 file(s) remaining                   upload: frontend/build/manifest.json to s3://inventoryman/manifest.json              
+Completed 1021 Bytes/2.0 MiB (6.9 KiB/s) with 11 file(s) remainingCompleted 1.0 KiB/2.0 MiB (5.4 KiB/s) with 11 file(s) remaining   upload: frontend/build/robots.txt to s3://inventoryman/robots.txt 
+Completed 1.0 KiB/2.0 MiB (5.4 KiB/s) with 10 file(s) remainingCompleted 1.6 KiB/2.0 MiB (7.5 KiB/s) with 10 file(s) remainingupload: frontend/build/index.html to s3://inventoryman/index.html
+Completed 1.6 KiB/2.0 MiB (7.5 KiB/s) with 9 file(s) remainingCompleted 20.4 KiB/2.0 MiB (71.3 KiB/s) with 9 file(s) remainingupload: frontend/build/inventoryman.ico to s3://inventoryman/inventoryman.ico
+Completed 20.4 KiB/2.0 MiB (71.3 KiB/s) with 8 file(s) remainingCompleted 24.8 KiB/2.0 MiB (71.8 KiB/s) with 8 file(s) remainingupload: frontend/build/static/js/453.8ab44547.chunk.js to s3://inventoryman/static/js/453.8ab44547.chunk.js
+Completed 24.8 KiB/2.0 MiB (71.8 KiB/s) with 7 file(s) remainingCompleted 280.8 KiB/2.0 MiB (721.6 KiB/s) with 7 file(s) remainingCompleted 536.8 KiB/2.0 MiB (1.3 MiB/s) with 7 file(s) remaining  Completed 743.5 KiB/2.0 MiB (1.8 MiB/s) with 7 file(s) remaining  upload: frontend/build/static/js/main.5f617db6.js to s3://inventoryman/static/js/main.5f617db6.js
+Completed 743.5 KiB/2.0 MiB (1.8 MiB/s) with 6 file(s) remainingCompleted 999.5 KiB/2.0 MiB (2.4 MiB/s) with 6 file(s) remainingCompleted 1.2 MiB/2.0 MiB (3.0 MiB/s) with 6 file(s) remaining  Completed 1.5 MiB/2.0 MiB (3.5 MiB/s) with 6 file(s) remaining  upload: frontend/build/static/css/main.890bbc14.css to s3://inventoryman/static/css/main.890bbc14.css
+Completed 1.5 MiB/2.0 MiB (3.5 MiB/s) with 5 file(s) remainingCompleted 1.7 MiB/2.0 MiB (4.1 MiB/s) with 5 file(s) remainingCompleted 1.7 MiB/2.0 MiB (3.9 MiB/s) with 5 file(s) remainingupload: frontend/build/static/js/main.5f617db6.js.LICENSE.txt to s3://inventoryman/static/js/main.5f617db6.js.LICENSE.txt
+Completed 1.7 MiB/2.0 MiB (3.9 MiB/s) with 4 file(s) remainingCompleted 1.7 MiB/2.0 MiB (3.8 MiB/s) with 4 file(s) remainingupload: frontend/build/static/js/453.8ab44547.chunk.js.map to s3://inventoryman/static/js/453.8ab44547.chunk.js.map
+Completed 1.7 MiB/2.0 MiB (3.8 MiB/s) with 3 file(s) remainingCompleted 1.7 MiB/2.0 MiB (3.8 MiB/s) with 3 file(s) remainingupload: frontend/build/inventoryman.png to s3://inventoryman/inventoryman.png
+Completed 1.7 MiB/2.0 MiB (3.8 MiB/s) with 2 file(s) remainingCompleted 1.9 MiB/2.0 MiB (4.1 MiB/s) with 2 file(s) remainingupload: frontend/build/static/js/main.5f617db6.js.map to s3://inventoryman/static/js/main.5f617db6.js.map
+Completed 1.9 MiB/2.0 MiB (4.1 MiB/s) with 1 file(s) remainingCompleted 2.0 MiB/2.0 MiB (3.8 MiB/s) with 1 file(s) remainingupload: frontend/build/static/css/main.890bbc14.css.map to s3://inventoryman/static/css/main.890bbc14.css.map
+[Pipeline] }
+[Pipeline] // withAWS
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Backend)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withAWS
+Constructing AWS CredentialsSetting AWS region us-east-1 
+ [Pipeline] {
+[Pipeline] sh
++ aws s3 cp backend/target/inventoryman-0.0.1-SNAPSHOT.jar s3://inventoryman-backend/inventoryman-0.0.1-20240906153754.jar
+Completed 256.0 KiB/75.6 MiB (1.4 MiB/s) with 1 file(s) remainingCompleted 512.0 KiB/75.6 MiB (2.7 MiB/s) with 1 file(s) remainingCompleted 768.0 KiB/75.6 MiB (3.1 MiB/s) with 1 file(s) remainingCompleted 1.0 MiB/75.6 MiB (4.0 MiB/s) with 1 file(s) remaining  Completed 1.2 MiB/75.6 MiB (4.9 MiB/s) with 1 file(s) remaining  Completed 1.5 MiB/75.6 MiB (5.6 MiB/s) with 1 file(s) remaining  Completed 1.8 MiB/75.6 MiB (6.4 MiB/s) with 1 file(s) remaining  Completed 2.0 MiB/75.6 MiB (7.3 MiB/s) with 1 file(s) remaining  Completed 2.2 MiB/75.6 MiB (8.0 MiB/s) with 1 file(s) remaining  Completed 2.5 MiB/75.6 MiB (8.8 MiB/s) with 1 file(s) remaining  Completed 2.8 MiB/75.6 MiB (9.4 MiB/s) with 1 file(s) remaining  Completed 3.0 MiB/75.6 MiB (10.2 MiB/s) with 1 file(s) remaining Completed 3.2 MiB/75.6 MiB (10.7 MiB/s) with 1 file(s) remaining Completed 3.5 MiB/75.6 MiB (11.3 MiB/s) with 1 file(s) remaining Completed 3.8 MiB/75.6 MiB (12.0 MiB/s) with 1 file(s) remaining Completed 4.0 MiB/75.6 MiB (12.5 MiB/s) with 1 file(s) remaining Completed 4.2 MiB/75.6 MiB (12.8 MiB/s) with 1 file(s) remaining Completed 4.5 MiB/75.6 MiB (13.3 MiB/s) with 1 file(s) remaining Completed 4.8 MiB/75.6 MiB (13.9 MiB/s) with 1 file(s) remaining Completed 5.0 MiB/75.6 MiB (14.3 MiB/s) with 1 file(s) remaining Completed 5.2 MiB/75.6 MiB (14.8 MiB/s) with 1 file(s) remaining Completed 5.5 MiB/75.6 MiB (15.2 MiB/s) with 1 file(s) remaining Completed 5.8 MiB/75.6 MiB (15.4 MiB/s) with 1 file(s) remaining Completed 6.0 MiB/75.6 MiB (16.0 MiB/s) with 1 file(s) remaining Completed 6.2 MiB/75.6 MiB (16.2 MiB/s) with 1 file(s) remaining Completed 6.5 MiB/75.6 MiB (16.6 MiB/s) with 1 file(s) remaining Completed 6.8 MiB/75.6 MiB (16.9 MiB/s) with 1 file(s) remaining Completed 7.0 MiB/75.6 MiB (17.5 MiB/s) with 1 file(s) remaining Completed 7.2 MiB/75.6 MiB (16.5 MiB/s) with 1 file(s) remaining Completed 7.5 MiB/75.6 MiB (17.0 MiB/s) with 1 file(s) remaining Completed 7.8 MiB/75.6 MiB (17.5 MiB/s) with 1 file(s) remaining Completed 8.0 MiB/75.6 MiB (17.7 MiB/s) with 1 file(s) remaining Completed 8.2 MiB/75.6 MiB (17.2 MiB/s) with 1 file(s) remaining Completed 8.5 MiB/75.6 MiB (17.7 MiB/s) with 1 file(s) remaining Completed 8.8 MiB/75.6 MiB (18.2 MiB/s) with 1 file(s) remaining Completed 9.0 MiB/75.6 MiB (18.7 MiB/s) with 1 file(s) remaining Completed 9.2 MiB/75.6 MiB (18.9 MiB/s) with 1 file(s) remaining Completed 9.5 MiB/75.6 MiB (19.3 MiB/s) with 1 file(s) remaining Completed 9.8 MiB/75.6 MiB (19.6 MiB/s) with 1 file(s) remaining Completed 10.0 MiB/75.6 MiB (20.1 MiB/s) with 1 file(s) remainingCompleted 10.2 MiB/75.6 MiB (20.6 MiB/s) with 1 file(s) remainingCompleted 10.5 MiB/75.6 MiB (21.0 MiB/s) with 1 file(s) remainingCompleted 10.8 MiB/75.6 MiB (21.4 MiB/s) with 1 file(s) remainingCompleted 11.0 MiB/75.6 MiB (21.8 MiB/s) with 1 file(s) remainingCompleted 11.2 MiB/75.6 MiB (22.3 MiB/s) with 1 file(s) remainingCompleted 11.5 MiB/75.6 MiB (22.6 MiB/s) with 1 file(s) remainingCompleted 11.8 MiB/75.6 MiB (22.8 MiB/s) with 1 file(s) remainingCompleted 12.0 MiB/75.6 MiB (22.5 MiB/s) with 1 file(s) remainingCompleted 12.2 MiB/75.6 MiB (22.9 MiB/s) with 1 file(s) remainingCompleted 12.5 MiB/75.6 MiB (23.2 MiB/s) with 1 file(s) remainingCompleted 12.8 MiB/75.6 MiB (23.7 MiB/s) with 1 file(s) remainingCompleted 13.0 MiB/75.6 MiB (23.9 MiB/s) with 1 file(s) remainingCompleted 13.2 MiB/75.6 MiB (24.3 MiB/s) with 1 file(s) remainingCompleted 13.5 MiB/75.6 MiB (24.7 MiB/s) with 1 file(s) remainingCompleted 13.8 MiB/75.6 MiB (25.1 MiB/s) with 1 file(s) remainingCompleted 14.0 MiB/75.6 MiB (25.5 MiB/s) with 1 file(s) remainingCompleted 14.2 MiB/75.6 MiB (25.9 MiB/s) with 1 file(s) remainingCompleted 14.5 MiB/75.6 MiB (26.1 MiB/s) with 1 file(s) remainingCompleted 14.8 MiB/75.6 MiB (26.3 MiB/s) with 1 file(s) remainingCompleted 15.0 MiB/75.6 MiB (26.7 MiB/s) with 1 file(s) remainingCompleted 15.2 MiB/75.6 MiB (27.0 MiB/s) with 1 file(s) remainingCompleted 15.5 MiB/75.6 MiB (27.4 MiB/s) with 1 file(s) remainingCompleted 15.8 MiB/75.6 MiB (27.7 MiB/s) with 1 file(s) remainingCompleted 16.0 MiB/75.6 MiB (28.0 MiB/s) with 1 file(s) remainingCompleted 16.2 MiB/75.6 MiB (28.3 MiB/s) with 1 file(s) remainingCompleted 16.5 MiB/75.6 MiB (28.6 MiB/s) with 1 file(s) remainingCompleted 16.8 MiB/75.6 MiB (29.0 MiB/s) with 1 file(s) remainingCompleted 17.0 MiB/75.6 MiB (29.4 MiB/s) with 1 file(s) remainingCompleted 17.2 MiB/75.6 MiB (29.8 MiB/s) with 1 file(s) remainingCompleted 17.5 MiB/75.6 MiB (30.2 MiB/s) with 1 file(s) remainingCompleted 17.8 MiB/75.6 MiB (30.6 MiB/s) with 1 file(s) remainingCompleted 18.0 MiB/75.6 MiB (31.0 MiB/s) with 1 file(s) remainingCompleted 18.2 MiB/75.6 MiB (31.3 MiB/s) with 1 file(s) remainingCompleted 18.5 MiB/75.6 MiB (31.5 MiB/s) with 1 file(s) remainingCompleted 18.8 MiB/75.6 MiB (31.9 MiB/s) with 1 file(s) remainingCompleted 19.0 MiB/75.6 MiB (32.1 MiB/s) with 1 file(s) remainingCompleted 19.2 MiB/75.6 MiB (32.5 MiB/s) with 1 file(s) remainingCompleted 19.5 MiB/75.6 MiB (32.3 MiB/s) with 1 file(s) remainingCompleted 19.8 MiB/75.6 MiB (32.6 MiB/s) with 1 file(s) remainingCompleted 20.0 MiB/75.6 MiB (33.0 MiB/s) with 1 file(s) remainingCompleted 20.2 MiB/75.6 MiB (33.3 MiB/s) with 1 file(s) remainingCompleted 20.5 MiB/75.6 MiB (33.5 MiB/s) with 1 file(s) remainingCompleted 20.8 MiB/75.6 MiB (33.7 MiB/s) with 1 file(s) remainingCompleted 21.0 MiB/75.6 MiB (33.9 MiB/s) with 1 file(s) remainingCompleted 21.2 MiB/75.6 MiB (34.3 MiB/s) with 1 file(s) remainingCompleted 21.5 MiB/75.6 MiB (34.6 MiB/s) with 1 file(s) remainingCompleted 21.8 MiB/75.6 MiB (35.0 MiB/s) with 1 file(s) remainingCompleted 22.0 MiB/75.6 MiB (35.4 MiB/s) with 1 file(s) remainingCompleted 22.2 MiB/75.6 MiB (35.7 MiB/s) with 1 file(s) remainingCompleted 22.5 MiB/75.6 MiB (35.5 MiB/s) with 1 file(s) remainingCompleted 22.8 MiB/75.6 MiB (35.8 MiB/s) with 1 file(s) remainingCompleted 23.0 MiB/75.6 MiB (36.2 MiB/s) with 1 file(s) remainingCompleted 23.2 MiB/75.6 MiB (36.5 MiB/s) with 1 file(s) remainingCompleted 23.5 MiB/75.6 MiB (36.6 MiB/s) with 1 file(s) remainingCompleted 23.8 MiB/75.6 MiB (36.9 MiB/s) with 1 file(s) remainingCompleted 24.0 MiB/75.6 MiB (37.2 MiB/s) with 1 file(s) remainingCompleted 24.2 MiB/75.6 MiB (37.3 MiB/s) with 1 file(s) remainingCompleted 24.5 MiB/75.6 MiB (37.4 MiB/s) with 1 file(s) remainingCompleted 24.8 MiB/75.6 MiB (37.7 MiB/s) with 1 file(s) remainingCompleted 25.0 MiB/75.6 MiB (37.9 MiB/s) with 1 file(s) remainingCompleted 25.2 MiB/75.6 MiB (38.1 MiB/s) with 1 file(s) remainingCompleted 25.5 MiB/75.6 MiB (38.0 MiB/s) with 1 file(s) remainingCompleted 25.8 MiB/75.6 MiB (38.3 MiB/s) with 1 file(s) remainingCompleted 26.0 MiB/75.6 MiB (38.6 MiB/s) with 1 file(s) remainingCompleted 26.2 MiB/75.6 MiB (38.4 MiB/s) with 1 file(s) remainingCompleted 26.5 MiB/75.6 MiB (38.5 MiB/s) with 1 file(s) remainingCompleted 26.8 MiB/75.6 MiB (38.8 MiB/s) with 1 file(s) remainingCompleted 27.0 MiB/75.6 MiB (39.1 MiB/s) with 1 file(s) remainingCompleted 27.2 MiB/75.6 MiB (39.4 MiB/s) with 1 file(s) remainingCompleted 27.5 MiB/75.6 MiB (39.7 MiB/s) with 1 file(s) remainingCompleted 27.8 MiB/75.6 MiB (39.8 MiB/s) with 1 file(s) remainingCompleted 28.0 MiB/75.6 MiB (40.1 MiB/s) with 1 file(s) remainingCompleted 28.2 MiB/75.6 MiB (40.3 MiB/s) with 1 file(s) remainingCompleted 28.5 MiB/75.6 MiB (40.5 MiB/s) with 1 file(s) remainingCompleted 28.8 MiB/75.6 MiB (40.8 MiB/s) with 1 file(s) remainingCompleted 29.0 MiB/75.6 MiB (41.0 MiB/s) with 1 file(s) remainingCompleted 29.2 MiB/75.6 MiB (41.3 MiB/s) with 1 file(s) remainingCompleted 29.5 MiB/75.6 MiB (41.5 MiB/s) with 1 file(s) remainingCompleted 29.8 MiB/75.6 MiB (41.7 MiB/s) with 1 file(s) remainingCompleted 30.0 MiB/75.6 MiB (41.9 MiB/s) with 1 file(s) remainingCompleted 30.2 MiB/75.6 MiB (42.2 MiB/s) with 1 file(s) remainingCompleted 30.5 MiB/75.6 MiB (42.5 MiB/s) with 1 file(s) remainingCompleted 30.8 MiB/75.6 MiB (42.8 MiB/s) with 1 file(s) remainingCompleted 31.0 MiB/75.6 MiB (43.0 MiB/s) with 1 file(s) remainingCompleted 31.2 MiB/75.6 MiB (43.2 MiB/s) with 1 file(s) remainingCompleted 31.5 MiB/75.6 MiB (43.3 MiB/s) with 1 file(s) remainingCompleted 31.8 MiB/75.6 MiB (43.6 MiB/s) with 1 file(s) remainingCompleted 32.0 MiB/75.6 MiB (43.5 MiB/s) with 1 file(s) remainingCompleted 32.2 MiB/75.6 MiB (43.7 MiB/s) with 1 file(s) remainingCompleted 32.5 MiB/75.6 MiB (43.8 MiB/s) with 1 file(s) remainingCompleted 32.8 MiB/75.6 MiB (44.1 MiB/s) with 1 file(s) remainingCompleted 33.0 MiB/75.6 MiB (44.1 MiB/s) with 1 file(s) remainingCompleted 33.2 MiB/75.6 MiB (44.4 MiB/s) with 1 file(s) remainingCompleted 33.5 MiB/75.6 MiB (44.7 MiB/s) with 1 file(s) remainingCompleted 33.8 MiB/75.6 MiB (45.0 MiB/s) with 1 file(s) remainingCompleted 34.0 MiB/75.6 MiB (45.1 MiB/s) with 1 file(s) remainingCompleted 34.2 MiB/75.6 MiB (45.3 MiB/s) with 1 file(s) remainingCompleted 34.5 MiB/75.6 MiB (45.5 MiB/s) with 1 file(s) remainingCompleted 34.8 MiB/75.6 MiB (45.7 MiB/s) with 1 file(s) remainingCompleted 35.0 MiB/75.6 MiB (45.8 MiB/s) with 1 file(s) remainingCompleted 35.2 MiB/75.6 MiB (46.1 MiB/s) with 1 file(s) remainingCompleted 35.5 MiB/75.6 MiB (46.3 MiB/s) with 1 file(s) remainingCompleted 35.8 MiB/75.6 MiB (46.6 MiB/s) with 1 file(s) remainingCompleted 36.0 MiB/75.6 MiB (46.8 MiB/s) with 1 file(s) remainingCompleted 36.2 MiB/75.6 MiB (47.0 MiB/s) with 1 file(s) remainingCompleted 36.5 MiB/75.6 MiB (47.3 MiB/s) with 1 file(s) remainingCompleted 36.8 MiB/75.6 MiB (47.6 MiB/s) with 1 file(s) remainingCompleted 37.0 MiB/75.6 MiB (47.8 MiB/s) with 1 file(s) remainingCompleted 37.2 MiB/75.6 MiB (47.9 MiB/s) with 1 file(s) remainingCompleted 37.5 MiB/75.6 MiB (47.9 MiB/s) with 1 file(s) remainingCompleted 37.8 MiB/75.6 MiB (48.1 MiB/s) with 1 file(s) remainingCompleted 38.0 MiB/75.6 MiB (48.4 MiB/s) with 1 file(s) remainingCompleted 38.2 MiB/75.6 MiB (48.6 MiB/s) with 1 file(s) remainingCompleted 38.5 MiB/75.6 MiB (48.8 MiB/s) with 1 file(s) remainingCompleted 38.8 MiB/75.6 MiB (48.9 MiB/s) with 1 file(s) remainingCompleted 39.0 MiB/75.6 MiB (49.1 MiB/s) with 1 file(s) remainingCompleted 39.2 MiB/75.6 MiB (49.3 MiB/s) with 1 file(s) remainingCompleted 39.5 MiB/75.6 MiB (49.4 MiB/s) with 1 file(s) remainingCompleted 39.8 MiB/75.6 MiB (49.6 MiB/s) with 1 file(s) remainingCompleted 40.0 MiB/75.6 MiB (49.6 MiB/s) with 1 file(s) remainingCompleted 40.2 MiB/75.6 MiB (49.8 MiB/s) with 1 file(s) remainingCompleted 40.5 MiB/75.6 MiB (50.1 MiB/s) with 1 file(s) remainingCompleted 40.8 MiB/75.6 MiB (50.2 MiB/s) with 1 file(s) remainingCompleted 41.0 MiB/75.6 MiB (50.2 MiB/s) with 1 file(s) remainingCompleted 41.2 MiB/75.6 MiB (50.3 MiB/s) with 1 file(s) remainingCompleted 41.5 MiB/75.6 MiB (50.6 MiB/s) with 1 file(s) remainingCompleted 41.8 MiB/75.6 MiB (50.8 MiB/s) with 1 file(s) remainingCompleted 42.0 MiB/75.6 MiB (51.0 MiB/s) with 1 file(s) remainingCompleted 42.2 MiB/75.6 MiB (51.3 MiB/s) with 1 file(s) remainingCompleted 42.5 MiB/75.6 MiB (51.5 MiB/s) with 1 file(s) remainingCompleted 42.8 MiB/75.6 MiB (51.7 MiB/s) with 1 file(s) remainingCompleted 43.0 MiB/75.6 MiB (51.5 MiB/s) with 1 file(s) remainingCompleted 43.2 MiB/75.6 MiB (51.7 MiB/s) with 1 file(s) remainingCompleted 43.5 MiB/75.6 MiB (51.8 MiB/s) with 1 file(s) remainingCompleted 43.8 MiB/75.6 MiB (52.1 MiB/s) with 1 file(s) remainingCompleted 44.0 MiB/75.6 MiB (52.2 MiB/s) with 1 file(s) remainingCompleted 44.2 MiB/75.6 MiB (52.5 MiB/s) with 1 file(s) remainingCompleted 44.3 MiB/75.6 MiB (52.5 MiB/s) with 1 file(s) remainingCompleted 44.6 MiB/75.6 MiB (52.7 MiB/s) with 1 file(s) remainingCompleted 44.8 MiB/75.6 MiB (52.9 MiB/s) with 1 file(s) remainingCompleted 45.1 MiB/75.6 MiB (53.2 MiB/s) with 1 file(s) remainingCompleted 45.3 MiB/75.6 MiB (53.2 MiB/s) with 1 file(s) remainingCompleted 45.6 MiB/75.6 MiB (53.4 MiB/s) with 1 file(s) remainingCompleted 45.8 MiB/75.6 MiB (53.6 MiB/s) with 1 file(s) remainingCompleted 46.1 MiB/75.6 MiB (53.8 MiB/s) with 1 file(s) remainingCompleted 46.3 MiB/75.6 MiB (54.0 MiB/s) with 1 file(s) remainingCompleted 46.6 MiB/75.6 MiB (54.0 MiB/s) with 1 file(s) remainingCompleted 46.8 MiB/75.6 MiB (54.3 MiB/s) with 1 file(s) remainingCompleted 47.1 MiB/75.6 MiB (54.5 MiB/s) with 1 file(s) remainingCompleted 47.3 MiB/75.6 MiB (54.7 MiB/s) with 1 file(s) remainingCompleted 47.6 MiB/75.6 MiB (54.9 MiB/s) with 1 file(s) remainingCompleted 47.8 MiB/75.6 MiB (55.2 MiB/s) with 1 file(s) remainingCompleted 48.1 MiB/75.6 MiB (55.4 MiB/s) with 1 file(s) remainingCompleted 48.3 MiB/75.6 MiB (55.5 MiB/s) with 1 file(s) remainingCompleted 48.6 MiB/75.6 MiB (55.7 MiB/s) with 1 file(s) remainingCompleted 48.8 MiB/75.6 MiB (55.9 MiB/s) with 1 file(s) remainingCompleted 49.1 MiB/75.6 MiB (56.1 MiB/s) with 1 file(s) remainingCompleted 49.3 MiB/75.6 MiB (56.3 MiB/s) with 1 file(s) remainingCompleted 49.6 MiB/75.6 MiB (56.5 MiB/s) with 1 file(s) remainingCompleted 49.8 MiB/75.6 MiB (56.7 MiB/s) with 1 file(s) remainingCompleted 50.1 MiB/75.6 MiB (56.8 MiB/s) with 1 file(s) remainingCompleted 50.3 MiB/75.6 MiB (57.0 MiB/s) with 1 file(s) remainingCompleted 50.6 MiB/75.6 MiB (57.2 MiB/s) with 1 file(s) remainingCompleted 50.8 MiB/75.6 MiB (57.4 MiB/s) with 1 file(s) remainingCompleted 51.1 MiB/75.6 MiB (57.6 MiB/s) with 1 file(s) remainingCompleted 51.3 MiB/75.6 MiB (57.8 MiB/s) with 1 file(s) remainingCompleted 51.6 MiB/75.6 MiB (58.0 MiB/s) with 1 file(s) remainingCompleted 51.8 MiB/75.6 MiB (58.2 MiB/s) with 1 file(s) remainingCompleted 52.1 MiB/75.6 MiB (58.4 MiB/s) with 1 file(s) remainingCompleted 52.3 MiB/75.6 MiB (58.4 MiB/s) with 1 file(s) remainingCompleted 52.6 MiB/75.6 MiB (58.6 MiB/s) with 1 file(s) remainingCompleted 52.8 MiB/75.6 MiB (58.8 MiB/s) with 1 file(s) remainingCompleted 53.1 MiB/75.6 MiB (59.0 MiB/s) with 1 file(s) remainingCompleted 53.3 MiB/75.6 MiB (59.2 MiB/s) with 1 file(s) remainingCompleted 53.6 MiB/75.6 MiB (59.3 MiB/s) with 1 file(s) remainingCompleted 53.8 MiB/75.6 MiB (59.5 MiB/s) with 1 file(s) remainingCompleted 54.1 MiB/75.6 MiB (59.7 MiB/s) with 1 file(s) remainingCompleted 54.3 MiB/75.6 MiB (59.9 MiB/s) with 1 file(s) remainingCompleted 54.6 MiB/75.6 MiB (60.0 MiB/s) with 1 file(s) remainingCompleted 54.8 MiB/75.6 MiB (60.1 MiB/s) with 1 file(s) remainingCompleted 55.1 MiB/75.6 MiB (60.4 MiB/s) with 1 file(s) remainingCompleted 55.3 MiB/75.6 MiB (60.5 MiB/s) with 1 file(s) remainingCompleted 55.6 MiB/75.6 MiB (60.7 MiB/s) with 1 file(s) remainingCompleted 55.8 MiB/75.6 MiB (60.9 MiB/s) with 1 file(s) remainingCompleted 56.1 MiB/75.6 MiB (61.1 MiB/s) with 1 file(s) remainingCompleted 56.3 MiB/75.6 MiB (61.3 MiB/s) with 1 file(s) remainingCompleted 56.6 MiB/75.6 MiB (61.4 MiB/s) with 1 file(s) remainingCompleted 56.8 MiB/75.6 MiB (61.4 MiB/s) with 1 file(s) remainingCompleted 57.1 MiB/75.6 MiB (61.6 MiB/s) with 1 file(s) remainingCompleted 57.3 MiB/75.6 MiB (61.8 MiB/s) with 1 file(s) remainingCompleted 57.6 MiB/75.6 MiB (61.9 MiB/s) with 1 file(s) remainingCompleted 57.8 MiB/75.6 MiB (62.0 MiB/s) with 1 file(s) remainingCompleted 58.1 MiB/75.6 MiB (62.2 MiB/s) with 1 file(s) remainingCompleted 58.3 MiB/75.6 MiB (62.4 MiB/s) with 1 file(s) remainingCompleted 58.6 MiB/75.6 MiB (62.6 MiB/s) with 1 file(s) remainingCompleted 58.8 MiB/75.6 MiB (62.8 MiB/s) with 1 file(s) remainingCompleted 59.1 MiB/75.6 MiB (62.9 MiB/s) with 1 file(s) remainingCompleted 59.3 MiB/75.6 MiB (62.7 MiB/s) with 1 file(s) remainingCompleted 59.6 MiB/75.6 MiB (63.0 MiB/s) with 1 file(s) remainingCompleted 59.8 MiB/75.6 MiB (63.2 MiB/s) with 1 file(s) remainingCompleted 60.1 MiB/75.6 MiB (63.4 MiB/s) with 1 file(s) remainingCompleted 60.3 MiB/75.6 MiB (63.6 MiB/s) with 1 file(s) remainingCompleted 60.6 MiB/75.6 MiB (63.8 MiB/s) with 1 file(s) remainingCompleted 60.8 MiB/75.6 MiB (63.4 MiB/s) with 1 file(s) remainingCompleted 61.1 MiB/75.6 MiB (63.7 MiB/s) with 1 file(s) remainingCompleted 61.3 MiB/75.6 MiB (63.9 MiB/s) with 1 file(s) remainingCompleted 61.6 MiB/75.6 MiB (63.9 MiB/s) with 1 file(s) remainingCompleted 61.8 MiB/75.6 MiB (63.9 MiB/s) with 1 file(s) remainingCompleted 62.1 MiB/75.6 MiB (64.1 MiB/s) with 1 file(s) remainingCompleted 62.3 MiB/75.6 MiB (64.2 MiB/s) with 1 file(s) remainingCompleted 62.6 MiB/75.6 MiB (64.4 MiB/s) with 1 file(s) remainingCompleted 62.8 MiB/75.6 MiB (64.6 MiB/s) with 1 file(s) remainingCompleted 63.1 MiB/75.6 MiB (64.8 MiB/s) with 1 file(s) remainingCompleted 63.3 MiB/75.6 MiB (64.8 MiB/s) with 1 file(s) remainingCompleted 63.6 MiB/75.6 MiB (65.0 MiB/s) with 1 file(s) remainingCompleted 63.8 MiB/75.6 MiB (65.2 MiB/s) with 1 file(s) remainingCompleted 64.1 MiB/75.6 MiB (65.3 MiB/s) with 1 file(s) remainingCompleted 64.3 MiB/75.6 MiB (65.5 MiB/s) with 1 file(s) remainingCompleted 64.6 MiB/75.6 MiB (65.6 MiB/s) with 1 file(s) remainingCompleted 64.8 MiB/75.6 MiB (65.8 MiB/s) with 1 file(s) remainingCompleted 65.1 MiB/75.6 MiB (65.9 MiB/s) with 1 file(s) remainingCompleted 65.3 MiB/75.6 MiB (66.0 MiB/s) with 1 file(s) remainingCompleted 65.6 MiB/75.6 MiB (66.1 MiB/s) with 1 file(s) remainingCompleted 65.8 MiB/75.6 MiB (66.2 MiB/s) with 1 file(s) remainingCompleted 66.1 MiB/75.6 MiB (66.2 MiB/s) with 1 file(s) remainingCompleted 66.3 MiB/75.6 MiB (66.4 MiB/s) with 1 file(s) remainingCompleted 66.6 MiB/75.6 MiB (66.6 MiB/s) with 1 file(s) remainingCompleted 66.8 MiB/75.6 MiB (66.5 MiB/s) with 1 file(s) remainingCompleted 67.1 MiB/75.6 MiB (66.8 MiB/s) with 1 file(s) remainingCompleted 67.3 MiB/75.6 MiB (66.8 MiB/s) with 1 file(s) remainingCompleted 67.6 MiB/75.6 MiB (67.0 MiB/s) with 1 file(s) remainingCompleted 67.8 MiB/75.6 MiB (67.2 MiB/s) with 1 file(s) remainingCompleted 68.1 MiB/75.6 MiB (67.4 MiB/s) with 1 file(s) remainingCompleted 68.3 MiB/75.6 MiB (67.5 MiB/s) with 1 file(s) remainingCompleted 68.6 MiB/75.6 MiB (67.6 MiB/s) with 1 file(s) remainingCompleted 68.8 MiB/75.6 MiB (67.7 MiB/s) with 1 file(s) remainingCompleted 69.1 MiB/75.6 MiB (68.0 MiB/s) with 1 file(s) remainingCompleted 69.3 MiB/75.6 MiB (68.1 MiB/s) with 1 file(s) remainingCompleted 69.6 MiB/75.6 MiB (68.2 MiB/s) with 1 file(s) remainingCompleted 69.8 MiB/75.6 MiB (68.1 MiB/s) with 1 file(s) remainingCompleted 70.1 MiB/75.6 MiB (68.3 MiB/s) with 1 file(s) remainingCompleted 70.3 MiB/75.6 MiB (68.5 MiB/s) with 1 file(s) remainingCompleted 70.6 MiB/75.6 MiB (68.7 MiB/s) with 1 file(s) remainingCompleted 70.8 MiB/75.6 MiB (68.9 MiB/s) with 1 file(s) remainingCompleted 71.1 MiB/75.6 MiB (69.0 MiB/s) with 1 file(s) remainingCompleted 71.3 MiB/75.6 MiB (69.0 MiB/s) with 1 file(s) remainingCompleted 71.6 MiB/75.6 MiB (69.2 MiB/s) with 1 file(s) remainingCompleted 71.8 MiB/75.6 MiB (69.2 MiB/s) with 1 file(s) remainingCompleted 72.1 MiB/75.6 MiB (69.3 MiB/s) with 1 file(s) remainingCompleted 72.3 MiB/75.6 MiB (69.5 MiB/s) with 1 file(s) remainingCompleted 72.6 MiB/75.6 MiB (69.7 MiB/s) with 1 file(s) remainingCompleted 72.8 MiB/75.6 MiB (69.9 MiB/s) with 1 file(s) remainingCompleted 73.1 MiB/75.6 MiB (69.9 MiB/s) with 1 file(s) remainingCompleted 73.3 MiB/75.6 MiB (70.0 MiB/s) with 1 file(s) remainingCompleted 73.6 MiB/75.6 MiB (70.2 MiB/s) with 1 file(s) remainingCompleted 73.8 MiB/75.6 MiB (70.4 MiB/s) with 1 file(s) remainingCompleted 74.1 MiB/75.6 MiB (70.5 MiB/s) with 1 file(s) remainingCompleted 74.3 MiB/75.6 MiB (70.7 MiB/s) with 1 file(s) remainingCompleted 74.6 MiB/75.6 MiB (70.7 MiB/s) with 1 file(s) remainingCompleted 74.8 MiB/75.6 MiB (70.9 MiB/s) with 1 file(s) remainingCompleted 75.1 MiB/75.6 MiB (71.1 MiB/s) with 1 file(s) remainingCompleted 75.3 MiB/75.6 MiB (71.3 MiB/s) with 1 file(s) remainingCompleted 75.6 MiB/75.6 MiB (71.5 MiB/s) with 1 file(s) remainingupload: backend/target/inventoryman-0.0.1-SNAPSHOT.jar to s3://inventoryman-backend/inventoryman-0.0.1-20240906153754.jar
+[Pipeline] sh
++ aws elasticbeanstalk create-application-version --application-name InventoryMan --version-label 0.0.1-20240906153754 --source-bundle S3Bucket=inventoryman-backend,S3Key=inventoryman-0.0.1-20240906153754.jar
+{
+    "ApplicationVersion": {
+        "ApplicationVersionArn": "arn:aws:elasticbeanstalk:us-east-1:924809052459:applicationversion/InventoryMan/0.0.1-20240906153754",
+        "ApplicationName": "InventoryMan",
+        "VersionLabel": "0.0.1-20240906153754",
+        "SourceBundle": {
+            "S3Bucket": "inventoryman-backend",
+            "S3Key": "inventoryman-0.0.1-20240906153754.jar"
+        },
+        "DateCreated": "2024-09-06T15:37:57.654000+00:00",
+        "DateUpdated": "2024-09-06T15:37:57.654000+00:00",
+        "Status": "UNPROCESSED"
+    }
+}
+[Pipeline] sh
++ aws elasticbeanstalk update-environment --environment-name InventoryMan-env --version-label 0.0.1-20240906153754
+{
+    "EnvironmentName": "InventoryMan-env",
+    "EnvironmentId": "e-5siumkrw2c",
+    "ApplicationName": "InventoryMan",
+    "VersionLabel": "0.0.1-20240906153754",
+    "SolutionStackName": "64bit Amazon Linux 2023 v4.3.0 running Corretto 17",
+    "PlatformArn": "arn:aws:elasticbeanstalk:us-east-1::platform/Corretto 17 running on 64bit Amazon Linux 2023/4.3.0",
+    "Description": "InventoryMan Backend",
+    "EndpointURL": "3.232.204.162",
+    "CNAME": "inventoryman-env.us-east-1.elasticbeanstalk.com",
+    "DateCreated": "2024-08-20T00:29:29.745000+00:00",
+    "DateUpdated": "2024-09-06T15:37:59.186000+00:00",
+    "Status": "Updating",
+    "AbortableOperationInProgress": true,
+    "Health": "Grey",
+    "Tier": {
+        "Name": "WebServer",
+        "Type": "Standard",
+        "Version": "1.0"
+    },
+    "EnvironmentArn": "arn:aws:elasticbeanstalk:us-east-1:924809052459:environment/InventoryMan/InventoryMan-env"
+}
+[Pipeline] }
+[Pipeline] // withAWS
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Tests)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Waiting for frontend deployment...
+[Pipeline] retry
+[Pipeline] {
+[Pipeline] sleep
+Sleeping for 10 sec
+[Pipeline] sh
++ curl -s -o /dev/null -w '%{http_code}' http://inventoryman.s3-website-us-east-1.amazonaws.com/
+[Pipeline] }
+[Pipeline] // retry
+[Pipeline] echo
+Waiting for backend deployment...
+[Pipeline] retry
+[Pipeline] {
+[Pipeline] sleep
+Sleeping for 10 sec
+[Pipeline] sh
++ curl -s -o /dev/null -w '%{http_code}' http://inventoryman-env.us-east-1.elasticbeanstalk.com:8080/api/warehouses
+000[Pipeline] }
+ERROR: script returned exit code 7
+Retrying
+[Pipeline] {
+[Pipeline] sleep
+Sleeping for 10 sec
+[Pipeline] sh
++ curl -s -o /dev/null -w '%{http_code}' http://inventoryman-env.us-east-1.elasticbeanstalk.com:8080/api/warehouses
+[Pipeline] }
+[Pipeline] // retry
+[Pipeline] sh
++ cd frontend
++ npm test -- --coverage
+
+> frontend@0.1.0 test
+> react-scripts test --coverage --passWithNoTests --coverage
+
+PASS src/components/__tests__/WarehouseForm.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m 35 |[39m     it([32m'should render the form fields'[39m[33m,[39m [36masync[39m () [33m=>[39m { [90m// Checks if the form fields are rendered, e.g. name, capacity, used capacity[39m
+     [90m 36 |[39m         [36mawait[39m act([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 37 |[39m         render(
+     [90m    |[39m               [31m[1m^[22m[39m
+     [90m 38 |[39m             [33m<[39m[33mBrowserRouter[39m[33m>[39m
+     [90m 39 |[39m             [33m<[39m[33mWarehouseForm[39m onSave[33m=[39m{jest[33m.[39mfn()} [33m/[39m[33m>[39m
+     [90m 40 |[39m             [33m<[39m[33m/[39m[33mBrowserRouter[39m[33m>[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at src/components/__tests__/WarehouseForm.test.js:37:15
+      at act (node_modules/react/cjs/react.development.js:2512:16)
+      at Object.<anonymous> (src/components/__tests__/WarehouseForm.test.js:36:18)
+
+PASS src/components/__tests__/ItemList.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m 40 |[39m     it([32m'should render the page title'[39m[33m,[39m [36masync[39m () [33m=>[39m { [90m// Checks if the page title is rendered - should be Items[39m
+     [90m 41 |[39m         [36mawait[39m act([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 42 |[39m             render(
+     [90m    |[39m                   [31m[1m^[22m[39m
+     [90m 43 |[39m                 [33m<[39m[33mBrowserRouter[39m[33m>[39m
+     [90m 44 |[39m                     [33m<[39m[33mItemList[39m [33m/[39m[33m>[39m
+     [90m 45 |[39m                 [33m<[39m[33m/[39m[33mBrowserRouter[39m[33m>[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at src/components/__tests__/ItemList.test.js:42:19
+      at act (node_modules/react/cjs/react.development.js:2512:16)
+      at Object.<anonymous> (src/components/__tests__/ItemList.test.js:41:18)
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: 'Item A',
+          description: 'Description A',
+          quantity: 10,
+          sizeInCubicFt: 5,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: []
+
+      at src/components/ItemList.js:15:15
+
+    console.log
+      Fetched items: [
+        {
+          id: 1,
+          name: '',
+          description: '',
+          quantity: 0,
+          sizeInCubicFt: 0,
+          warehouse: { id: 1, name: 'Warehouse 1' }
+        },
+        {
+          id: 2,
+          name: 'Item B',
+          description: 'Description B',
+          quantity: 20,
+          sizeInCubicFt: 10,
+          warehouse: { id: 2, name: 'Warehouse 2' }
+        }
+      ]
+
+      at src/components/ItemList.js:15:15
+
+PASS src/components/__tests__/App.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m [36mconst[39m renderApp [33m=[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mreturn[39m render([33m<[39m[33mApp[39m [35m/>); /[39m[33m/[39m render the [33mApp[39m component and [36mreturn[39m it
+     [90m   |[39m                [31m[1m^[22m[39m
+     [90m 7 |[39m }[33m;[39m
+     [90m 8 |[39m
+     [90m 9 |[39m describe([32m'App component'[39m[33m,[39m () [33m=>[39m { [90m// The app contains the navigation bar and links to the other pages[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at renderApp (src/components/__tests__/App.test.js:6:16)
+      at Object.<anonymous> (src/components/__tests__/App.test.js:11:9)
+
+    console.error
+      Warning: React does not recognize the `activeClassName` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `activeclassname` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+          at a
+          at LinkWithRef (/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/node_modules/react-router-dom/index.tsx:950:7)
+          at NavLinkWithRef (/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/node_modules/react-router-dom/index.tsx:1059:23)
+          at li
+          at div
+          at nav
+          at div
+          at Router (/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/node_modules/react-router/lib/components.tsx:413:13)
+          at BrowserRouter (/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/node_modules/react-router-dom/index.tsx:783:3)
+          at App
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m [36mconst[39m renderApp [33m=[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mreturn[39m render([33m<[39m[33mApp[39m [35m/>); /[39m[33m/[39m render the [33mApp[39m component and [36mreturn[39m it
+     [90m   |[39m                [31m[1m^[22m[39m
+     [90m 7 |[39m }[33m;[39m
+     [90m 8 |[39m
+     [90m 9 |[39m describe([32m'App component'[39m[33m,[39m () [33m=>[39m { [90m// The app contains the navigation bar and links to the other pages[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at validateProperty$1 (node_modules/react-dom/cjs/react-dom.development.js:3757:7)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom.development.js:3803:21)
+      at validateProperties$2 (node_modules/react-dom/cjs/react-dom.development.js:3827:3)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom.development.js:9541:5)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom.development.js:9830:5)
+      at finalizeInitialChildren (node_modules/react-dom/cjs/react-dom.development.js:10950:3)
+      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:22232:17)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26632:16)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26607:5)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+      at performConcurrentWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:25777:74)
+      at flushActQueue (node_modules/react/cjs/react.development.js:2667:24)
+      at act (node_modules/react/cjs/react.development.js:2582:11)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1740:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at renderApp (src/components/__tests__/App.test.js:6:16)
+      at Object.<anonymous> (src/components/__tests__/App.test.js:11:9)
+
+PASS src/components/__tests__/WarehouseList.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m 31 |[39m
+     [90m 32 |[39m     it([32m'should render the page title'[39m[33m,[39m [36masync[39m () [33m=>[39m { [90m// Checks if the page title is rendered[39m
+    [31m[1m>[22m[39m[90m 33 |[39m         [36mawait[39m act([36masync[39m () [33m=>[39m {
+     [90m    |[39m                  [31m[1m^[22m[39m
+     [90m 34 |[39m             render(
+     [90m 35 |[39m                 [33m<[39m[33mBrowserRouter[39m[33m>[39m
+     [90m 36 |[39m                     [33m<[39m[33mWarehouseList[39m [33m/[39m[33m>[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at Object.<anonymous> (src/components/__tests__/WarehouseList.test.js:33:18)
+
+PASS src/components/__tests__/ItemForm.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m 48 |[39m     it([32m'should render the form fields'[39m[33m,[39m [36masync[39m () [33m=>[39m { [90m// Checks if the form fields are rendered, e.g. name, description, quantity, size, warehouse[39m
+     [90m 49 |[39m         [36mawait[39m act([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 50 |[39m             render(
+     [90m    |[39m                   [31m[1m^[22m[39m
+     [90m 51 |[39m                 [33m<[39m[33mBrowserRouter[39m[33m>[39m
+     [90m 52 |[39m                     [33m<[39m[33mItemForm[39m onSave[33m=[39m{jest[33m.[39mfn()} [33m/[39m[33m>[39m
+     [90m 53 |[39m                 [33m<[39m[33m/[39m[33mBrowserRouter[39m[33m>[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at src/components/__tests__/ItemForm.test.js:50:19
+      at act (node_modules/react/cjs/react.development.js:2512:16)
+      at Object.<anonymous> (src/components/__tests__/ItemForm.test.js:49:18)
+
+PASS src/components/__tests__/itemService.test.js
+PASS src/components/__tests__/warehouseService.test.js
+PASS src/components/__tests__/UtilizationBar.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m  8 |[39m         [36mlet[39m container[33m;[39m
+     [90m  9 |[39m         act(() [33m=>[39m { [90m// Giving the bar some capacity and used capacity[39m
+    [31m[1m>[22m[39m[90m 10 |[39m             ({ container } [33m=[39m render(
+     [90m    |[39m                                    [31m[1m^[22m[39m
+     [90m 11 |[39m                 [33m<[39m[33mUtilizationBar[39m usedCapacity[33m=[39m{[35m50[39m} capacity[33m=[39m{[35m100[39m} [33m/[39m[33m>[39m
+     [90m 12 |[39m             ))[33m;[39m
+     [90m 13 |[39m         })[33m;[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at src/components/__tests__/UtilizationBar.test.js:10:36
+      at act (node_modules/react/cjs/react.development.js:2512:16)
+      at Object.<anonymous> (src/components/__tests__/UtilizationBar.test.js:9:12)
+
+PASS src/components/__tests__/index.test.js
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+PASS src/components/__tests__/reportWebVitals.test.js
+PASS src/components/__tests__/HomePage.test.js
+  ● Console
+
+    console.error
+      Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
+
+    [0m [90m  7 |[39m     [36mlet[39m getByText[33m;[39m
+     [90m  8 |[39m     act(() [33m=>[39m { [90m// Act so that the component is fully rendered before getting the text content[39m
+    [31m[1m>[22m[39m[90m  9 |[39m         ({ getByText } [33m=[39m render([33m<[39m[33mHomePage[39m [35m/>)); /[39m[33m/[39m [33mRender[39m the homepage[33m,[39m [36mget[39m the text content
+     [90m    |[39m                                [31m[1m^[22m[39m
+     [90m 10 |[39m     })[33m;[39m
+     [90m 11 |[39m     expect(getByText([32m'InventoryMan'[39m))[33m.[39mtoBeInTheDocument()[33m;[39m [90m// Checking for the title, description, and the GitHub link[39m
+     [90m 12 |[39m     expect(getByText([32m'A basic inventory management application created as part of the SkillStorm SDET Apprenticeship.'[39m))[33m.[39mtoBeInTheDocument()[33m;[39m[0m
+
+      at printWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:71:30)
+      at error (node_modules/react-dom/cjs/react-dom-test-utils.development.js:45:7)
+      at actWithWarning (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1736:7)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at src/components/__tests__/HomePage.test.js:9:32
+      at act (node_modules/react/cjs/react.development.js:2512:16)
+      at Object.<anonymous> (src/components/__tests__/HomePage.test.js:8:8)
+      at TestScheduler.scheduleTests (node_modules/@jest/core/build/TestScheduler.js:333:13)
+      at runJest (node_modules/@jest/core/build/runJest.js:404:19)
+      at _run10000 (node_modules/@jest/core/build/cli/index.js:320:7)
+      at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
+
+----------------------|---------|----------|---------|---------|-----------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s     
+----------------------|---------|----------|---------|---------|-----------------------
+All files             |   88.72 |    81.57 |    89.7 |   89.39 |                       
+ src                  |   28.57 |       75 |      50 |   28.57 |                       
+  App.js              |   66.66 |      100 |      50 |   66.66 | 13                    
+  index.js            |       0 |      100 |     100 |       0 | 7-17                  
+  reportWebVitals.js  |      25 |       75 |      50 |      25 | 3-8                   
+ src/components       |   92.57 |    81.94 |   90.56 |   93.49 |                       
+  HomePage.js         |     100 |      100 |     100 |     100 |                       
+  ItemForm.js         |    86.2 |       75 |      80 |    87.5 | 56-57,67-68,82,95-106 
+  ItemList.js         |   97.72 |    83.33 |     100 |   97.67 | 57                    
+  UtilizationBar.js   |     100 |      100 |     100 |     100 |                       
+  WarehouseForm.js    |   91.42 |       85 |      75 |   93.93 | 53,66                 
+  WarehouseList.js    |   96.42 |    83.33 |     100 |   96.29 | 41                    
+ src/services         |     100 |      100 |     100 |     100 |                       
+  itemService.js      |     100 |      100 |     100 |     100 |                       
+  warehouseService.js |     100 |      100 |     100 |     100 |                       
+----------------------|---------|----------|---------|---------|-----------------------
+
+Test Suites: 11 passed, 11 total
+Tests:       57 passed, 57 total
+Snapshots:   0 total
+Time:        6.74 s
+Ran all test suites.
+[Pipeline] sh
++ cd backend
++ mvn test jacoco:report
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.skillstorm:inventoryman >---------------------
+[INFO] Building InventoryMan 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:prepare-agent (default) @ inventoryman ---
+[INFO] argLine set to "-javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=/var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec"
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ inventoryman ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ inventoryman ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ inventoryman ---
+[INFO] Copying 16 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ inventoryman ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ inventoryman ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+Before Testing: Initializing Item
+Before Testing: Initializing Warehouse
+com.skillstorm.inventoryman.models.Warehouse@6a1568d6
+After Testing: Finished testing!
+After Testing: Finished testing!
+[INFO] Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.041 s - in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 25, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+
+ +-------------------------------------------------------------------------------+
+ | WARNING:                                                                      |
+ | The junit-platform-surefire-provider has been deprecated and is scheduled to  |
+ | be removed in JUnit Platform 1.4. Please use the built-in support in Maven    |
+ | Surefire >= 2.22.0 instead.                                                   |
+ | » https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven |
+ +-------------------------------------------------------------------------------+
+
+[INFO] Running RunCucumberTest
+
+@addWarehouse
+Scenario Outline: Adding a new warehouse                                                    # com/skillstorm/inventoryman/00_addWarehouse.feature:14
+15:39:04.366 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:39:04.486 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:39:06 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I have navigated to the Add Warehouse page
+  Given I have navigated to the Add Warehouse page                                          # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.navigateToAddWarehousePage()
+Step: I input the warehouse name validtest
+  When I input the warehouse name "validtest"                                               # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.inputWarehouseName(java.lang.String)
+Step: I provide the warehouse capacity 10
+  And I provide the warehouse capacity "10"                                                 # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.provideWarehouseCapacity(java.lang.String)
+Step: I press the Create button to submit the warehouse form
+  And I press the Create button to submit the warehouse form                                # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.pressSubmitWarehouseButton()
+Step: I should be taken to the Warehouses overview page
+  Then I should be taken to the Warehouses overview page if the warehouse details are valid # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.takenToWarehousesOverviewPage()
+Step: I should see the new warehouse validtest listed on the Warehouses page
+Warehouse card number: 3
+  And I should see the new warehouse "validtest" listed on the Warehouses page              # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyWarehouseInWarehousesPage(java.lang.String)
+Step: I should find the capacity 10 shown on the Warehouses page
+  And I should find the capacity "10" shown on the Warehouses page                          # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyCapacityInWarehousesPage(java.lang.String)
+
+@addWarehouse
+Scenario Outline: Adding a new warehouse                                                    # com/skillstorm/inventoryman/00_addWarehouse.feature:15
+15:39:19.662 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:39:19.674 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:39:20 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I have navigated to the Add Warehouse page
+  Given I have navigated to the Add Warehouse page                                          # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.navigateToAddWarehousePage()
+Step: I input the warehouse name validtest2
+  When I input the warehouse name "validtest2"                                              # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.inputWarehouseName(java.lang.String)
+Step: I provide the warehouse capacity 100
+  And I provide the warehouse capacity "100"                                                # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.provideWarehouseCapacity(java.lang.String)
+Step: I press the Create button to submit the warehouse form
+  And I press the Create button to submit the warehouse form                                # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.pressSubmitWarehouseButton()
+Step: I should be taken to the Warehouses overview page
+  Then I should be taken to the Warehouses overview page if the warehouse details are valid # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.takenToWarehousesOverviewPage()
+Step: I should see the new warehouse validtest2 listed on the Warehouses page
+Warehouse card number: 4
+  And I should see the new warehouse "validtest2" listed on the Warehouses page             # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyWarehouseInWarehousesPage(java.lang.String)
+Step: I should find the capacity 100 shown on the Warehouses page
+  And I should find the capacity "100" shown on the Warehouses page                         # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyCapacityInWarehousesPage(java.lang.String)
+
+@addWarehouse
+Scenario Outline: Adding a new warehouse                                                    # com/skillstorm/inventoryman/00_addWarehouse.feature:16
+15:39:34.800 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:39:34.818 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:39:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I have navigated to the Add Warehouse page
+  Given I have navigated to the Add Warehouse page                                          # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.navigateToAddWarehousePage()
+Step: I input the warehouse name invalidtest
+  When I input the warehouse name "invalidtest"                                             # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.inputWarehouseName(java.lang.String)
+Step: I provide the warehouse capacity 1000
+  And I provide the warehouse capacity "1000"                                               # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.provideWarehouseCapacity(java.lang.String)
+Step: I press the Create button to submit the warehouse form
+  And I press the Create button to submit the warehouse form                                # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.pressSubmitWarehouseButton()
+Step: I should be taken to the Warehouses overview page
+  Then I should be taken to the Warehouses overview page if the warehouse details are valid # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.takenToWarehousesOverviewPage()
+Step: I should see the new warehouse invalidtest listed on the Warehouses page
+Warehouse card number: 3
+  And I should see the new warehouse "invalidtest" listed on the Warehouses page            # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyWarehouseInWarehousesPage(java.lang.String)
+Step: I should find the capacity 1000 shown on the Warehouses page
+  And I should find the capacity "1000" shown on the Warehouses page                        # com.skillstorm.cucumber.CRUDTests.AddWarehouseSteps.verifyCapacityInWarehousesPage(java.lang.String)
+
+@addItem
+Scenario Outline: Adding items                                            # com/skillstorm/inventoryman/01_addItem.feature:15
+15:39:48.604 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:39:48.623 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:39:49 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+HEADLESS value: 'true'
+  Given I am on the Add an Item page                                      # com.skillstorm.cucumber.CRUDTests.AddItemSteps.loadAddItemWebsite()
+Step: I enter validitem in the added item name field
+  When I enter "validitem" in the added item name field                   # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterItemName(java.lang.String)
+Step: I enter validdescription in the added item description field
+  And I enter "validdescription" in the added item description field      # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemDescription(java.lang.String)
+Step: I enter 1 in the item quantity field
+  And I enter "1" in the added item quantity field                        # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemQuantity(java.lang.String)
+Step: I enter 5 in the item size field
+  And I enter "5" in the added item size field                            # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemSize(java.lang.String)
+Step: I select validtest from the warehouse dropdown
+Selected warehouse: validtest
+  And I select "validtest" from the warehouse dropdown for the added item # com.skillstorm.cucumber.CRUDTests.AddItemSteps.selectAddedItemWarehouse(java.lang.String)
+Step: I click the Create button to submit the added item
+  And I click the Create button to submit the added item                  # com.skillstorm.cucumber.CRUDTests.AddItemSteps.clickSubmitAddedItemButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the item is valid # com.skillstorm.cucumber.CRUDTests.AddItemSteps.amIOnWarehousesPage()
+
+@addItem
+Scenario Outline: Adding items                                             # com/skillstorm/inventoryman/01_addItem.feature:16
+15:40:00.762 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:40:00.808 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:40:01 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+HEADLESS value: 'true'
+  Given I am on the Add an Item page                                       # com.skillstorm.cucumber.CRUDTests.AddItemSteps.loadAddItemWebsite()
+Step: I enter validitem2 in the added item name field
+  When I enter "validitem2" in the added item name field                   # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterItemName(java.lang.String)
+Step: I enter validdescription2 in the added item description field
+  And I enter "validdescription2" in the added item description field      # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemDescription(java.lang.String)
+Step: I enter 2 in the item quantity field
+  And I enter "2" in the added item quantity field                         # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemQuantity(java.lang.String)
+Step: I enter 10 in the item size field
+  And I enter "10" in the added item size field                            # com.skillstorm.cucumber.CRUDTests.AddItemSteps.enterAddedItemSize(java.lang.String)
+Step: I select validtest2 from the warehouse dropdown
+Selected warehouse: validtest2
+  And I select "validtest2" from the warehouse dropdown for the added item # com.skillstorm.cucumber.CRUDTests.AddItemSteps.selectAddedItemWarehouse(java.lang.String)
+Step: I click the Create button to submit the added item
+  And I click the Create button to submit the added item                   # com.skillstorm.cucumber.CRUDTests.AddItemSteps.clickSubmitAddedItemButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the item is valid  # com.skillstorm.cucumber.CRUDTests.AddItemSteps.amIOnWarehousesPage()
+
+@utilBarRendering
+Scenario Outline: Checking if utilization bar renders                                              # com/skillstorm/inventoryman/02_utilBarRendering.feature:10
+15:40:13.152 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:40:13.159 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:40:13 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+  Given I am on the page with the Warehouses cards                                                 # com.skillstorm.cucumber.UITests.ViewUtilizationSteps.onWarehousesPageString()
+Warehouse card number: 4
+  When the warehouse "validtest" is displaying on the page                                         # com.skillstorm.cucumber.UITests.ViewUtilizationSteps.warehouseIsDisplaying(java.lang.String)
+  Then I should see the utilization bar for the "validtest" warehouse displaying "50%" utilization # com.skillstorm.cucumber.UITests.ViewUtilizationSteps.utilizationBarIsDisplaying(java.lang.String,java.lang.String)
+
+@editWarehouse
+Scenario Outline: Editing warehouse                                                   # com/skillstorm/inventoryman/03_editWarehouse.feature:16
+15:40:24.530 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:40:24.540 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:40:25 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am on the Warehouses page                                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.loadWebsite()
+Step: I find the validtest warehouse in the Warehouses page
+Warehouse card number: 4
+  When I find the "validtest" warehouse in the Warehouses page                        # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.findWarehouse(java.lang.String)
+Step: I click the Edit button to edit the warehouse
+  And I click the Edit button to edit the warehouse                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.clickEditButton()
+Step: I should be redirected to the Edit Warehouse page
+  Then I should be redirected to the Edit Warehouse page                              # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.isOnEditWarehousePage()
+Step: I enter editedtest in the warehouse name field
+  When I enter "editedtest" in the warehouse name field                               # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.enterWarehouseName(java.lang.String)
+Step: I enter 123 in the warehouse capacity field
+  And I enter "123" in the warehouse capacity field                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.enterWarehouseCapacity(java.lang.String)
+Step: I click the Update button to submit the warehouse
+  And I click the Update button to submit the warehouse                               # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.clickSubmitWarehouseButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the edited warehouse is valid # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.isOnWarehousesPageAfterEdit()
+Step: I should see the warehouse editedtest in the Warehouses page
+Warehouse card number: 2
+  And I should see the edited warehouse "editedtest" in the Warehouses page           # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.checkEditedWarehouse(java.lang.String)
+
+@editWarehouse
+Scenario Outline: Editing warehouse                                                   # com/skillstorm/inventoryman/03_editWarehouse.feature:17
+15:40:44.831 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:40:44.841 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:40:45 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am on the Warehouses page                                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.loadWebsite()
+Step: I find the validtest2 warehouse in the Warehouses page
+Warehouse card number: 5
+  When I find the "validtest2" warehouse in the Warehouses page                       # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.findWarehouse(java.lang.String)
+Step: I click the Edit button to edit the warehouse
+  And I click the Edit button to edit the warehouse                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.clickEditButton()
+Step: I should be redirected to the Edit Warehouse page
+  Then I should be redirected to the Edit Warehouse page                              # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.isOnEditWarehousePage()
+Step: I enter orphantestwh in the warehouse name field
+  When I enter "orphantestwh" in the warehouse name field                             # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.enterWarehouseName(java.lang.String)
+Step: I enter 456 in the warehouse capacity field
+  And I enter "456" in the warehouse capacity field                                   # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.enterWarehouseCapacity(java.lang.String)
+Step: I click the Update button to submit the warehouse
+  And I click the Update button to submit the warehouse                               # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.clickSubmitWarehouseButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the edited warehouse is valid # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.isOnWarehousesPageAfterEdit()
+Step: I should see the warehouse orphantestwh in the Warehouses page
+Warehouse card number: 5
+  And I should see the edited warehouse "orphantestwh" in the Warehouses page         # com.skillstorm.cucumber.CRUDTests.EditWarehouseSteps.checkEditedWarehouse(java.lang.String)
+
+@editItem
+Scenario Outline: Editing items                                                  # com/skillstorm/inventoryman/04_editItem.feature:20
+15:41:09.252 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:41:09.259 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:41:09 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am on the Items page                                                   # com.skillstorm.cucumber.CRUDTests.EditItemSteps.loadWebsite()
+Step: I find the validitem item in the Items page
+  When I find the item "validitem" in the Items page                             # com.skillstorm.cucumber.CRUDTests.EditItemSteps.findItem(java.lang.String)
+Step: I click the Edit button to edit the item
+  And I click the Edit button to edit the item                                   # com.skillstorm.cucumber.CRUDTests.EditItemSteps.clickEditButton()
+Step: I should be redirected to the Edit Item page
+  Then I should be redirected to the Edit Item page                              # com.skillstorm.cucumber.CRUDTests.EditItemSteps.isOnEditItemPage()
+Step: I enter orphantestitem in the item name field
+  When I enter the new name "orphantestitem" in the item name field              # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemName(java.lang.String)
+Step: I enter item 1 in the item description field
+  And I enter the new description "item 1" in the item description field         # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemDescription(java.lang.String)
+Step: I enter 5 in the item quantity field
+  And I enter the new quantity "5" in the item quantity field                    # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemQuantity(java.lang.String)
+Step: I enter 1 in the item size field
+  And I enter the new size "1" in the item size field                            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemSize(java.lang.String)
+Step: I select orphantestwh from the warehouse dropdown
+Selected warehouse: orphantestwh
+  And I select the new item "orphantestwh" in the item warehouse dropdown        # com.skillstorm.cucumber.CRUDTests.EditItemSteps.selectWarehouse(java.lang.String)
+Step: I click the Update button to submit the edited item
+  And I click the Update button to submit the edited item                        # com.skillstorm.cucumber.CRUDTests.EditItemSteps.clickSubmitItemButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the edited item is valid # com.skillstorm.cucumber.CRUDTests.EditItemSteps.isOnItemsPageAfterEdit()
+Step: If I navigate to the Items page
+  And If I navigate to the Items page                                            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.navigateToItemsPage()
+Step: I should see the edited item orphantestitem in the Items page
+  And I should see the edited item "orphantestitem" in the Items page            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.checkEditedItem(java.lang.String)
+
+@editItem
+Scenario Outline: Editing items                                                  # com/skillstorm/inventoryman/04_editItem.feature:21
+15:41:34.587 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:41:34.594 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:41:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am on the Items page                                                   # com.skillstorm.cucumber.CRUDTests.EditItemSteps.loadWebsite()
+Step: I find the validitem2 item in the Items page
+  When I find the item "validitem2" in the Items page                            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.findItem(java.lang.String)
+Step: I click the Edit button to edit the item
+  And I click the Edit button to edit the item                                   # com.skillstorm.cucumber.CRUDTests.EditItemSteps.clickEditButton()
+Step: I should be redirected to the Edit Item page
+  Then I should be redirected to the Edit Item page                              # com.skillstorm.cucumber.CRUDTests.EditItemSteps.isOnEditItemPage()
+Step: I enter editeditem in the item name field
+  When I enter the new name "editeditem" in the item name field                  # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemName(java.lang.String)
+Step: I enter item 2 in the item description field
+  And I enter the new description "item 2" in the item description field         # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemDescription(java.lang.String)
+Step: I enter 10 in the item quantity field
+  And I enter the new quantity "10" in the item quantity field                   # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemQuantity(java.lang.String)
+Step: I enter 2 in the item size field
+  And I enter the new size "2" in the item size field                            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.enterItemSize(java.lang.String)
+Step: I select editedtest from the warehouse dropdown
+Selected warehouse: editedtest
+  And I select the new item "editedtest" in the item warehouse dropdown          # com.skillstorm.cucumber.CRUDTests.EditItemSteps.selectWarehouse(java.lang.String)
+Step: I click the Update button to submit the edited item
+  And I click the Update button to submit the edited item                        # com.skillstorm.cucumber.CRUDTests.EditItemSteps.clickSubmitItemButton()
+Step: I should be redirected to the Warehouses page
+  Then I should be redirected to the Warehouses page if the edited item is valid # com.skillstorm.cucumber.CRUDTests.EditItemSteps.isOnItemsPageAfterEdit()
+Step: If I navigate to the Items page
+  And If I navigate to the Items page                                            # com.skillstorm.cucumber.CRUDTests.EditItemSteps.navigateToItemsPage()
+Step: I should see the edited item editeditem in the Items page
+  And I should see the edited item "editeditem" in the Items page                # com.skillstorm.cucumber.CRUDTests.EditItemSteps.checkEditedItem(java.lang.String)
+
+@addingItemDataValidation
+Scenario Outline: Entering invalid quantity and size to create an item         # com/skillstorm/inventoryman/05_addingItemDataValidation.feature:15
+15:41:59.722 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:41:59.731 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:42:00 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+  Given I am on the Add Item page                                              # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.loadWebsite()
+Step: I enter invalidItem in the item name field
+  When I enter "invalidItem" in the item name field                            # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemName(java.lang.String)
+Step: I enter ValidDescription in the item description field
+  And I enter "ValidDescription" in the item description field                 # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemDescription(java.lang.String)
+Step: I enter 0 in the item quantity field
+  And I enter "0" in the item quantity field                                   # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemQuantity(java.lang.String)
+Step: I enter 1 in the item size field
+  And I enter "1" in the item size field                                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemSize(java.lang.String)
+Step: I select invalidtest from the warehouse dropdown
+Selected warehouse: invalidtest
+  And I select "invalidtest" from the warehouse dropdown                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.selectWarehouse(java.lang.String)
+Step: I click the Create button to submit the item
+  And I click the Create button to submit the item                             # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.clickSubmitItemButton()
+Step: I should see the alert message - Quantity and size must be at least 1.
+  Then The "Quantity and size must be at least 1." message should be displayed # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingItemDataValidation
+Scenario Outline: Entering invalid quantity and size to create an item         # com/skillstorm/inventoryman/05_addingItemDataValidation.feature:16
+15:42:12.849 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:42:12.859 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:42:13 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+  Given I am on the Add Item page                                              # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.loadWebsite()
+Step: I enter invalidItem in the item name field
+  When I enter "invalidItem" in the item name field                            # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemName(java.lang.String)
+Step: I enter ValidDescription in the item description field
+  And I enter "ValidDescription" in the item description field                 # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemDescription(java.lang.String)
+Step: I enter 1 in the item quantity field
+  And I enter "1" in the item quantity field                                   # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemQuantity(java.lang.String)
+Step: I enter 0 in the item size field
+  And I enter "0" in the item size field                                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemSize(java.lang.String)
+Step: I select invalidtest from the warehouse dropdown
+Selected warehouse: invalidtest
+  And I select "invalidtest" from the warehouse dropdown                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.selectWarehouse(java.lang.String)
+Step: I click the Create button to submit the item
+  And I click the Create button to submit the item                             # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.clickSubmitItemButton()
+Step: I should see the alert message - Quantity and size must be at least 1.
+  Then The "Quantity and size must be at least 1." message should be displayed # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingItemDataValidation
+Scenario Outline: Entering invalid quantity and size to create an item         # com/skillstorm/inventoryman/05_addingItemDataValidation.feature:17
+15:42:25.924 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:42:25.954 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:42:26 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+  Given I am on the Add Item page                                              # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.loadWebsite()
+Step: I enter invalidItem in the item name field
+  When I enter "invalidItem" in the item name field                            # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemName(java.lang.String)
+Step: I enter ValidDescription in the item description field
+  And I enter "ValidDescription" in the item description field                 # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemDescription(java.lang.String)
+Step: I enter -1 in the item quantity field
+  And I enter "-1" in the item quantity field                                  # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemQuantity(java.lang.String)
+Step: I enter 1 in the item size field
+  And I enter "1" in the item size field                                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemSize(java.lang.String)
+Step: I select invalidtest from the warehouse dropdown
+Selected warehouse: invalidtest
+  And I select "invalidtest" from the warehouse dropdown                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.selectWarehouse(java.lang.String)
+Step: I click the Create button to submit the item
+  And I click the Create button to submit the item                             # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.clickSubmitItemButton()
+Step: I should see the alert message - Quantity and size must be at least 1.
+  Then The "Quantity and size must be at least 1." message should be displayed # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingItemDataValidation
+Scenario Outline: Entering invalid quantity and size to create an item         # com/skillstorm/inventoryman/05_addingItemDataValidation.feature:18
+15:42:39.219 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:42:39.232 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:42:39 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+  Given I am on the Add Item page                                              # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.loadWebsite()
+Step: I enter invalidItem in the item name field
+  When I enter "invalidItem" in the item name field                            # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemName(java.lang.String)
+Step: I enter ValidDescription in the item description field
+  And I enter "ValidDescription" in the item description field                 # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemDescription(java.lang.String)
+Step: I enter 1 in the item quantity field
+  And I enter "1" in the item quantity field                                   # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemQuantity(java.lang.String)
+Step: I enter -1 in the item size field
+  And I enter "-1" in the item size field                                      # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemSize(java.lang.String)
+Step: I select invalidtest from the warehouse dropdown
+Selected warehouse: invalidtest
+  And I select "invalidtest" from the warehouse dropdown                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.selectWarehouse(java.lang.String)
+Step: I click the Create button to submit the item
+  And I click the Create button to submit the item                             # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.clickSubmitItemButton()
+Step: I should see the alert message - Quantity and size must be at least 1.
+  Then The "Quantity and size must be at least 1." message should be displayed # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingItemDataValidation
+Scenario Outline: Entering invalid quantity and size to create an item         # com/skillstorm/inventoryman/05_addingItemDataValidation.feature:19
+15:42:52.230 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:42:52.237 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:42:52 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Item page
+  Given I am on the Add Item page                                              # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.loadWebsite()
+Step: I enter invalidItem in the item name field
+  When I enter "invalidItem" in the item name field                            # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemName(java.lang.String)
+Step: I enter ValidDescription in the item description field
+  And I enter "ValidDescription" in the item description field                 # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemDescription(java.lang.String)
+Step: I enter -1 in the item quantity field
+  And I enter "-1" in the item quantity field                                  # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemQuantity(java.lang.String)
+Step: I enter -1 in the item size field
+  And I enter "-1" in the item size field                                      # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.enterItemSize(java.lang.String)
+Step: I select invalidtest from the warehouse dropdown
+Selected warehouse: invalidtest
+  And I select "invalidtest" from the warehouse dropdown                       # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.selectWarehouse(java.lang.String)
+Step: I click the Create button to submit the item
+  And I click the Create button to submit the item                             # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.clickSubmitItemButton()
+Step: I should see the alert message - Quantity and size must be at least 1.
+  Then The "Quantity and size must be at least 1." message should be displayed # com.skillstorm.cucumber.ValidationTests.ItemDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingWarehouseDataValidation
+Scenario Outline: Entering invalid capacity to create an warehouse                                 # com/skillstorm/inventoryman/06_addingWarehouseDataValidation.feature:13
+15:43:05.357 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:05.364 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:06 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Warehouses page
+  Given I am on the Add Warehouse page                                                             # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.loadWebsite()
+Step: I enterinvalidTest in the warehouse name field
+  When I enter a "invalidTest" in the warehouse name field                                         # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.selectSortingOption(java.lang.String)
+Step: I enter 0 in the warehouse capacity field
+  And I enter a "0" in the warehouse capacity field                                                # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.enterWarehouseCapacity(java.lang.String)
+Step: I click the Create button to submit the warehouse
+  And I click the Create button to submit the warehouse                                            # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.clickSubmitWarehouseButton()
+Step: I should see the alert message - Capacity must be positive.
+  Then The "Capacity must be positive." message should be displayed when entering invalid capacity # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@addingWarehouseDataValidation
+Scenario Outline: Entering invalid capacity to create an warehouse                                 # com/skillstorm/inventoryman/06_addingWarehouseDataValidation.feature:14
+15:43:16.083 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:16.094 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:16 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Add Warehouses page
+  Given I am on the Add Warehouse page                                                             # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.loadWebsite()
+Step: I enterinvalidTest in the warehouse name field
+  When I enter a "invalidTest" in the warehouse name field                                         # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.selectSortingOption(java.lang.String)
+Step: I enter -1 in the warehouse capacity field
+  And I enter a "-1" in the warehouse capacity field                                               # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.enterWarehouseCapacity(java.lang.String)
+Step: I click the Create button to submit the warehouse
+  And I click the Create button to submit the warehouse                                            # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.clickSubmitWarehouseButton()
+Step: I should see the alert message - Capacity must be positive.
+  Then The "Capacity must be positive." message should be displayed when entering invalid capacity # com.skillstorm.cucumber.ValidationTests.WarehouseDataValidationSteps.isInvalidDataAlertDisplayed(java.lang.String)
+
+@sortItems
+Scenario Outline: Sorted items                                              # com/skillstorm/inventoryman/07_sortItems.feature:10
+15:43:26.347 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:26.357 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:27 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am in the Items page                                              # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.loadWebsite()
+Step: I select to sort items by Name (Alphabetical)
+  When I select "Name (Alphabetical)" in the Sort By dropdown to sort Items # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.selectSortingOption(java.lang.String)
+Step: Items should be order by alphabetical
+[Bacon Crate, editeditem, Flatscreen TVs, orphantestitem, Toaster Strudels]
+[Bacon Crate, editeditem, Flatscreen TVs, orphantestitem, Toaster Strudels]
+  Then Items should be displayed in the page by "alphabetical" order        # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.isWarehousesOrdered(java.lang.String)
+
+@sortItems
+Scenario Outline: Sorted items                                   # com/skillstorm/inventoryman/07_sortItems.feature:11
+15:43:33.639 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:33.646 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:34 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am in the Items page                                   # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.loadWebsite()
+Step: I select to sort items by Quantity
+  When I select "Quantity" in the Sort By dropdown to sort Items # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.selectSortingOption(java.lang.String)
+Step: Items should be order by quantity
+  Then Items should be displayed in the page by "quantity" order # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.isWarehousesOrdered(java.lang.String)
+
+@sortItems
+Scenario Outline: Sorted items                                    # com/skillstorm/inventoryman/07_sortItems.feature:12
+15:43:41.165 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:41.183 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:41 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am in the Items page                                    # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.loadWebsite()
+Step: I select to sort items by Item Size
+  When I select "Item Size" in the Sort By dropdown to sort Items # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.selectSortingOption(java.lang.String)
+Step: Items should be order by size
+  Then Items should be displayed in the page by "size" order      # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.isWarehousesOrdered(java.lang.String)
+
+@sortItems
+Scenario Outline: Sorted items                                     # com/skillstorm/inventoryman/07_sortItems.feature:13
+15:43:48.517 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:48.535 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:49 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am in the Items page                                     # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.loadWebsite()
+Step: I select to sort items by Total Size
+  When I select "Total Size" in the Sort By dropdown to sort Items # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.selectSortingOption(java.lang.String)
+Step: Items should be order by total size
+  Then Items should be displayed in the page by "total size" order # com.skillstorm.cucumber.ValidationTests.SortItemsSteps.isWarehousesOrdered(java.lang.String)
+
+@sortWarehouses
+Scenario Outline: Sorted warehouses                                              # com/skillstorm/inventoryman/08_sortWarehouses.feature:20
+15:43:55.960 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:43:55.966 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:43:56 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am in the Warehouses page                                              # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.loadWebsite()
+Step: I select to sort warehouse by Name (Alphabetical)
+  When I select "Name (Alphabetical)" in the Sort By dropdown to sort Warehouses # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.selectSortingOption(java.lang.String)
+Step: Warehouse should be order by alphabetical
+[Cold Storage, editedtest, HVAC Warehouse, invalidtest, orphantestwh, Walk-in Freezer]
+[Cold Storage, editedtest, HVAC Warehouse, invalidtest, orphantestwh, Walk-in Freezer]
+  Then Warehouses should be displayed in the page by "alphabetical" order        # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.isWarehousesOrdered(java.lang.String)
+
+@sortWarehouses
+Scenario Outline: Sorted warehouses                                          # com/skillstorm/inventoryman/08_sortWarehouses.feature:21
+15:44:03.364 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:44:03.371 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:44:04 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am in the Warehouses page                                          # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.loadWebsite()
+Step: I select to sort warehouse by Utilization (%)
+  When I select "Utilization (%)" in the Sort By dropdown to sort Warehouses # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.selectSortingOption(java.lang.String)
+Step: Warehouse should be order by utilization
+  Then Warehouses should be displayed in the page by "utilization" order     # com.skillstorm.cucumber.ValidationTests.SortWarehousesSteps.isWarehousesOrdered(java.lang.String)
+
+@filterItems
+Scenario Outline: Filtering by Warehouse                                            # com/skillstorm/inventoryman/09_filterItems.feature:10
+15:44:10.722 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:44:10.729 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:44:11 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page with several items contained in warehouses
+  Given I am on the Items page with several items contained in warehouses           # com.skillstorm.cucumber.UITests.FilterItemSteps.loadWebsite()
+Step: I select to filter items by orphantestwh
+Selected warehouse: orphantestwh
+  When I select "orphantestwh" in the Filter by Warehouse dropdown to filter items  # com.skillstorm.cucumber.UITests.FilterItemSteps.filterByWarehouse(java.lang.String)
+Step: Only items from the orphantestwh warehouse should be displayed in the page
+  Then Only items from the "orphantestwh" warehouse should be displayed in the page # com.skillstorm.cucumber.UITests.FilterItemSteps.areItemsFiltered(java.lang.String)
+
+@filterItems
+Scenario Outline: Filtering by Warehouse                                          # com/skillstorm/inventoryman/09_filterItems.feature:11
+15:44:21.388 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:44:21.395 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:44:22 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page with several items contained in warehouses
+  Given I am on the Items page with several items contained in warehouses         # com.skillstorm.cucumber.UITests.FilterItemSteps.loadWebsite()
+Step: I select to filter items by editedtest
+Selected warehouse: editedtest
+  When I select "editedtest" in the Filter by Warehouse dropdown to filter items  # com.skillstorm.cucumber.UITests.FilterItemSteps.filterByWarehouse(java.lang.String)
+Step: Only items from the editedtest warehouse should be displayed in the page
+  Then Only items from the "editedtest" warehouse should be displayed in the page # com.skillstorm.cucumber.UITests.FilterItemSteps.areItemsFiltered(java.lang.String)
+
+@deleteItem
+Scenario Outline: Deleting items                                   # com/skillstorm/inventoryman/10_deleteItem.feature:12
+15:44:31.931 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:44:31.939 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:44:32 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Items page
+  Given I am viewing items                                         # com.skillstorm.cucumber.CRUDTests.DeleteItemSteps.loadItem()
+Step: I find the editeditem item in the Items page
+  When I find the item "editeditem" on the Items page              # com.skillstorm.cucumber.CRUDTests.DeleteItemSteps.findItemToDelete(java.lang.String)
+Step: I click the Delete button
+  And I click the Delete button                                    # com.skillstorm.cucumber.CRUDTests.DeleteItemSteps.clickDeleteButton()
+Step: I click the OK button to confirm the deletion
+  And I click the OK button to confirm the deletion                # com.skillstorm.cucumber.CRUDTests.DeleteItemSteps.clickOKButton()
+Step: The editeditem item should be deleted from the Items page
+  Then The item "editeditem" should be deleted from the Items page # com.skillstorm.cucumber.CRUDTests.DeleteItemSteps.itemDeleted(java.lang.String)
+
+@deleteWarehouse
+Scenario Outline: Deleting Warehouses                                         # com/skillstorm/inventoryman/11_deleteWarehouse.feature:12
+15:44:50.729 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:44:50.738 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:44:51 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am viewing the Warehouses                                           # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.loadWarehouses()
+Step: I find the orphantestwh warehouse in the Warehouses page
+Warehouse card number: 5
+  When I find the Warehouse "orphantestwh" on the page                        # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.findWarehouseToDelete(java.lang.String)
+Step: I click the Delete button to delete the Warehouse
+  And I click the Delete button to delete the Warehouse                       # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickDeleteWarehouseButton()
+Step: I click the OK button to confirm deletion
+  And I click the OK button to confirm deletion                               # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickOKButtonToConfirm()
+Step: The orphantestwh warehouse should be deleted from the Warehouses page
+Warehouse card number: -1
+  Then The warehouse "orphantestwh" should be deleted from the Warehouse page # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.warehouseDeleted(java.lang.String)
+
+@deleteWarehouse
+Scenario Outline: Deleting Warehouses                                       # com/skillstorm/inventoryman/11_deleteWarehouse.feature:13
+15:45:13.664 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:45:13.670 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:45:14 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am viewing the Warehouses                                         # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.loadWarehouses()
+Step: I find the editedtest warehouse in the Warehouses page
+Warehouse card number: 2
+  When I find the Warehouse "editedtest" on the page                        # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.findWarehouseToDelete(java.lang.String)
+Step: I click the Delete button to delete the Warehouse
+  And I click the Delete button to delete the Warehouse                     # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickDeleteWarehouseButton()
+Step: I click the OK button to confirm deletion
+  And I click the OK button to confirm deletion                             # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickOKButtonToConfirm()
+Step: The editedtest warehouse should be deleted from the Warehouses page
+Warehouse card number: -1
+  Then The warehouse "editedtest" should be deleted from the Warehouse page # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.warehouseDeleted(java.lang.String)
+
+@deleteWarehouse
+Scenario Outline: Deleting Warehouses                                        # com/skillstorm/inventoryman/11_deleteWarehouse.feature:14
+15:45:32.118 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:45:32.124 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:45:32 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the Warehouses page
+  Given I am viewing the Warehouses                                          # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.loadWarehouses()
+Step: I find the invalidtest warehouse in the Warehouses page
+Warehouse card number: 3
+  When I find the Warehouse "invalidtest" on the page                        # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.findWarehouseToDelete(java.lang.String)
+Step: I click the Delete button to delete the Warehouse
+  And I click the Delete button to delete the Warehouse                      # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickDeleteWarehouseButton()
+Step: I click the OK button to confirm deletion
+  And I click the OK button to confirm deletion                              # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.clickOKButtonToConfirm()
+Step: The invalidtest warehouse should be deleted from the Warehouses page
+Warehouse card number: -1
+  Then The warehouse "invalidtest" should be deleted from the Warehouse page # com.skillstorm.cucumber.CRUDTests.DeleteWarehouseSteps.warehouseDeleted(java.lang.String)
+
+@browserNavigation
+Scenario Outline: Navigating with the browser back/forward buttons # com/skillstorm/inventoryman/12_browserNavigation.feature:3
+15:45:50.757 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:45:50.767 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:45:51 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the landing page of InventoryMan
+  Given I am on the landing page of InventoryMan                   # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.loadWebsite()
+Step: I select the Warehouses page from the navigation bar
+  When I select the Warehouses page from the navigation bar        # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.selectWarehousesPage()
+Step: I select the Items page from the navigation bar
+  And I select the Items page from the navigation bar              # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.selectItemsPage()
+Step: I navigate back using the browser back button
+  And I navigate back using the browser back button                # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.navigateBack()
+Step: I should see the Warehouses page
+  Then I should see the Warehouses page                            # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.isOnWarehousesPage()
+Step: I navigate forward using the browser forward button
+  When I navigate forward using the browser forward button         # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.navigateForward()
+Step: I should see the Items page
+  Then I should see the Items page                                 # com.skillstorm.cucumber.FunctionalityTests.BrowserNavigationSteps.isOnItemsPage()
+
+@orphanRemoval
+Scenario Outline: Verifying orphaned items have been removed from the database   # com/skillstorm/inventoryman/13_orphanRemoval.feature:9
+15:45:58.149 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:45:58.156 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:45:58 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the items page after orphans have been removed
+  Given I am on the items page after the orphantestwh warehouse has been deleted # com.skillstorm.cucumber.ValidationTests.OrphanRemovalSteps.loadItemsAfterDeletion()
+Step: I should not see the orphaned item orphantestitem in the items list
+  Then I should not see the orphaned item "orphantestitem" in the items list     # com.skillstorm.cucumber.ValidationTests.OrphanRemovalSteps.verifyOrphanedItem(java.lang.String)
+
+@navBarFunctionality
+Scenario Outline: Verifying the different navigation tabs in the navigation bar work and highlight correctly # com/skillstorm/inventoryman/14_navBarFunctionality.feature:3
+15:46:10.457 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 128.0.6613.119 (resolved driver for Chrome 128)
+15:46:10.464 [main] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as /var/lib/jenkins/.cache/selenium/chromedriver/linux64/128.0.6613.119/chromedriver
+Sep 06, 2024 3:46:11 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 128, returning the closest version; found: 127; Please update to a Selenium version that supports CDP version 128
+Step: I am on the InventoryMan landing page
+  Given I am on the InventoryMan landing page                                                                # com.skillstorm.cucumber.UITests.NavBarSteps.loadWebsite()
+Step: I select the InventoryMan button
+  When I select the InventoryMan button                                                                      # com.skillstorm.cucumber.UITests.NavBarSteps.selectInventoryMan()
+Step: I should see that no other buttons are highlighted
+  Then I should see that no other buttons are highlighted                                                    # com.skillstorm.cucumber.UITests.NavBarSteps.noOtherButtonsHighlighted()
+Step: I am on the landing page for InventoryMan
+  And that I am on the landing page for InventoryMan                                                         # com.skillstorm.cucumber.UITests.NavBarSteps.onInventoryManLandingPage()
+Step: I select the Warehouses button
+  When I select the Warehouses button                                                                        # com.skillstorm.cucumber.UITests.NavBarSteps.selectWarehouses()
+Step: I should see that the Warehouses button is highlighted
+  Then I should see that the Warehouses button is highlighted                                                # com.skillstorm.cucumber.UITests.NavBarSteps.warehousesButtonHighlighted()
+Step: I am on the page with the Warehouses
+  And I am on the page with the Warehouses                                                                   # com.skillstorm.cucumber.UITests.NavBarSteps.onWarehousesPage()
+Step: I select the Items button
+  When I select the Items button                                                                             # com.skillstorm.cucumber.UITests.NavBarSteps.selectItems()
+Step: I should see that the Items button is highlighted
+  Then I should see that the Items button is highlighted                                                     # com.skillstorm.cucumber.UITests.NavBarSteps.itemsButtonHighlighted()
+Step: I am on the Items page
+  And that I am on the page with the Items                                                                   # com.skillstorm.cucumber.UITests.NavBarSteps.onThePageItemsPage()
+Step: I select the Add Warehouse button
+  When I am on the page where I can add Warehouses                                                           # com.skillstorm.cucumber.UITests.NavBarSteps.selectAddWarehouse()
+Step: I should see that the Add Warehouse button is highlighted
+  Then I should see that the Add Warehouse button is highlighted                                             # com.skillstorm.cucumber.UITests.NavBarSteps.addWarehouseButtonHighlighted()
+Step: I am on the page where I can add Warehouses
+  And that I am on the page where I can add Warehouses                                                       # com.skillstorm.cucumber.UITests.NavBarSteps.onAddWarehousePage()
+Step: I select the Add Item button
+  When I select the Add Item button                                                                          # com.skillstorm.cucumber.UITests.NavBarSteps.selectAddItem()
+Step: I should see that the Add Item button is highlighted
+  Then I should see that the Add Item button is highlighted                                                  # com.skillstorm.cucumber.UITests.NavBarSteps.addItemButtonHighlighted()
+Step: I am on the page where I can add items
+  And I am on the page where I can add items                                                                 # com.skillstorm.cucumber.UITests.NavBarSteps.onTheAddItemPage()
+┌──────────────────────────────────────────────────────────────────────────┐
+│ View your Cucumber Report at:                                            │
+│ https://reports.cucumber.io/reports/5ac29b5a-d64e-446b-8ca6-e5849b6748be │
+│                                                                          │
+│ This report will self-destruct in 24h.                                   │
+│ Keep reports forever: https://reports.cucumber.io/profile                │
+└──────────────────────────────────────────────────────────────────────────┘[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 443.292 s - in RunCucumberTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:report (report) @ inventoryman ---
+[INFO] Loading execution data file /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec
+[INFO] Analyzed bundle 'InventoryMan' with 9 classes
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:check (report) @ inventoryman ---
+[INFO] Loading execution data file /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec
+[INFO] Analyzed bundle 'inventoryman' with 9 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.12:report (default-cli) @ inventoryman ---
+[INFO] Loading execution data file /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/jacoco.exec
+[INFO] Analyzed bundle 'InventoryMan' with 9 classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  07:41 min
+[INFO] Finished at: 2024-09-06T15:46:24Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Archive JaCoCo Report)
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Analyze Frontend with SonarCloud)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: SonarCloud
+[Pipeline] {
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend
+[Pipeline] {
+[Pipeline] sh
++ npx sonar-scanner -Dsonar.projectKey=salmoncore_InventoryMan -Dsonar.projectName=InventoryMan -Dsonar.sources=src '-Dsonar.exclusions=**/__tests__/**' -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+INFO: Scanner configuration file: /var/lib/jenkins/.npm/_npx/4c634e31006915c7/node_modules/sonar-scanner/conf/sonar-scanner.properties
+INFO: Project root configuration file: NONE
+INFO: SonarQube Scanner 3.1.0.1141
+INFO: Java 17.0.12 Amazon.com Inc. (64-bit)
+INFO: Linux 6.1.102-111.182.amzn2023.x86_64 amd64
+INFO: User cache: /var/lib/jenkins/.sonar/cache
+INFO: SonarQube server 11.1.1.164
+INFO: Default locale: "en", source code encoding: "UTF-8" (analysis is platform dependent)
+INFO: Load global settings
+INFO: Load global settings (done) | time=347ms
+INFO: Server id: 1BD809FA-AWHW8ct9-T_TB3XqouNu
+INFO: Loading required plugins
+INFO: Load plugins index
+INFO: Load plugins index (done) | time=174ms
+INFO: Load/download plugins
+INFO: Load/download plugins (done) | time=41ms
+INFO: Found an active CI vendor: 'Jenkins'
+INFO: Load project settings for component key: 'salmoncore_InventoryMan'
+INFO: Load project settings for component key: 'salmoncore_InventoryMan' (done) | time=163ms
+INFO: Process project properties
+INFO: Project key: salmoncore_InventoryMan
+INFO: Base dir: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend
+INFO: Working dir: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork
+INFO: Load project branches
+INFO: Load project branches (done) | time=171ms
+INFO: Check ALM binding of project 'salmoncore_InventoryMan'
+INFO: Detected project binding: BOUND
+INFO: Check ALM binding of project 'salmoncore_InventoryMan' (done) | time=156ms
+INFO: Load project pull requests
+INFO: Load project pull requests (done) | time=149ms
+INFO: Load branch configuration
+INFO: Load branch configuration (done) | time=6ms
+INFO: Load quality profiles
+INFO: Load quality profiles (done) | time=413ms
+INFO: Load active rules
+INFO: Load active rules (done) | time=8153ms
+INFO: Organization key: salmoncore
+INFO: Preprocessing files...
+INFO: 2 languages detected in 15 preprocessed files
+INFO: 11 files ignored because of inclusion/exclusion patterns
+INFO: 0 files ignored because of scm ignore settings
+INFO: Loading plugins for detected languages
+INFO: Load/download plugins
+INFO: Load/download plugins (done) | time=85ms
+INFO: Load project repositories
+INFO: Load project repositories (done) | time=173ms
+INFO: Indexing files...
+INFO: Project configuration:
+INFO:   Excluded sources: **/build-wrapper-dump.json, **/__tests__/**
+INFO: 15 files indexed
+INFO: Quality profile for css: Sonar way
+INFO: Quality profile for js: Sonar way
+INFO: ------------- Run sensors on module InventoryMan
+INFO: Load metrics repository
+INFO: Load metrics repository (done) | time=166ms
+INFO: Sensor cache enabled
+INFO: Load sensor cache
+INFO: Load sensor cache (50 KB) | time=1468ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=3ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=3ms
+INFO: Sensor Java Config Sensor [iac]
+INFO: 0 source files to be analyzed
+INFO: 0/0 source files have been analyzed
+INFO: Sensor Java Config Sensor [iac] (done) | time=55ms
+INFO: Sensor JavaScript/TypeScript analysis [javascript]
+INFO: Detected os: Linux arch: amd64 alpine: false. Platform: LINUX_X64
+INFO: Using embedded Node.js runtime
+INFO: Using Node.js executable: '/var/lib/jenkins/.sonar/js/node-runtime/node'.
+INFO: Memory configuration: OS (3827 MB), Node.js (1962 MB).
+INFO: Found 0 tsconfig.json file(s): []
+INFO: Creating TypeScript program
+INFO: TypeScript configuration file /tmp/tmp-1024268-eohwO6b3ve3u
+INFO: 12 source files to be analyzed
+INFO: Starting analysis with current program
+INFO: Analyzed 12 file(s) with current program
+INFO: 12/12 source files have been analyzed
+INFO: Hit the cache for 0 out of 12
+INFO: Miss the cache for 12 out of 12: ANALYSIS_MODE_INELIGIBLE [12/12]
+INFO: Sensor JavaScript/TypeScript analysis [javascript] (done) | time=19537ms
+INFO: Sensor CSS Rules [javascript]
+INFO: 2 source files to be analyzed
+INFO: 2/2 source files have been analyzed
+INFO: Hit the cache for 0 out of 0
+INFO: Miss the cache for 0 out of 0
+INFO: Sensor CSS Rules [javascript] (done) | time=289ms
+INFO: Sensor JavaScript/TypeScript Coverage [javascript]
+INFO: Analysing [/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/coverage/lcov.info]
+INFO: Sensor JavaScript/TypeScript Coverage [javascript] (done) | time=18ms
+INFO: Sensor CSS Metrics [javascript]
+INFO: Sensor CSS Metrics [javascript] (done) | time=31ms
+INFO: Sensor IaC Docker Sensor [iac]
+INFO: 0 source files to be analyzed
+INFO: 0/0 source files have been analyzed
+INFO: Sensor IaC Docker Sensor [iac] (done) | time=137ms
+INFO: Sensor Serverless configuration file sensor [security]
+INFO: 0 Serverless function entries were found in the project
+INFO: 0 Serverless function handlers were kept as entrypoints
+INFO: Sensor Serverless configuration file sensor [security] (done) | time=5ms
+INFO: Sensor AWS SAM template file sensor [security]
+INFO: Sensor AWS SAM template file sensor [security] (done) | time=0ms
+INFO: Sensor AWS SAM Inline template file sensor [security]
+INFO: Sensor AWS SAM Inline template file sensor [security] (done) | time=1ms
+INFO: Sensor TextAndSecretsSensor [text]
+INFO: Available processors: 2
+INFO: Using 2 threads for analysis.
+INFO: The property "sonar.tests" is not set. To improve the analysis accuracy, we categorize a file as a test file if any of the following is true:
+  * The filename starts with "test"
+  * The filename contains "test." or "tests."
+  * Any directory in the file path is named: "doc", "docs", "test" or "tests"
+  * Any directory in the file path has a name ending in "test" or "tests"
+
+INFO: Using git CLI to retrieve untracked files
+INFO: Analyzing language associated files and files included via "sonar.text.inclusions" that are tracked by git
+INFO: 14 source files to be analyzed
+INFO: 14/14 source files have been analyzed
+INFO: Sensor TextAndSecretsSensor [text] (done) | time=1346ms
+INFO: Sensor JavaSecuritySensor [security]
+INFO: Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5147, S5334, S5496, S5883, S6096, S6173, S6287, S6350, S6384, S6390, S6398, S6399, S6547, S6549
+INFO: Load type hierarchy and UCFGs: Starting
+INFO: Load type hierarchy: Starting
+INFO: Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/ucfg2/java
+INFO: Read 0 type definitions
+INFO: Load type hierarchy: Time spent was 00:00:00.004
+INFO: Load UCFGs: Starting
+INFO: Load UCFGs: Time spent was 00:00:00.000
+INFO: Load type hierarchy and UCFGs: Time spent was 00:00:00.005
+INFO: No UCFGs have been included for analysis.
+INFO: java security sensor: Time spent was 00:00:00.029
+INFO: java security sensor: Begin: 2024-09-06T15:47:06.856672156Z, End: 2024-09-06T15:47:06.886548092Z, Duration: 00:00:00.029
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:06.861564418Z, End: 2024-09-06T15:47:06.867498416Z, Duration: 00:00:00.005
+    Load type hierarchy: Begin: 2024-09-06T15:47:06.861699648Z, End: 2024-09-06T15:47:06.866277324Z, Duration: 00:00:00.004
+    Load UCFGs: Begin: 2024-09-06T15:47:06.866848605Z, End: 2024-09-06T15:47:06.866947908Z, Duration: 00:00:00.000
+INFO: java security sensor peak memory: 138 MB
+INFO: Sensor JavaSecuritySensor [security] (done) | time=37ms
+INFO: Sensor CSharpSecuritySensor [security]
+INFO: Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5334, S5883, S6096, S6173, S6287, S6350, S6399, S6639, S6641
+INFO: Load type hierarchy and UCFGs: Starting
+INFO: Load type hierarchy: Starting
+INFO: Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/ucfg2/cs
+INFO: Read 0 type definitions
+INFO: Load type hierarchy: Time spent was 00:00:00.001
+INFO: Load UCFGs: Starting
+INFO: Load UCFGs: Time spent was 00:00:00.000
+INFO: Load type hierarchy and UCFGs: Time spent was 00:00:00.002
+INFO: No UCFGs have been included for analysis.
+INFO: csharp security sensor: Time spent was 00:00:00.004
+INFO: csharp security sensor: Begin: 2024-09-06T15:47:06.893011273Z, End: 2024-09-06T15:47:06.897640489Z, Duration: 00:00:00.004
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:06.894244451Z, End: 2024-09-06T15:47:06.896956090Z, Duration: 00:00:00.002
+    Load type hierarchy: Begin: 2024-09-06T15:47:06.894278368Z, End: 2024-09-06T15:47:06.896103915Z, Duration: 00:00:00.001
+    Load UCFGs: Begin: 2024-09-06T15:47:06.896697057Z, End: 2024-09-06T15:47:06.896799801Z, Duration: 00:00:00.000
+INFO: csharp security sensor peak memory: 138 MB
+INFO: Sensor CSharpSecuritySensor [security] (done) | time=6ms
+INFO: Sensor PhpSecuritySensor [security]
+INFO: Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5334, S5335, S5883, S6173, S6287, S6350
+INFO: Load type hierarchy and UCFGs: Starting
+INFO: Load type hierarchy: Starting
+INFO: Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/ucfg2/php
+INFO: Read 0 type definitions
+INFO: Load type hierarchy: Time spent was 00:00:00.000
+INFO: Load UCFGs: Starting
+INFO: Load UCFGs: Time spent was 00:00:00.000
+INFO: Load type hierarchy and UCFGs: Time spent was 00:00:00.000
+INFO: No UCFGs have been included for analysis.
+INFO: php security sensor: Time spent was 00:00:00.001
+INFO: php security sensor: Begin: 2024-09-06T15:47:06.899743602Z, End: 2024-09-06T15:47:06.901190220Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:06.900046160Z, End: 2024-09-06T15:47:06.900693922Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2024-09-06T15:47:06.900071327Z, End: 2024-09-06T15:47:06.900258892Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:06.900400757Z, End: 2024-09-06T15:47:06.900447836Z, Duration: 00:00:00.000
+INFO: php security sensor peak memory: 138 MB
+INFO: Sensor PhpSecuritySensor [security] (done) | time=7ms
+INFO: Sensor PythonSecuritySensor [security]
+INFO: Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5147, S5334, S5496, S6287, S6350, S6639, S6680, S6776, S6839
+INFO: Load type hierarchy and UCFGs: Starting
+INFO: Load type hierarchy: Starting
+INFO: Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/ucfg2/python
+INFO: Read 0 type definitions
+INFO: Load type hierarchy: Time spent was 00:00:00.000
+INFO: Load UCFGs: Starting
+INFO: Load UCFGs: Time spent was 00:00:00.000
+INFO: Load type hierarchy and UCFGs: Time spent was 00:00:00.001
+INFO: No UCFGs have been included for analysis.
+INFO: python security sensor: Time spent was 00:00:00.003
+INFO: python security sensor: Begin: 2024-09-06T15:47:06.906505178Z, End: 2024-09-06T15:47:06.909666349Z, Duration: 00:00:00.003
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:06.906759704Z, End: 2024-09-06T15:47:06.908314823Z, Duration: 00:00:00.001
+    Load type hierarchy: Begin: 2024-09-06T15:47:06.906956434Z, End: 2024-09-06T15:47:06.907175613Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:06.907996072Z, End: 2024-09-06T15:47:06.908103837Z, Duration: 00:00:00.000
+INFO: python security sensor peak memory: 138 MB
+INFO: Sensor PythonSecuritySensor [security] (done) | time=5ms
+INFO: Sensor JsSecuritySensor [security]
+INFO: Enabled taint analysis rules: S5131, S6287, S6350, S5144, S5334, S2631, S3649, S6096, S5147, S5883, S2076, S5696, S5146, S6105, S2083
+INFO: Load type hierarchy and UCFGs: Starting
+INFO: Load type hierarchy: Starting
+INFO: Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/ucfg2/js
+INFO: Read 0 type definitions
+INFO: Load type hierarchy: Time spent was 00:00:00.001
+INFO: Load UCFGs: Starting
+INFO: Reading UCFGs from: /var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/ucfg2/js
+INFO: Load UCFGs: Time spent was 00:00:00.385
+INFO: Load type hierarchy and UCFGs: Time spent was 00:00:00.387
+INFO: Analyzing 82 UCFGs to detect vulnerabilities.
+INFO: Check cache: Starting
+INFO: Load cache: Starting
+INFO: Load cache: Time spent was 00:00:00.000
+INFO: Check cache: Time spent was 00:00:00.000
+INFO: Create runtime call graph: Starting
+INFO: Variable Type Analysis #1: Starting
+INFO: Create runtime type propagation graph: Starting
+INFO: Create runtime type propagation graph: Time spent was 00:00:00.025
+INFO: Run SCC (Tarjan) on 455 nodes: Starting
+INFO: Run SCC (Tarjan) on 455 nodes: Time spent was 00:00:00.004
+INFO: Tarjan found 455 strongly connected components
+INFO: Propagate runtime types to strongly connected components: Starting
+INFO: Propagate runtime types to strongly connected components: Time spent was 00:00:00.007
+INFO: Variable Type Analysis #1: Time spent was 00:00:00.041
+INFO: Variable Type Analysis #2: Starting
+INFO: Create runtime type propagation graph: Starting
+INFO: Create runtime type propagation graph: Time spent was 00:00:00.029
+INFO: Run SCC (Tarjan) on 455 nodes: Starting
+INFO: Run SCC (Tarjan) on 455 nodes: Time spent was 00:00:00.002
+INFO: Tarjan found 455 strongly connected components
+INFO: Propagate runtime types to strongly connected components: Starting
+INFO: Propagate runtime types to strongly connected components: Time spent was 00:00:00.006
+INFO: Variable Type Analysis #2: Time spent was 00:00:00.039
+INFO: Create runtime call graph: Time spent was 00:00:00.087
+INFO: Load config: Starting
+INFO: Load config: Time spent was 00:00:00.184
+INFO: Compute entry points: Starting
+INFO: Compute entry points: Time spent was 00:00:00.121
+INFO: All rules entry points : 13
+INFO: Slice call graph: Starting
+INFO: Slice call graph: Time spent was 00:00:00.000
+INFO: Live variable analysis: Starting
+INFO: Live variable analysis: Time spent was 00:00:00.046
+INFO: Taint analysis for js: Starting
+INFO: 0 / 82 UCFGs simulated, memory usage: 82 MB
+INFO: 18 / 82 UCFGs simulated, memory usage: 94 MB
+INFO: Taint analysis for js: Time spent was 00:00:01.869
+INFO: Report issues: Starting
+INFO: Report issues: Time spent was 00:00:00.005
+INFO: Store cache: Starting
+INFO: Store cache: Time spent was 00:00:00.002
+INFO: js security sensor: Time spent was 00:00:02.711
+INFO: js security sensor: Begin: 2024-09-06T15:47:06.911741784Z, End: 2024-09-06T15:47:09.623175007Z, Duration: 00:00:02.711
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:06.912025382Z, End: 2024-09-06T15:47:07.299913550Z, Duration: 00:00:00.387
+    Load type hierarchy: Begin: 2024-09-06T15:47:06.912279727Z, End: 2024-09-06T15:47:06.914202682Z, Duration: 00:00:00.001
+    Load UCFGs: Begin: 2024-09-06T15:47:06.914345104Z, End: 2024-09-06T15:47:07.299486573Z, Duration: 00:00:00.385
+  Check cache: Begin: 2024-09-06T15:47:07.300125701Z, End: 2024-09-06T15:47:07.300594309Z, Duration: 00:00:00.000
+    Load cache: Begin: 2024-09-06T15:47:07.300160199Z, End: 2024-09-06T15:47:07.300208961Z, Duration: 00:00:00.000
+  Create runtime call graph: Begin: 2024-09-06T15:47:07.300762702Z, End: 2024-09-06T15:47:07.388491536Z, Duration: 00:00:00.087
+    Variable Type Analysis #1: Begin: 2024-09-06T15:47:07.301629021Z, End: 2024-09-06T15:47:07.343020299Z, Duration: 00:00:00.041
+      Create runtime type propagation graph: Begin: 2024-09-06T15:47:07.303088234Z, End: 2024-09-06T15:47:07.329063728Z, Duration: 00:00:00.025
+      Run SCC (Tarjan) on 455 nodes: Begin: 2024-09-06T15:47:07.329850986Z, End: 2024-09-06T15:47:07.333851127Z, Duration: 00:00:00.004
+      Propagate runtime types to strongly connected components: Begin: 2024-09-06T15:47:07.335382810Z, End: 2024-09-06T15:47:07.342709292Z, Duration: 00:00:00.007
+    Variable Type Analysis #2: Begin: 2024-09-06T15:47:07.345715401Z, End: 2024-09-06T15:47:07.385388141Z, Duration: 00:00:00.039
+      Create runtime type propagation graph: Begin: 2024-09-06T15:47:07.345814970Z, End: 2024-09-06T15:47:07.374982649Z, Duration: 00:00:00.029
+      Run SCC (Tarjan) on 455 nodes: Begin: 2024-09-06T15:47:07.375320187Z, End: 2024-09-06T15:47:07.378052699Z, Duration: 00:00:00.002
+      Propagate runtime types to strongly connected components: Begin: 2024-09-06T15:47:07.378350626Z, End: 2024-09-06T15:47:07.385024954Z, Duration: 00:00:00.006
+  Load config: Begin: 2024-09-06T15:47:07.388771193Z, End: 2024-09-06T15:47:07.573241699Z, Duration: 00:00:00.184
+  Compute entry points: Begin: 2024-09-06T15:47:07.573697638Z, End: 2024-09-06T15:47:07.695230624Z, Duration: 00:00:00.121
+  Slice call graph: Begin: 2024-09-06T15:47:07.695669943Z, End: 2024-09-06T15:47:07.695697111Z, Duration: 00:00:00.000
+  Live variable analysis: Begin: 2024-09-06T15:47:07.695940153Z, End: 2024-09-06T15:47:07.742428500Z, Duration: 00:00:00.046
+  Taint analysis for js: Begin: 2024-09-06T15:47:07.743159600Z, End: 2024-09-06T15:47:09.612627014Z, Duration: 00:00:01.869
+  Report issues: Begin: 2024-09-06T15:47:09.612808619Z, End: 2024-09-06T15:47:09.617965671Z, Duration: 00:00:00.005
+  Store cache: Begin: 2024-09-06T15:47:09.618254712Z, End: 2024-09-06T15:47:09.621180635Z, Duration: 00:00:00.002
+INFO: js security sensor peak memory: 150 MB
+INFO: Sensor JsSecuritySensor [security] (done) | time=2721ms
+INFO: ------------- Run sensors on project
+INFO: Sensor Zero Coverage Sensor
+INFO: Sensor Zero Coverage Sensor (done) | time=1ms
+INFO: SCM Publisher SCM provider for this project is: git
+INFO: SCM Publisher 1 source file to be analyzed
+INFO: SCM Publisher 1/1 source file have been analyzed (done) | time=370ms
+INFO: CPD Executor 2 files had no CPD blocks
+INFO: CPD Executor Calculating CPD for 10 files
+INFO: CPD Executor CPD calculation finished (done) | time=50ms
+INFO: Analysis report generated in 250ms, dir size=303 KB
+INFO: Analysis report compressed in 52ms, zip size=83 KB
+INFO: Analysis report uploaded in 357ms
+INFO: ANALYSIS SUCCESSFUL, you can find the results at: https://sonarcloud.io/dashboard?id=salmoncore_InventoryMan
+INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+INFO: More about the report processing at https://sonarcloud.io/api/ce/task?id=AZHIBJyCk1WAH-oX6T2h
+INFO: Sensor cache published successfully
+INFO: Time spent writing ucfgs 76ms
+INFO: Analysis total time: 42.200 s
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION SUCCESS
+INFO: ------------------------------------------------------------------------
+INFO: Total time: 46.123s
+INFO: Final Memory: 58M/173M
+INFO: ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withSonarQubeEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Analyze Backend with SonarCloud)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: SonarCloud
+[Pipeline] {
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/Github Webhook Pipeline/backend
+[Pipeline] {
+[Pipeline] sh
++ mvn sonar:sonar -Dsonar.projectKey=salmoncore_inventoryman-backend -Dsonar.projectName=InventoryMan_Backend -Dsonar.java.binaries=target/classes -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+[INFO] Scanning for projects...
+[WARNING] The artifact org.codehaus.mojo:sonar-maven-plugin:jar:4.0.0.4121 has been relocated to org.sonarsource.scanner.maven:sonar-maven-plugin:jar:4.0.0.4121: SonarQube plugin was moved to SonarSource organisation
+[INFO] 
+[INFO] --------------------< com.skillstorm:inventoryman >---------------------
+[INFO] Building InventoryMan 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- sonar-maven-plugin:4.0.0.4121:sonar (default-cli) @ inventoryman ---
+[WARNING] 15:47:20.196 Using an unspecified version instead of an explicit plugin version may introduce breaking analysis changes at an unwanted time. It is highly recommended to use an explicit version, e.g. 'org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121'.
+[INFO] 15:47:20.223 Java 17.0.12 Amazon.com Inc. (64-bit)
+[INFO] 15:47:20.224 Linux 6.1.102-111.182.amzn2023.x86_64 (amd64)
+[INFO] 15:47:20.566 User cache: /var/lib/jenkins/.sonar/cache
+[INFO] 15:47:21.275 Communicating with SonarCloud
+[INFO] 15:47:21.320 Default locale: "en", source code encoding: "UTF-8"
+[INFO] 15:47:23.032 Load global settings
+[INFO] 15:47:23.460 Load global settings (done) | time=431ms
+[INFO] 15:47:23.467 Server id: 1BD809FA-AWHW8ct9-T_TB3XqouNu
+[INFO] 15:47:24.012 Loading required plugins
+[INFO] 15:47:24.013 Load plugins index
+[INFO] 15:47:24.154 Load plugins index (done) | time=141ms
+[INFO] 15:47:24.155 Load/download plugins
+[INFO] 15:47:24.189 Load/download plugins (done) | time=34ms
+[INFO] 15:47:24.654 Found an active CI vendor: 'Jenkins'
+[INFO] 15:47:24.672 Load project settings for component key: 'salmoncore_inventoryman-backend'
+[INFO] 15:47:24.812 Load project settings for component key: 'salmoncore_inventoryman-backend' (done) | time=140ms
+[INFO] 15:47:24.819 Process project properties
+[INFO] 15:47:24.843 Project key: salmoncore_inventoryman-backend
+[INFO] 15:47:24.843 Base dir: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend
+[INFO] 15:47:24.843 Working dir: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar
+[INFO] 15:47:24.852 Load project branches
+[INFO] 15:47:24.996 Load project branches (done) | time=144ms
+[INFO] 15:47:25.000 Check ALM binding of project 'salmoncore_inventoryman-backend'
+[INFO] 15:47:25.117 Detected project binding: NOT_BOUND
+[INFO] 15:47:25.117 Check ALM binding of project 'salmoncore_inventoryman-backend' (done) | time=117ms
+[INFO] 15:47:25.119 Load project pull requests
+[INFO] 15:47:25.236 Load project pull requests (done) | time=117ms
+[INFO] 15:47:25.239 Load branch configuration
+[INFO] 15:47:25.241 Load branch configuration (done) | time=2ms
+[INFO] 15:47:25.250 Load quality profiles
+[INFO] 15:47:25.478 Load quality profiles (done) | time=227ms
+[INFO] 15:47:25.485 Load active rules
+[INFO] 15:47:31.800 Load active rules (done) | time=6315ms
+[INFO] 15:47:31.958 Organization key: salmoncore
+[INFO] 15:47:31.982 Preprocessing files...
+[INFO] 15:47:32.286 2 languages detected in 38 preprocessed files
+[INFO] 15:47:32.287 0 files ignored because of inclusion/exclusion patterns
+[INFO] 15:47:32.287 0 files ignored because of scm ignore settings
+[INFO] 15:47:32.335 Loading plugins for detected languages
+[INFO] 15:47:32.335 Load/download plugins
+[INFO] 15:47:32.436 Load/download plugins (done) | time=101ms
+[INFO] 15:47:32.769 Load project repositories
+[INFO] 15:47:32.932 Load project repositories (done) | time=163ms
+[INFO] 15:47:32.947 Indexing files...
+[INFO] 15:47:32.951 Project configuration:
+[INFO] 15:47:32.952   Excluded sources: **/build-wrapper-dump.json
+[INFO] 15:47:32.976 38 files indexed
+[INFO] 15:47:32.995 Quality profile for java: Sonar way
+[INFO] 15:47:32.995 Quality profile for xml: Sonar way
+[INFO] 15:47:32.995 ------------- Run sensors on module InventoryMan_Backend
+[INFO] 15:47:33.088 Load metrics repository
+[INFO] 15:47:33.199 Load metrics repository (done) | time=110ms
+[INFO] 15:47:33.206 Sensor cache enabled
+[INFO] 15:47:33.811 Load sensor cache
+[INFO] 15:47:35.230 Load sensor cache (29 KB) | time=1419ms
+[INFO] 15:47:36.810 Sensor JavaSensor [java]
+[INFO] 15:47:36.817 Configured Java source version (sonar.java.source): 17, preview features enabled (sonar.java.enablePreview): false
+[INFO] 15:47:36.852 Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+[INFO] 15:47:36.855 Using ECJ batch to parse 10 Main java source files with batch size 50 KB.
+[INFO] 15:47:37.390 Starting batch processing.
+[INFO] 15:47:38.663 The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+[INFO] 15:47:41.329 100% analyzed
+[INFO] 15:47:41.330 Batch processing: Done.
+[INFO] 15:47:41.333 Did not optimize analysis for any files, performed a full analysis for all 10 files.
+[INFO] 15:47:41.384 Using ECJ batch to parse 27 Test java source files with batch size 50 KB.
+[INFO] 15:47:41.421 Starting batch processing.
+[INFO] 15:47:43.936 100% analyzed
+[INFO] 15:47:43.936 Batch processing: Done.
+[INFO] 15:47:43.939 Did not optimize analysis for any files, performed a full analysis for all 27 files.
+[INFO] 15:47:43.939 No "Generated" source files to scan.
+[INFO] 15:47:43.939 Sensor JavaSensor [java] (done) | time=7129ms
+[INFO] 15:47:43.940 Sensor ThymeLeaf template sensor [securityjavafrontend]
+[INFO] 15:47:43.942 Sensor ThymeLeaf template sensor [securityjavafrontend] (done) | time=2ms
+[INFO] 15:47:43.942 Sensor SurefireSensor [java]
+[INFO] 15:47:43.944 parsing [/var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/surefire-reports]
+[INFO] 15:47:44.034 Sensor SurefireSensor [java] (done) | time=92ms
+[INFO] 15:47:44.034 Sensor XML Sensor [xml]
+[INFO] 15:47:44.053 1 source file to be analyzed
+[INFO] 15:47:44.260 1/1 source file has been analyzed
+[INFO] 15:47:44.260 Sensor XML Sensor [xml] (done) | time=226ms
+[INFO] 15:47:44.261 Sensor JaCoCo XML Report Importer [jacoco]
+[INFO] 15:47:44.266 Importing 1 report(s). Turn your logs in debug mode in order to see the exhaustive list.
+[INFO] 15:47:44.285 Sensor JaCoCo XML Report Importer [jacoco] (done) | time=24ms
+[INFO] 15:47:44.286 Sensor Java Config Sensor [iac]
+[INFO] 15:47:44.305 0 source files to be analyzed
+[INFO] 15:47:44.306 0/0 source files have been analyzed
+[INFO] 15:47:44.306 Sensor Java Config Sensor [iac] (done) | time=21ms
+[INFO] 15:47:44.306 Sensor IaC Docker Sensor [iac]
+[INFO] 15:47:44.391 0 source files to be analyzed
+[INFO] 15:47:44.391 0/0 source files have been analyzed
+[INFO] 15:47:44.391 Sensor IaC Docker Sensor [iac] (done) | time=85ms
+[INFO] 15:47:44.392 Sensor Serverless configuration file sensor [security]
+[INFO] 15:47:44.393 0 Serverless function entries were found in the project
+[INFO] 15:47:44.395 0 Serverless function handlers were kept as entrypoints
+[INFO] 15:47:44.396 Sensor Serverless configuration file sensor [security] (done) | time=3ms
+[INFO] 15:47:44.396 Sensor AWS SAM template file sensor [security]
+[INFO] 15:47:44.397 Sensor AWS SAM template file sensor [security] (done) | time=1ms
+[INFO] 15:47:44.397 Sensor AWS SAM Inline template file sensor [security]
+[INFO] 15:47:44.398 Sensor AWS SAM Inline template file sensor [security] (done) | time=1ms
+[INFO] 15:47:44.398 Sensor javabugs [dbd]
+[INFO] 15:47:44.440 Reading IR files from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ir/java
+[INFO] 15:47:44.446 Analyzing 63 functions to detect bugs.
+[INFO] 15:47:44.994 Sensor javabugs [dbd] (done) | time=596ms
+[INFO] 15:47:44.995 Sensor pythonbugs [dbd]
+[INFO] 15:47:44.995 Reading IR files from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ir/python
+[INFO] 15:47:44.996 No IR files have been included for analysis.
+[INFO] 15:47:44.996 Sensor pythonbugs [dbd] (done) | time=1ms
+[INFO] 15:47:44.996 Sensor TextAndSecretsSensor [text]
+[INFO] 15:47:44.996 Available processors: 2
+[INFO] 15:47:44.998 Using 2 threads for analysis.
+[INFO] 15:47:45.841 Using git CLI to retrieve untracked files
+[INFO] 15:47:45.858 Analyzing language associated files and files included via "sonar.text.inclusions" that are tracked by git
+[INFO] 15:47:45.898 38 source files to be analyzed
+[INFO] 15:47:46.163 38/38 source files have been analyzed
+[INFO] 15:47:46.164 Sensor TextAndSecretsSensor [text] (done) | time=1168ms
+[INFO] 15:47:46.165 Sensor JavaSecuritySensor [security]
+[INFO] 15:47:46.168 Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5147, S5334, S5496, S5883, S6096, S6173, S6287, S6350, S6384, S6390, S6398, S6399, S6547, S6549
+[INFO] 15:47:46.169 Load type hierarchy and UCFGs: Starting
+[INFO] 15:47:46.169 Load type hierarchy: Starting
+[INFO] 15:47:46.169 Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ucfg2/java
+[INFO] 15:47:46.222 Read 41 type definitions
+[INFO] 15:47:46.226 Load type hierarchy: Time spent was 00:00:00.056
+[INFO] 15:47:46.226 Load UCFGs: Starting
+[INFO] 15:47:46.227 Reading UCFGs from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ucfg2/java
+[INFO] 15:47:46.368 Load UCFGs: Time spent was 00:00:00.141
+[INFO] 15:47:46.368 Load type hierarchy and UCFGs: Time spent was 00:00:00.198
+[INFO] 15:47:46.368 Analyzing 46 UCFGs to detect vulnerabilities.
+[INFO] 15:47:46.368 Check cache: Starting
+[INFO] 15:47:46.368 Load cache: Starting
+[INFO] 15:47:46.368 Load cache: Time spent was 00:00:00.000
+[INFO] 15:47:46.369 Check cache: Time spent was 00:00:00.000
+[INFO] 15:47:46.369 Create runtime call graph: Starting
+[INFO] 15:47:46.374 Variable Type Analysis #1: Starting
+[INFO] 15:47:46.375 Create runtime type propagation graph: Starting
+[INFO] 15:47:46.396 Create runtime type propagation graph: Time spent was 00:00:00.020
+[INFO] 15:47:46.398 Run SCC (Tarjan) on 203 nodes: Starting
+[INFO] 15:47:46.401 Run SCC (Tarjan) on 203 nodes: Time spent was 00:00:00.003
+[INFO] 15:47:46.401 Tarjan found 191 strongly connected components
+[INFO] 15:47:46.402 Propagate runtime types to strongly connected components: Starting
+[INFO] 15:47:46.405 Propagate runtime types to strongly connected components: Time spent was 00:00:00.002
+[INFO] 15:47:46.405 Variable Type Analysis #1: Time spent was 00:00:00.031
+[INFO] 15:47:46.409 Variable Type Analysis #2: Starting
+[INFO] 15:47:46.409 Create runtime type propagation graph: Starting
+[INFO] 15:47:46.414 Create runtime type propagation graph: Time spent was 00:00:00.004
+[INFO] 15:47:46.414 Run SCC (Tarjan) on 203 nodes: Starting
+[INFO] 15:47:46.415 Run SCC (Tarjan) on 203 nodes: Time spent was 00:00:00.000
+[INFO] 15:47:46.415 Tarjan found 191 strongly connected components
+[INFO] 15:47:46.416 Propagate runtime types to strongly connected components: Starting
+[INFO] 15:47:46.416 Propagate runtime types to strongly connected components: Time spent was 00:00:00.000
+[INFO] 15:47:46.417 Variable Type Analysis #2: Time spent was 00:00:00.007
+[INFO] 15:47:46.418 Create runtime call graph: Time spent was 00:00:00.048
+[INFO] 15:47:46.418 Load config: Starting
+[INFO] 15:47:48.996 Load config: Time spent was 00:00:02.577
+[INFO] 15:47:48.996 Compute entry points: Starting
+[INFO] 15:47:50.823 Compute entry points: Time spent was 00:00:01.827
+[INFO] 15:47:50.823 All rules entry points : 1
+[INFO] 15:47:50.824 Slice call graph: Starting
+[INFO] 15:47:50.824 Retained UCFGs : 7
+[INFO] 15:47:50.825 Slice call graph: Time spent was 00:00:00.001
+[INFO] 15:47:50.826 Live variable analysis: Starting
+[INFO] 15:47:50.836 Live variable analysis: Time spent was 00:00:00.009
+[INFO] 15:47:50.837 Taint analysis for java: Starting
+[INFO] 15:47:50.863 0 / 7 UCFGs simulated, memory usage: 255 MB
+[INFO] 15:47:51.071 7 / 7 UCFGs simulated, memory usage: 262 MB
+[INFO] 15:47:51.071 Taint analysis for java: Time spent was 00:00:00.234
+[INFO] 15:47:51.072 Report issues: Starting
+[INFO] 15:47:51.078 Report issues: Time spent was 00:00:00.005
+[INFO] 15:47:51.078 Store cache: Starting
+[INFO] 15:47:51.084 Store cache: Time spent was 00:00:00.005
+[INFO] 15:47:51.100 java security sensor: Time spent was 00:00:04.933
+[INFO] 15:47:51.109 java security sensor: Begin: 2024-09-06T15:47:46.167336199Z, End: 2024-09-06T15:47:51.100571762Z, Duration: 00:00:04.933
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:46.169452924Z, End: 2024-09-06T15:47:46.368322610Z, Duration: 00:00:00.198
+    Load type hierarchy: Begin: 2024-09-06T15:47:46.169610200Z, End: 2024-09-06T15:47:46.226335112Z, Duration: 00:00:00.056
+    Load UCFGs: Begin: 2024-09-06T15:47:46.226831447Z, End: 2024-09-06T15:47:46.367895026Z, Duration: 00:00:00.141
+  Check cache: Begin: 2024-09-06T15:47:46.368646859Z, End: 2024-09-06T15:47:46.369292530Z, Duration: 00:00:00.000
+    Load cache: Begin: 2024-09-06T15:47:46.368732728Z, End: 2024-09-06T15:47:46.368825463Z, Duration: 00:00:00.000
+  Create runtime call graph: Begin: 2024-09-06T15:47:46.369537323Z, End: 2024-09-06T15:47:46.418130999Z, Duration: 00:00:00.048
+    Variable Type Analysis #1: Begin: 2024-09-06T15:47:46.374006520Z, End: 2024-09-06T15:47:46.405446665Z, Duration: 00:00:00.031
+      Create runtime type propagation graph: Begin: 2024-09-06T15:47:46.375425266Z, End: 2024-09-06T15:47:46.396298624Z, Duration: 00:00:00.020
+      Run SCC (Tarjan) on 203 nodes: Begin: 2024-09-06T15:47:46.397984891Z, End: 2024-09-06T15:47:46.401316547Z, Duration: 00:00:00.003
+      Propagate runtime types to strongly connected components: Begin: 2024-09-06T15:47:46.402418535Z, End: 2024-09-06T15:47:46.405081525Z, Duration: 00:00:00.002
+    Variable Type Analysis #2: Begin: 2024-09-06T15:47:46.409176119Z, End: 2024-09-06T15:47:46.416918790Z, Duration: 00:00:00.007
+      Create runtime type propagation graph: Begin: 2024-09-06T15:47:46.409397025Z, End: 2024-09-06T15:47:46.414231036Z, Duration: 00:00:00.004
+      Run SCC (Tarjan) on 203 nodes: Begin: 2024-09-06T15:47:46.414948559Z, End: 2024-09-06T15:47:46.415662710Z, Duration: 00:00:00.000
+      Propagate runtime types to strongly connected components: Begin: 2024-09-06T15:47:46.416055166Z, End: 2024-09-06T15:47:46.416677325Z, Duration: 00:00:00.000
+  Load config: Begin: 2024-09-06T15:47:46.418368653Z, End: 2024-09-06T15:47:48.995713323Z, Duration: 00:00:02.577
+  Compute entry points: Begin: 2024-09-06T15:47:48.996283889Z, End: 2024-09-06T15:47:50.823404396Z, Duration: 00:00:01.827
+  Slice call graph: Begin: 2024-09-06T15:47:50.824038157Z, End: 2024-09-06T15:47:50.825694584Z, Duration: 00:00:00.001
+  Live variable analysis: Begin: 2024-09-06T15:47:50.825944588Z, End: 2024-09-06T15:47:50.835862467Z, Duration: 00:00:00.009
+  Taint analysis for java: Begin: 2024-09-06T15:47:50.836846098Z, End: 2024-09-06T15:47:51.071728875Z, Duration: 00:00:00.234
+  Report issues: Begin: 2024-09-06T15:47:51.072034625Z, End: 2024-09-06T15:47:51.077846875Z, Duration: 00:00:00.005
+  Store cache: Begin: 2024-09-06T15:47:51.078252950Z, End: 2024-09-06T15:47:51.083741869Z, Duration: 00:00:00.005
+[INFO] 15:47:51.110 java security sensor peak memory: 456 MB
+[INFO] 15:47:51.110 Sensor JavaSecuritySensor [security] (done) | time=4945ms
+[INFO] 15:47:51.110 Sensor CSharpSecuritySensor [security]
+[INFO] 15:47:51.113 Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5334, S5883, S6096, S6173, S6287, S6350, S6399, S6639, S6641
+[INFO] 15:47:51.113 Load type hierarchy and UCFGs: Starting
+[INFO] 15:47:51.114 Load type hierarchy: Starting
+[INFO] 15:47:51.114 Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/ucfg2/cs
+[INFO] 15:47:51.114 Read 0 type definitions
+[INFO] 15:47:51.114 Load type hierarchy: Time spent was 00:00:00.000
+[INFO] 15:47:51.114 Load UCFGs: Starting
+[INFO] 15:47:51.115 Load UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.115 Load type hierarchy and UCFGs: Time spent was 00:00:00.001
+[INFO] 15:47:51.115 No UCFGs have been included for analysis.
+[INFO] 15:47:51.115 csharp security sensor: Time spent was 00:00:00.004
+[INFO] 15:47:51.116 csharp security sensor: Begin: 2024-09-06T15:47:51.110977645Z, End: 2024-09-06T15:47:51.115818291Z, Duration: 00:00:00.004
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:51.113940929Z, End: 2024-09-06T15:47:51.115238516Z, Duration: 00:00:00.001
+    Load type hierarchy: Begin: 2024-09-06T15:47:51.114050289Z, End: 2024-09-06T15:47:51.114512622Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:51.114868862Z, End: 2024-09-06T15:47:51.115043341Z, Duration: 00:00:00.000
+[INFO] 15:47:51.116 csharp security sensor peak memory: 456 MB
+[INFO] 15:47:51.116 Sensor CSharpSecuritySensor [security] (done) | time=6ms
+[INFO] 15:47:51.117 Sensor PhpSecuritySensor [security]
+[INFO] 15:47:51.117 Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5334, S5335, S5883, S6173, S6287, S6350
+[INFO] 15:47:51.117 Load type hierarchy and UCFGs: Starting
+[INFO] 15:47:51.117 Load type hierarchy: Starting
+[INFO] 15:47:51.117 Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ucfg2/php
+[INFO] 15:47:51.117 Read 0 type definitions
+[INFO] 15:47:51.117 Load type hierarchy: Time spent was 00:00:00.000
+[INFO] 15:47:51.118 Load UCFGs: Starting
+[INFO] 15:47:51.118 Load UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.118 Load type hierarchy and UCFGs: Time spent was 00:00:00.001
+[INFO] 15:47:51.118 No UCFGs have been included for analysis.
+[INFO] 15:47:51.119 php security sensor: Time spent was 00:00:00.002
+[INFO] 15:47:51.119 php security sensor: Begin: 2024-09-06T15:47:51.117203234Z, End: 2024-09-06T15:47:51.119236463Z, Duration: 00:00:00.002
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:51.117456094Z, End: 2024-09-06T15:47:51.118481474Z, Duration: 00:00:00.001
+    Load type hierarchy: Begin: 2024-09-06T15:47:51.117530997Z, End: 2024-09-06T15:47:51.117873570Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:51.118184742Z, End: 2024-09-06T15:47:51.118306216Z, Duration: 00:00:00.000
+[INFO] 15:47:51.119 php security sensor peak memory: 456 MB
+[INFO] 15:47:51.120 Sensor PhpSecuritySensor [security] (done) | time=3ms
+[INFO] 15:47:51.120 Sensor PythonSecuritySensor [security]
+[INFO] 15:47:51.120 Enabled taint analysis rules: S2076, S2078, S2083, S2091, S2631, S3649, S5131, S5135, S5144, S5145, S5146, S5147, S5334, S5496, S6287, S6350, S6639, S6680, S6776, S6839
+[INFO] 15:47:51.120 Load type hierarchy and UCFGs: Starting
+[INFO] 15:47:51.120 Load type hierarchy: Starting
+[INFO] 15:47:51.120 Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ucfg2/python
+[INFO] 15:47:51.121 Read 0 type definitions
+[INFO] 15:47:51.121 Load type hierarchy: Time spent was 00:00:00.000
+[INFO] 15:47:51.121 Load UCFGs: Starting
+[INFO] 15:47:51.121 Load UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.121 Load type hierarchy and UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.121 No UCFGs have been included for analysis.
+[INFO] 15:47:51.122 python security sensor: Time spent was 00:00:00.001
+[INFO] 15:47:51.122 python security sensor: Begin: 2024-09-06T15:47:51.120504612Z, End: 2024-09-06T15:47:51.122011171Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:51.120768452Z, End: 2024-09-06T15:47:51.121553119Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2024-09-06T15:47:51.120845338Z, End: 2024-09-06T15:47:51.121168046Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:51.121330478Z, End: 2024-09-06T15:47:51.121412796Z, Duration: 00:00:00.000
+[INFO] 15:47:51.122 python security sensor peak memory: 456 MB
+[INFO] 15:47:51.123 Sensor PythonSecuritySensor [security] (done) | time=3ms
+[INFO] 15:47:51.123 Sensor JsSecuritySensor [security]
+[INFO] 15:47:51.123 Enabled taint analysis rules: S5144, S6350, S6105, S3649, S5131, S5146, S2631, S5696, S2076, S2083, S6287, S5147, S5334, S5883, S6096
+[INFO] 15:47:51.123 Load type hierarchy and UCFGs: Starting
+[INFO] 15:47:51.123 Load type hierarchy: Starting
+[INFO] 15:47:51.123 Reading type hierarchy from: /var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/ucfg2/js
+[INFO] 15:47:51.124 Read 0 type definitions
+[INFO] 15:47:51.124 Load type hierarchy: Time spent was 00:00:00.000
+[INFO] 15:47:51.124 Load UCFGs: Starting
+[INFO] 15:47:51.124 Load UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.124 Load type hierarchy and UCFGs: Time spent was 00:00:00.000
+[INFO] 15:47:51.124 No UCFGs have been included for analysis.
+[INFO] 15:47:51.125 js security sensor: Time spent was 00:00:00.001
+[INFO] 15:47:51.126 js security sensor: Begin: 2024-09-06T15:47:51.123477672Z, End: 2024-09-06T15:47:51.125249066Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2024-09-06T15:47:51.123750524Z, End: 2024-09-06T15:47:51.124619435Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2024-09-06T15:47:51.123826637Z, End: 2024-09-06T15:47:51.124140062Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2024-09-06T15:47:51.124346524Z, End: 2024-09-06T15:47:51.124432057Z, Duration: 00:00:00.000
+[INFO] 15:47:51.126 js security sensor peak memory: 456 MB
+[INFO] 15:47:51.126 Sensor JsSecuritySensor [security] (done) | time=3ms
+[INFO] 15:47:51.130 ------------- Run sensors on project
+[INFO] 15:47:51.354 Sensor Zero Coverage Sensor
+[INFO] 15:47:51.354 Sensor Zero Coverage Sensor (done) | time=1ms
+[INFO] 15:47:51.355 Sensor Java CPD Block Indexer
+[INFO] 15:47:51.384 Sensor Java CPD Block Indexer (done) | time=29ms
+[INFO] 15:47:51.398 CPD Executor 4 files had no CPD blocks
+[INFO] 15:47:51.398 CPD Executor Calculating CPD for 6 files
+[INFO] 15:47:51.406 CPD Executor CPD calculation finished (done) | time=8ms
+[INFO] 15:47:51.625 Analysis report generated in 204ms, dir size=515 KB
+[INFO] 15:47:51.763 Analysis report compressed in 138ms, zip size=163 KB
+[INFO] 15:47:52.387 Analysis report uploaded in 623ms
+[INFO] 15:47:52.388 ANALYSIS SUCCESSFUL, you can find the results at: https://sonarcloud.io/dashboard?id=salmoncore_inventoryman-backend
+[INFO] 15:47:52.389 Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO] 15:47:52.389 More about the report processing at https://sonarcloud.io/api/ce/task?id=AZHIBT0l5bTXtkvW8y2g
+[INFO] 15:47:53.016 Sensor cache published successfully
+[INFO] 15:47:53.036 Analysis total time: 28.703 s
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  35.865 s
+[INFO] Finished at: 2024-09-06T15:47:53Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+WARN: Found multiple 'report-task.txt' in the workspace. Taking the first one.
+/var/lib/jenkins/workspace/Github Webhook Pipeline/backend/target/sonar/report-task.txt
+/var/lib/jenkins/workspace/Github Webhook Pipeline/frontend/.scannerwork/report-task.txt
+[Pipeline] // withSonarQubeEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run JMeter Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ /opt/apache-jmeter-5.6.3/bin/jmeter -j jmeter.save.saveservice.output_format=xml -n -t /opt/apache-jmeter-5.6.3/bin/InventoryMan_JMeter_Test.jmx -l /opt/apache-jmeter-5.6.3/reports/InventoryMan_JMeter_Test.report.jtl
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using /opt/apache-jmeter-5.6.3/bin/InventoryMan_JMeter_Test.jmx
+Starting standalone test @ 2024 Sep 6 15:47:57 UTC (1725637677447)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary =     10 in 00:00:01 =    9.9/s Avg:    46 Min:    17 Max:    86 Err:     0 (0.00%)
+Tidying up ...    @ 2024 Sep 6 15:47:58 UTC (1725637678617)
+... end of run
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Publish JMeter Report)
+[Pipeline] perfReport
+Creating parser with percentiles:'0,50,90,95,100,' filterRegex:
+Performance: Recording JMeter reports '/var/lib/jenkins/jobs/Github Webhook Pipeline/builds/68/temp/InventoryMan_JMeter_Test.report.jtl'
+Performance: JMeter copying reports to master, files '[/var/lib/jenkins/jobs/Github Webhook Pipeline/builds/68/temp/InventoryMan_JMeter_Test.report.jtl]'
+Performance: JMeter parsing local reports '[/var/lib/jenkins/jobs/Github Webhook Pipeline/builds/68/performance-reports/JMeter/InventoryMan_JMeter_Test.report.jtl]'
+Performance: Parsing report file '/var/lib/jenkins/jobs/Github Webhook Pipeline/builds/68/performance-reports/JMeter/InventoryMan_JMeter_Test.report.jtl' with filterRegex ''.
+Performance: No threshold configured for making the test unstable
+Performance: No threshold configured for making the test failure
+Performance: File InventoryMan_JMeter_Test.report.jtl reported 0.0% of errors [SUCCESS]. Build status is: SUCCESS
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
