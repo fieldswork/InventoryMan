@@ -16,17 +16,17 @@ public class AddWarehousePage {
     private WebDriver driver;
     private static final String url = "http://inventoryman.s3-website-us-east-1.amazonaws.com/add-warehouse";
 
+    // /html/body/div/div/div/form/div[1]/input for the warehouse name
     @FindBy(xpath = "/html/body/div/div/div/form/div[1]/input")
     private WebElement warehouseName;
 
+    // /html/body/div/div/div/form/div[2]/input for the warehouse capacity
     @FindBy(xpath = "/html/body/div/div/div/form/div[2]/input")
     private WebElement warehouseCapacity;
 
+    // /html/body/div/div/div/form/button for the submit button
     @FindBy(xpath = "/html/body/div/div/div/form/button")
     private WebElement submitButton;
-
-    //@FindBy(id = "alertMessageId")
-    //private WebElement alertMessage;
 
     // /html/body/div/div/div/form/div[3] for the alert message
     @FindBy(xpath = "/html/body/div/div/div/form/div[3]")
@@ -40,6 +40,7 @@ public class AddWarehousePage {
         PageFactory.initElements(driver, this);
     }
 
+    // Loads the page
     public void get() {
         try {
             Thread.sleep(1000);
@@ -90,7 +91,7 @@ public class AddWarehousePage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    // Using xpath /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 to find the warehouse name
+    // Checks if the created warehouse is being displayed on the page
     public boolean isWarehouseInWarehousesPage(String warehouseName) {
         warehouseCard = -1; // setting warehouseCard for error checking
         try {
@@ -107,6 +108,7 @@ public class AddWarehousePage {
                 e.printStackTrace();
             }
             try {
+                // Using xpath /html/body/div/div/div/div/div[2]/div[<variable>]/div/h5 to find the warehouse name
                 WebElement warehouse = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + i + "]/div/h5"));
                 warehouses.add(warehouse);
                 String warehouseText = warehouse.getText();
@@ -123,14 +125,14 @@ public class AddWarehousePage {
         return values.contains(warehouseName);
     }
 
-    // /html/body/div/div/div/div/div[2]/div[<variable>]/div/p is the xpath for the capacity, but the capacity is formatted as "0 / <capacity> cubic feet utilized"
-    // use the warehouseCard to find the correct warehouse card
+    // Use the warehouseCard to find the correct warehouse card
     public boolean isCapacityInWarehousesPage(String warehouseCapacity) {
         if (warehouseCard == -1) {
             return false; // warehouse not found
         }
     
         try {
+            // /html/body/div/div/div/div/div[2]/div[<variable>]/div/p is the xpath for the capacity, but the capacity is formatted as "0 / <capacity> cubic feet utilized"
             WebElement capacityElement = this.driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div[" + warehouseCard + "]/div/p"));
             String capacityText = capacityElement.getText();
             
@@ -149,6 +151,7 @@ public class AddWarehousePage {
         return false;
     }
 
+    // Checks if the alert message is displayed on the page
     public boolean isInvalidDataAlertDisplayed(String alertMessage) {
         try {
             Thread.sleep(2000);

@@ -17,27 +17,27 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
 }));
 
-const mockItems = [
+const mockItems = [ // Properties for the mock items
     { id: 1, name: 'Item A', description: 'Description A', quantity: 10, sizeInCubicFt: 5, warehouse: { id: 1, name: 'Warehouse 1' } },
     { id: 2, name: 'Item B', description: 'Description B', quantity: 20, sizeInCubicFt: 10, warehouse: { id: 2, name: 'Warehouse 2' } },
 ];
 
-const mockWarehouses = [
+const mockWarehouses = [ // Properties for the mock warehouses
     { id: 1, name: 'Warehouse 1' },
     { id: 2, name: 'Warehouse 2' },
 ];
 
-describe('ItemList', () => {
-    beforeEach(() => {
+describe('ItemList', () => { // ItemList is the list of item, displayed in a card format
+    beforeEach(() => { // We mock the services and their responses before each test
         ItemService.getAll.mockResolvedValue({ data: mockItems });
         WarehouseService.getAll.mockResolvedValue({ data: mockWarehouses });
     });
 
     afterEach(() => {
-        jest.clearAllMocks(); // Clear mock calls
+        jest.clearAllMocks(); // Clear mock calls after each test
     });
 
-    it('should render the page title', async () => {
+    it('should render the page title', async () => { // Checks if the page title is rendered - should be Items
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -47,11 +47,11 @@ describe('ItemList', () => {
         });
     
         await waitFor(() => {
-            expect(screen.getByText('Items')).toBeInTheDocument();
+            expect(screen.getByText('Items')).toBeInTheDocument(); // Looking for Items text
         });
     });
 
-    it('should render items and warehouses', async () => {
+    it('should render items and warehouses', async () => { // Checks if the items and warehouses listings are rendered
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -60,7 +60,7 @@ describe('ItemList', () => {
             );
         });
 
-        await waitFor(() => {
+        await waitFor(() => { // Checking for each item and warehouse from the mock data
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
             expect(screen.getByText('Warehouse 1')).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should sort items by name', async () => {
+    it('should sort items by name', async () => { // Checks if the items are sorted by name
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -78,13 +78,29 @@ describe('ItemList', () => {
         });
 
         await waitFor(() => {
-            const options = screen.getAllByRole('option');
-            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'name' } });
-            expect(options[0].selected).toBeTruthy();
+            const options = screen.getAllByRole('option'); // Finds all the options, 
+            fireEvent.change(screen.getByLabelText('Sort By:'), { target: { value: 'name' } }); // Changes the sorting criteria to name,
+            expect(options[0].selected).toBeTruthy(); // And checks if the first option is selected
         });
     });
 
-    it('should filter items by warehouse', async () => {
+    it('should filter items by warehouse', async () => { // Checks if the items are filtered by warehouse
+        await act(async () => {
+            render(
+                <BrowserRouter>
+                    <ItemList />
+                </BrowserRouter>
+            );
+        });
+
+        await waitFor(() => { 
+            fireEvent.change(screen.getByLabelText('Filter by Warehouse:'), { target: { value: '1' } }); // Changes the warehouse filter to warehouse 1
+            expect(screen.getByText('Item A')).toBeInTheDocument(); // Item A should be the only item displayed from the mock data
+            expect(screen.queryByText('Item B')).not.toBeInTheDocument(); // Item B should not be displayed, as it is in warehouse 2
+        });
+    });
+
+    it('should navigate to the edit item page', async () => { // Checks if the edit item page is navigated to
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -94,29 +110,13 @@ describe('ItemList', () => {
         });
 
         await waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Filter by Warehouse:'), { target: { value: '1' } });
-            expect(screen.getByText('Item A')).toBeInTheDocument();
-            expect(screen.queryByText('Item B')).not.toBeInTheDocument();
+            const editButtons = screen.getAllByText('Edit'); // Finds all the edit buttons
+            fireEvent.click(editButtons[0]); // Click the first Edit button - should navigate to the edit item page
+            expect(mockNavigate).toHaveBeenCalledWith('/edit-item/1'); // Checks if the navigation is to the edit item page with the correct item ID
         });
     });
 
-    it('should navigate to the edit item page', async () => {
-        await act(async () => {
-            render(
-                <BrowserRouter>
-                    <ItemList />
-                </BrowserRouter>
-            );
-        });
-
-        await waitFor(() => {
-            const editButtons = screen.getAllByText('Edit');
-            fireEvent.click(editButtons[0]); // Click the first Edit button
-            expect(mockNavigate).toHaveBeenCalledWith('/edit-item/1');
-        });
-    });
-
-    it('should delete an item', async () => {
+    it('should delete an item', async () => { // Checks if an item is deleted from the list 
         // Mock the delete method
         ItemService.delete.mockResolvedValue({});
     
@@ -147,7 +147,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should sort items by quantity', async () => {
+    it('should sort items by quantity', async () => { // Checks if the items are sorted by quantity
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -156,7 +156,7 @@ describe('ItemList', () => {
             );
         });
 
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before sorting
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         })
@@ -174,7 +174,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should sort items by name', async () => {
+    it('should sort items by name', async () => { // Checks if the items are sorted by name
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -183,7 +183,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before sorting them
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });
@@ -201,7 +201,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should sort items by item size', async () => {
+    it('should sort items by item size', async () => { // Checks if the items are sorted by size
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -210,7 +210,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before sorting them
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });
@@ -228,7 +228,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should sort items by total size', async () => {
+    it('should sort items by total size', async () => { // Checks if the items are sorted by total size
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -237,7 +237,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before sorting them
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });
@@ -255,7 +255,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should filter items by all warehouses', async () => {
+    it('should filter items by all warehouses', async () => { // Checks if the items are filtered by all warehouses
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -264,7 +264,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before filtering them
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });
@@ -281,7 +281,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should filter items by warehouse', async () => {
+    it('should filter items by warehouse', async () => { // Checks if the items are filtered by warehouse
         await act(async () => {
             render(
                 <BrowserRouter>
@@ -290,7 +290,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered before filtering them
             expect(screen.getByText('Item A')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });
@@ -307,7 +307,7 @@ describe('ItemList', () => {
         });
     });
 
-    it('should handle empty item list', async () => {
+    it('should handle empty item list', async () => { // Checks if the empty item list is handled
         ItemService.getAll.mockResolvedValue({ data: [] });
         WarehouseService.getAll.mockResolvedValue({ data: mockWarehouses });
     
@@ -319,19 +319,19 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered - should be none, as the list is empty (branch test coverage case)
             expect(screen.getByText('Items')).toBeInTheDocument();
             expect(screen.queryByText('Item A')).not.toBeInTheDocument();
             expect(screen.queryByText('Item B')).not.toBeInTheDocument();
         });
     });
 
-    const mockItemsWithMissingFields = [
+    const mockItemsWithMissingFields = [ // Mock items with missing fields for the next test
         { id: 1, name: '', description: '', quantity: 0, sizeInCubicFt: 0, warehouse: { id: 1, name: 'Warehouse 1' } },
         { id: 2, name: 'Item B', description: 'Description B', quantity: 20, sizeInCubicFt: 10, warehouse: { id: 2, name: 'Warehouse 2' } },
     ];
     
-    it('should handle items with missing fields', async () => {
+    it('should handle items with missing fields', async () => { // Checks if the items with missing fields are handled - should display "Unnamed Item"
         ItemService.getAll.mockResolvedValue({ data: mockItemsWithMissingFields });
         WarehouseService.getAll.mockResolvedValue({ data: mockWarehouses });
     
@@ -343,7 +343,7 @@ describe('ItemList', () => {
             );
         });
     
-        await waitFor(() => {
+        await waitFor(() => { // Waits for the items to be rendered
             expect(screen.getByText('Unnamed Item')).toBeInTheDocument();
             expect(screen.getByText('Item B')).toBeInTheDocument();
         });

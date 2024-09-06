@@ -61,19 +61,19 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com");
     }
 
-    //selectWarehousesPage
+    // Select Warehouses page
     public void selectWarehousesPage() {
         //this.warehousesButton.click();
         this.warehousesButton.sendKeys(Keys.ENTER);
     }
 
-    // selectItemsPage
+    // Select Items page
     public void selectItemsPage() {
         //this.itemsButton.click();
         this.itemsButton.sendKeys(Keys.ENTER);
     }
 
-    // amIOnWarehousesPage
+    // Checks if I am on Warehouses page
     public boolean amIOnWarehousesPage() {
         try {
             Thread.sleep(1000);
@@ -83,7 +83,7 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    // amIOnItemsPage
+    // Checks if I am on the Items page
     public boolean amIOnItemsPage() {
         try {
             Thread.sleep(1000);
@@ -93,12 +93,13 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/items");
     }
 
-    // selectInventoryMan
+    // Select InventoryMan
     public void selectInventoryMan() {
         //this.inventoryManButton.click();
         this.inventoryManButton.sendKeys(Keys.ENTER);
     }
 
+    // Check if no other buttons are highlighted
     public boolean noOtherButtonsHighlighted() {
         return (!this.warehousesButton.getAttribute("class").contains("active") &&
                 !this.itemsButton.getAttribute("class").contains("active") &&
@@ -106,7 +107,7 @@ public class LandingPage {
                 !this.addItemButton.getAttribute("class").contains("active"));
     }
 
-    // onInventoryManLandingPage
+    // On InventoryMan landing page
     public boolean onInventoryManLandingPage() {
         try {
             Thread.sleep(1000);
@@ -116,18 +117,18 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/");
     }
 
-    // selectWarehouses
+    // Select Warehouses
     public void selectWarehouses() {
         //this.warehousesButton.click();
         this.warehousesButton.sendKeys(Keys.ENTER);
     }
 
-    // warehousesButtonHighlighted
+    // Warehouses button should be highlighted
     public boolean warehousesButtonHighlighted() {
         return this.warehousesButton.getAttribute("class").contains("active");
     }
 
-    // onWarehousesPage
+    // On Warehouses Page
     public boolean onWarehousesPage() {
         try {
             Thread.sleep(1000);
@@ -137,18 +138,18 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
-    // selectItems
+    // Select Items
     public void selectItems() {
         //this.itemsButton.click();
         this.itemsButton.sendKeys(Keys.ENTER);
     }
 
-    // itemsButtonHighlighted
+    // Items button should be highlighted
     public boolean itemsButtonHighlighted() {
         return this.itemsButton.getAttribute("class").contains("active");
     }
 
-    // onItemsPage
+    // On Items page
     public boolean onItemsPage() {
         try {
             Thread.sleep(1000);
@@ -158,18 +159,18 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/items");
     }
 
-    // selectAddWarehouse   
+    // Select Add Warehouse   
     public void selectAddWarehouse() {
         //this.addWarehouseButton.click();
         this.addWarehouseButton.sendKeys(Keys.ENTER);
     }
 
-    // addWarehouseButtonHighlighted
+    // Add Warehouse button should be highlighted
     public boolean addWarehouseButtonHighlighted() {
         return this.addWarehouseButton.getAttribute("class").contains("active");
     }
 
-    // onAddWarehousePage
+    // On Add Warehouse page
     public boolean onAddWarehousePage() {
         try {
             Thread.sleep(1000);
@@ -179,18 +180,18 @@ public class LandingPage {
         return this.driver.getCurrentUrl().equals("http://inventoryman.s3-website-us-east-1.amazonaws.com/add-warehouse");
     }
 
-    // selectAddItem
+    // Select Add Item
     public void selectAddItem() {
         //this.addItemButton.click();
         this.addItemButton.sendKeys(Keys.ENTER);
     }
 
-    // addItemButtonHighlighted
+    // Add Item button should be highlighted
     public boolean addItemButtonHighlighted() {
         return this.addItemButton.getAttribute("class").contains("active");
     }
 
-    // onAddItemPage
+    // On Add Item page
     public boolean onAddItemPage() {
         try {
             Thread.sleep(1000);
