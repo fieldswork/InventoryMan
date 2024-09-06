@@ -15,13 +15,18 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class ViewUtilizationSteps {
  
-    private WebDriver driver;
-    private WarehousesPage whPage;
+    private WebDriver driver;               // driver
+    private WarehousesPage whPage;          // page object
 
     @Before("@utilBarRendering")
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
+        /**
+        * Checks if we are running these tests on Jenkins
+        * If so, these tests will be run in a HEADLESS mode
+        * If not, these tests will run as usual with browser popping, etc
+        */
         if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
@@ -31,29 +36,43 @@ public class ViewUtilizationSteps {
             options.addArguments("--remote-debugging-port=9222");
         }
 
-        WebDriverManager.chromedriver().setup();
-        this.driver = new ChromeDriver(options);
-        this.whPage = new WarehousesPage(driver);
+        WebDriverManager.chromedriver().setup();        //setting up the chrome driver
+
+        this.driver = new ChromeDriver(options);        // assigning our driver to be of a type Chrome
+        this.whPage = new WarehousesPage(driver);       // initializing our page object
     }
 
-    // Given I am on the page with the Warehouses cards
+    /**
+     * Load the Warehouses page
+     */
     @Given("I am on the page with the Warehouses cards")
     public void onWarehousesPageString() {
         this.whPage.get();
     }
 
-    // When the warehouse "<warehouse>" is displaying on the page
+    /**
+     * Checks if the warehouse of interest is being displayed
+     * @param warehouse
+     */
     @When("the warehouse {string} is displaying on the page")
     public void warehouseIsDisplaying(String warehouse) {
         this.whPage.findWarehouse(warehouse);
     }
 
-    //Then I should see the utilization bar for the "<warehouse>" warehouse displaying "<utilization>" utilization
+    /**
+     * Should see the utilization bar for the warehouse of interest displaying its utilization
+     * @param warehouse
+     * @param utilization
+     */
+    //Then I s
     @Then("I should see the utilization bar for the {string} warehouse displaying {string} utilization")
     public void utilizationBarIsDisplaying(String warehouse, String utilization) {
         this.whPage.findUtilization(warehouse, utilization);
     }
 
+    /**
+     * Quit the driver - will close all browsers
+     */
     @After("@utilBarRendering")
     public void after() {
         this.driver.quit();

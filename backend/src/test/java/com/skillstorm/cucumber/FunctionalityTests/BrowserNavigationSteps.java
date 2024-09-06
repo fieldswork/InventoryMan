@@ -15,15 +15,23 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+/**
+ * Browser navigation step definitions
+ */
 public class BrowserNavigationSteps {
     
-    private WebDriver driver;
-    private LandingPage lPage;
+    private WebDriver driver;       // driver
+    private LandingPage lPage;      // page object
 
     @Before("@browserNavigation")
     public void before() {
         ChromeOptions options = new ChromeOptions();
 
+        /**
+        * Checks if we are running these tests on Jenkins
+        * If so, these tests will be run in a HEADLESS mode
+        * If not, these tests will run as usual with browser popping, etc
+        */
         if ("true".equals(System.getenv("HEADLESS"))) {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
@@ -33,61 +41,78 @@ public class BrowserNavigationSteps {
             options.addArguments("--remote-debugging-port=9222");
         }
 
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup();        //setting up the chrome driver
 
-        this.driver = new ChromeDriver(options);
-        this.lPage = new LandingPage(driver);
+        this.driver = new ChromeDriver(options);        // assigning our driver to be of a type Chrome
+        this.lPage = new LandingPage(driver);           // initializing our page object
     }
 
-    //Given I am on the landing page of InventoryMan
+    /**
+     * Load the landing page of InventoryMan
+     */
     @Given("I am on the landing page of InventoryMan")
     public void loadWebsite() {
         System.out.println("Step: I am on the landing page of InventoryMan");
         this.lPage.get();
     }
 
-    //When I select the Warehouses page from the navigation bar
+    /**
+     * Select the Warehouses page from the navigation bar
+     */
     @When("I select the Warehouses page from the navigation bar")
     public void selectWarehousesPage() {
         System.out.println("Step: I select the Warehouses page from the navigation bar");
         this.lPage.selectWarehousesPage();
     }
 
-    //And I select the Items page from the navigation bar
+    /**
+     * Select the Items page from the navigation bar
+     */
     @When("I select the Items page from the navigation bar")
     public void selectItemsPage() {
         System.out.println("Step: I select the Items page from the navigation bar");
         this.lPage.selectItemsPage();
     }
 
-    //And I navigate back using the browser back button
+    /**
+     * Navigate back using the browser back button
+     */
     @When("I navigate back using the browser back button")
     public void navigateBack() {
         System.out.println("Step: I navigate back using the browser back button");
         this.driver.navigate().back();
     }
 
-    //Then I should see the Warehouses page
+    /**
+     * Should be navigated to the Warehouses page
+     */
     @Then("I should see the Warehouses page")
     public void isOnWarehousesPage() {
         System.out.println("Step: I should see the Warehouses page");
         assertTrue(lPage.amIOnWarehousesPage());
     }
 
-    //When I navigate forward using the browser forward button
+    /**
+     * Navigate forward using the browser forward button
+     */
     @When("I navigate forward using the browser forward button")
     public void navigateForward() {
         System.out.println("Step: I navigate forward using the browser forward button");
         this.driver.navigate().forward();
     }
 
-    //Then I should see the Items page
+    /**
+     * Should be navigated to the Items page 
+     */
     @Then("I should see the Items page")
     public void isOnItemsPage() {
         System.out.println("Step: I should see the Items page");
         assertTrue(lPage.amIOnItemsPage());
     }
-
+    
+    /**
+     * Quit the driver - will close all browsers
+     */
     @After("@browserNavigation")
     public void tearDown() {
         if (driver != null) {
