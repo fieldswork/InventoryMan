@@ -2,10 +2,10 @@
 
 ### A basic inventory management application created as part of the SkillStorm SDET Apprenticeship
 
-### This project is hosted on AWS! 
-Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))
-
 **Update 3/12/25:** InventoryMan has been taken offline from AWS. Thank you for your interest in this demo project!
+
+~~### This project is hosted on AWS!~~
+~~Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))~~
 
 **Update 9/6/24:** Project 2 content has been added, including additional tests with Mockito, Jest, and more configured in our Jenkinsfile! ***Huge thanks to my groupmate for this project, Bruna Vicente!***
 
