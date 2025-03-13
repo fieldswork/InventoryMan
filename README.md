@@ -5,10 +5,11 @@
 ### This project is hosted on AWS! 
 Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))
 
+**Update 3/12/25:*** InventoryMan has been taken offline from AWS. Thank you for your interest in this demo project!
 
 **Update 9/6/24:** Project 2 content has been added, including additional tests with Mockito, Jest, and more configured in our Jenkinsfile! ***Huge thanks to my groupmate for this project, Bruna Vicente!***
 
-**Update 8/26/24:** InventoryMan is back on AWS - this time, using the Aurora RDS, an Elastic Beanstalk backend, and utilizing a separate EC2 instance for Jenkins deployment/Selenium + Cucumber testing.
+~~**Update 8/26/24:** InventoryMan is back on AWS - this time, using the Aurora RDS, an Elastic Beanstalk backend, and utilizing a separate EC2 instance for Jenkins deployment/Selenium + Cucumber testing.~~
 
 ~~**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!~~
 
