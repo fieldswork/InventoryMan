@@ -13,6 +13,10 @@
 
 ~~**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!~~
 
+![InventoryMan's user interface.](readme_attachments/ui.png)
+
+![The Jenkins dashboard, showing build information, automated test reports, and more.](readme_attachments/jenkins.png)
+
 ## Test Reports
 
 [Full console output from Jenkins](readme_attachments/im_cicd_output.txt)
