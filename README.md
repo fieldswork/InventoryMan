@@ -8,9 +8,9 @@
 
 ## Screenshots and Demos
 
-![A demonstration of the card UI layout that was utilized in InventoryMan. Bootstrap components were used for accessibility and style.](readme_attachments/Screenshot 2025-07-13 153443.png)
+![A demonstration of the card UI layout that was utilized in InventoryMan. Bootstrap components were used for accessibility and style.](readme_attachments/warehouse_cards.png)
 
-![An demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses.](readme_attachments/Screenshot 2025-07-13 153516.png)
+![An demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses.](readme_attachments/item_cards.png)
 
 ![UI for adding a warehouse in InventoryMan](readme_attachments/create.png)
 
