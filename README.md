@@ -2,16 +2,29 @@
 
 ### A basic inventory management application created as part of the SkillStorm SDET Apprenticeship
 
-**Update 3/12/25:** InventoryMan has been taken offline from AWS. Thank you for your interest in this demo project!
-
-~~### This project is hosted on AWS!~~
-~~Find it [here!](http://inventoryman.s3-website-us-east-1.amazonaws.com/) ([http://inventoryman.s3-website-us-east-1.amazonaws.com/](http://inventoryman.s3-website-us-east-1.amazonaws.com/))~~
+**Update 3/12/25:** InventoryMan has been taken offline to avoid AWS charges, thank you for your interest in this project. Please see the linked resources below for guidance on how to host this application yourself!
 
 **Update 9/6/24:** Project 2 content has been added, including additional tests with Mockito, Jest, and more configured in our Jenkinsfile! ***Huge thanks to my groupmate for this project, Bruna Vicente!***
 
-~~**Update 8/26/24:** InventoryMan is back on AWS - this time, using the Aurora RDS, an Elastic Beanstalk backend, and utilizing a separate EC2 instance for Jenkins deployment/Selenium + Cucumber testing.~~
+## Screenshots and Demos
 
-~~**Update 8/5/24:** Project has been taken offline to avoid charges, I apologize for any inconvenience. See the `Resources` section below for a similar implementation!~~
+![A demonstration of the card UI layout that was utilized in InventoryMan. Bootstrap components were used for accessibility and style.](readme_attachments/Screenshot 2025-07-13 153443.png)
+
+![An demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses.](readme_attachments/Screenshot 2025-07-13 153516.png)
+
+![UI for adding a warehouse in InventoryMan](readme_attachments/create.png)
+
+![Demonstration of deleting a warehouse in InventoryMan](readme_attachments/delete.gif)
+
+![Demonstration of implemented router and history functionality](readme_attachments/history.gif)
+
+![Demonstration of frontend input validation practices](readme_attachments/inputvalidation.gif)
+
+![A demonstration of the navigation bar in InventoryMan](readme_attachments/navigation.gif)
+
+![Demonstrating filtering capabilities for both the name and utilization of warehouses](readme_attachments/organize.gif)
+
+![Demonstrating utilization of the browser's popup dialogue box for confirmation of certain destructive actions](readme_attachments/userconfirmation.gif)
 
 ![InventoryMan's user interface.](readme_attachments/ui.png)
 
