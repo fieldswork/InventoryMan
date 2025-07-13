@@ -9,36 +9,47 @@
 ## Screenshots and Demos
 
 > A demonstration of the card UI layout that was utilized in InventoryMan. Bootstrap components were used for accessibility and style.
+
 ![A demonstration of the card UI layout that was utilized in InventoryMan. Bootstrap components were used for accessibility and style.](readme_attachments/warehouse_cards.png)
 
-> A demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses.
+> A demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses
+
 ![A demonstration of the UI layout, depicting multiple item cards, each with their own name, description, quantity, size, and designated warehouse. InventoryMan offers options for sorting based on item attributes, and filtering by a specific warehouse, or all warehouses.](readme_attachments/item_cards.png)
 
 > UI for adding a warehouse in InventoryMan
+
 ![UI for adding a warehouse in InventoryMan](readme_attachments/create.png)
 
 > Demonstration of deleting a warehouse in InventoryMan
+
 ![Demonstration of deleting a warehouse in InventoryMan](readme_attachments/delete.gif)
 
 > Demonstration of implemented router and history functionality
+
 ![Demonstration of implemented router and history functionality](readme_attachments/history.gif)
 
 > Demonstration of frontend input validation practices
+
 ![Demonstration of frontend input validation practices](readme_attachments/inputvalidation.gif)
 
 > A demonstration of the navigation bar in InventoryMan
+
 ![A demonstration of the navigation bar in InventoryMan](readme_attachments/navigation.gif)
 
 > Demonstrating filtering capabilities for both the name and utilization of warehouses
+
 ![Demonstrating filtering capabilities for both the name and utilization of warehouses](readme_attachments/organize.gif)
 
 > Demonstrating utilization of the browser's popup dialogue box for confirmation of certain destructive actions
+
 ![Demonstrating utilization of the browser's popup dialogue box for confirmation of certain destructive actions](readme_attachments/userconfirmation.gif)
 
 > InventoryMan's user interface.
+
 ![InventoryMan's user interface.](readme_attachments/ui.png)
 
 > The Jenkins dashboard, showing build information, automated test reports, and more.
+
 ![The Jenkins dashboard, showing build information, automated test reports, and more.](readme_attachments/jenkins.png)
 
 ## Test Reports
