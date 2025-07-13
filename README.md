@@ -44,13 +44,13 @@
 
 ![Demonstrating utilization of the browser's popup dialogue box for confirmation of certain destructive actions](readme_attachments/userconfirmation.gif)
 
-> InventoryMan's user interface.
+> A screenshot of InventoryMan running on Amazon Web Services.
 
-![InventoryMan's user interface.](readme_attachments/ui.png)
+![A screenshot of InventoryMan running on Amazon Web Services.](readme_attachments/ui.png)
 
-> The Jenkins dashboard, showing build information, automated test reports, and more.
+> The Jenkins CI/CD dashboard, showing build information, automated test reports, and more.
 
-![The Jenkins dashboard, showing build information, automated test reports, and more.](readme_attachments/jenkins.png)
+![The Jenkins CI/CD dashboard, showing build information, automated test reports, and more.](readme_attachments/jenkins.png)
 
 ## Test Reports
 
