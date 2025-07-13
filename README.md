@@ -44,9 +44,9 @@
 
 ![Demonstrating utilization of the browser's popup dialogue box for confirmation of certain destructive actions](readme_attachments/userconfirmation.gif)
 
-> A screenshot of InventoryMan running on Amazon Web Services.
+> A screenshot of InventoryMan running on Amazon Web Services during automated frontend unit testing.
 
-![A screenshot of InventoryMan running on Amazon Web Services.](readme_attachments/ui.png)
+![A screenshot of InventoryMan running on Amazon Web Services during automated frontend unit testing](readme_attachments/ui.png)
 
 > The Jenkins CI/CD dashboard, showing build information, automated test reports, and more.
 
